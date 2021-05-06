@@ -1,5 +1,4 @@
 var express = require('express');
-const { consoleTestResultHandler } = require('tslint/lib/test');
 const watchlistModel = require('../models/watchlist');
 var router = express.Router();
 
