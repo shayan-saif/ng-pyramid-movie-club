@@ -1,4 +1,5 @@
 var express = require('express');
+const { consoleTestResultHandler } = require('tslint/lib/test');
 const watchlistModel = require('../models/watchlist');
 var router = express.Router();
 
@@ -47,40 +48,56 @@ router.post('/', function (req, res, next) {
   })
 });
 
-// Clear ALL movies from a watchlist
+// Update SPECIFIC watchlist
 router.put('/:watchlistId', async function (req, res, next) {
-  let watchlistId = req.params.watchlistId;
+  const watchlistId = req.params.watchlistId;
+  const { name, private, sharedWith } = req.body;
   let watchlist = await watchlistModel.findById(watchlistId);
-  watchlist.movies = [];
+
+  watchlist.name = name;
+  watchlist.private = private || watchlist.private;
+  watchlist.sharedWith = sharedWith || watchlist.sharedWith;
   watchlist.save();
+
   res.sendStatus(200);
 });
 
 // Delete SPECIFIC movie from a watchlist
 router.delete('/:watchlistId/:movieId', async function (req, res, next) {
   let { watchlistId, movieId } = req.params;
-  let watchlist = await watchlistModel.findById(watchlistId);
-  if (!watchlist) {
-    res.sendStatus(404);
-  }
-
-  let movies = watchlist.movies;
-  let filteredMovies = [];
-
-  filteredMovies = movies.filter(movie => {
-    return movie.id != movieId;
-  });
-
-  if (filteredMovies.length === movies.length) {
-    res.sendStatus(404);
+  if (movieId === '*') {
+    next();
   } else {
-    watchlist.movies = filteredMovies;
-    watchlist.save();
+    let watchlist = await watchlistModel.findById(watchlistId);
+    if (!watchlist) {
+      res.sendStatus(404);
+    }
 
-    res.sendStatus(200);
+    let movies = watchlist.movies;
+    let filteredMovies = [];
+
+    filteredMovies = movies.filter(movie => {
+      return movie.id != movieId;
+    });
+
+    if (filteredMovies.length === movies.length) {
+      res.sendStatus(404);
+    } else {
+      watchlist.movies = filteredMovies;
+      watchlist.save();
+
+      res.sendStatus(200);
+    }
   }
+});
 
-
+// Clear ALL movies from a watchlist
+router.delete('/:watchlistId/*', async function (req, res, next) {
+  let watchlistId = req.params.watchlistId;
+  let watchlist = await watchlistModel.findById(watchlistId);
+  watchlist.movies = [];
+  watchlist.save();
+  res.sendStatus(200);
 });
 
 // Delete SPECIFIC watchlist
