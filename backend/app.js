@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./connect');
 
-var indexRouter = require('./routes/index');
 var watchlistRouter = require('./routes/watchlist');
 var searchRouter = require('./routes/search');
 
@@ -21,11 +20,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Angular')));
 
-app.use('/api/', indexRouter);
 app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
+app.use(function(req, res, next) {
+  res.sendFile(path.join(__dirname, "Angular", "index.html"));
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
