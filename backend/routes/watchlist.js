@@ -61,6 +61,63 @@ router.put('/:watchlistId', async function (req, res, next) {
   res.sendStatus(200);
 });
 
+// (un)Bookmark SPECIFIC movie in SPECIFIC watchlist
+router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
+  const { watchlistId, movieId } = req.params;
+  const bookmarked = req.body.bookmarked;
+
+  let watchlist = await watchlistModel.findById(watchlistId);
+  let movies = watchlist.movies;
+
+  movieIndex = movies.findIndex((movie) => {
+    return movie.id == movieId;
+  });
+
+  if(movieIndex === -1) {
+    res.sendStatus(404);
+  } else {
+    let movie = movies[movieIndex];
+
+    movie.club.bookmarked = bookmarked || movie.club.bookmarked;
+
+    watchlist.movies[movieIndex] = movie;
+    watchlist.save();
+
+    res.sendStatus(200);
+  }
+
+});
+
+// (un)Archive SPECIFIC movie in SPECIFIC watchlist
+router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
+  const { watchlistId, movieId } = req.params;
+  const { watched, participants, dateWatched, ourRating } = req.body;
+
+  let watchlist = await watchlistModel.findById(watchlistId);
+  let movies = watchlist.movies;
+
+  movieIndex = movies.findIndex((movie) => {
+    return movie.id == movieId;
+  });
+
+  if(movieIndex === -1) {
+    res.sendStatus(404);
+  } else {
+    let movie = movies[movieIndex];
+
+    movie.club.watched = watched || movie.club.watched;
+    movie.club.participants = participants || movie.club.participants;
+    movie.club.dateWatched = dateWatched || movie.club.dateWatched;
+    movie.club.ourRating = ourRating || movie.club.ourRating;
+
+    watchlist.movies[movieIndex] = movie;
+    watchlist.save();
+
+    res.sendStatus(200);
+  }
+
+});
+
 // Delete SPECIFIC movie from a watchlist
 router.delete('/:watchlistId/:movieId', async function (req, res, next) {
   let { watchlistId, movieId } = req.params;
