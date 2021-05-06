@@ -1,14 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
-require('dotenv').config()
 // var cors = require('cors')
 var path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, "../.env") });
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./connect');
 
 var indexRouter = require('./routes/index');
-var moviesRouter = require('./routes/movies');
 var watchlistRouter = require('./routes/watchlist');
 var searchRouter = require('./routes/search');
 
@@ -24,10 +23,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/movies', moviesRouter);
-app.use('/watchlist', watchlistRouter);
-app.use('/search', searchRouter);
+app.use('/api/', indexRouter);
+app.use('/api/watchlist', watchlistRouter);
+app.use('/api/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
