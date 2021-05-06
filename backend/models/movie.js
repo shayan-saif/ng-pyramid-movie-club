@@ -98,12 +98,23 @@ const movieSchema =
       "type": "String",
       "default": "Anonymous"
     },
-    "dateWatched": {
-      "type": "Date",
+    "viewing": {
+      "type": "Boolean",
+      "default": "false"
+    },
+    "dateViewing": {
+      "type": "Date"
+    },
+    "attendants": {
+      "type": "Array",
+      default: []
     },
     "watched": {
       "type": "Boolean",
       "default": "false"
+    },
+    "dateWatched": {
+      "type": "Date",
     },
     "participants": {
       "type": "Array",
