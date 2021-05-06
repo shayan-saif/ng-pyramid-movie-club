@@ -88,6 +88,35 @@ router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
 
 });
 
+// Modify viewing for SPECIFIC movie in SPECIFIC watchlist
+router.post('/:watchlistId/:movieId/viewing', async function(req, res, next) {
+  const { watchlistId, movieId } = req.params;
+  const { viewing, dateViewing, attendants} = req.body;
+
+  let watchlist = await watchlistModel.findById(watchlistId);
+  let movies = watchlist.movies;
+
+  movieIndex = movies.findIndex((movie) => {
+    return movie.id == movieId;
+  });
+
+  if(movieIndex === -1) {
+    res.sendStatus(404);
+  } else {
+    let movie = movies[movieIndex];
+
+    movie.club.viewing = viewing || movie.club.viewing;
+    movie.club.dateViewing = dateViewing || movie.club.dateViewing;
+    movie.club.attendants = attendants || movie.club.attendants;
+
+    watchlist.movies[movieIndex] = movie;
+    watchlist.save();
+
+    res.sendStatus(200);
+  }
+
+});
+
 // (un)Archive SPECIFIC movie in SPECIFIC watchlist
 router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
   const { watchlistId, movieId } = req.params;
