@@ -1,9 +1,17 @@
 <div class="row mb-3">
   <div class="col">
-    <div class="card bg-dark">
-      <div class="card-header"><p class="card-title">{{ movie.title }}</p></div>
-      <div class="card-body">{{ movie.overview }}</div>
-      <div class="card-footer text-muted">{{ movie.club.addedBy }} / {{ movie.club.dateAdded | date }}</div>
+    <div class="container-flex rounded movie">
+      <div class="row">
+        <div class="col-3"><img [src]="'https://image.tmdb.org/t/p/w500/'+ movie.posterPath" class="img-fluid rounded"></div>
+        <div class="col-9">
+          <h5>{{ movie.title }}</h5>
+          <p>{{ movie.releaseDate | date }}</p>
+          <div class="genres mb-4">
+            <span class="badge bg-secondary me-2" *ngFor="let genre of movie.genres">{{ genre.name }}</span>
+          </div>
+          <p>{{ movie.overview }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

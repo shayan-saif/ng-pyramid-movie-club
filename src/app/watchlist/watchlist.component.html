@@ -7,11 +7,13 @@
     </div>
   </div>
   <div class="col">
-    <div class="container" *ngIf="selectedWatchlist">
+    <div class="card bg-dark" *ngIf="selectedWatchlist">
 
-        <h4>{{ selectedWatchlist.name }}</h4>
+        <div class="card-header"><h4>{{ selectedWatchlist.name }}</h4></div>
 
-        <app-movie *ngFor="let movie of selectedWatchlist.movies" [movie]="movie"></app-movie>
+        <div class="card-body">
+          <app-movie *ngFor="let movie of selectedWatchlist.movies" [movie]="movie"></app-movie>
+        </div>
 
     </div>
   </div>
