@@ -22,6 +22,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'Angular')));
 
+var cors = require('cors');
+
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:4200'}));
 app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
 app.use(function(req, res, next) {
