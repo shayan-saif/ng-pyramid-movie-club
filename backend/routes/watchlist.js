@@ -190,7 +190,7 @@ router.delete('/:watchlistId', function (req, res, next) {
   let watchlistId = req.params.watchlistId;
   watchlistModel.findByIdAndRemove(watchlistId, (err, doc) => {
     if (doc && !err) {
-      res.sendStatus(200);
+      res.json(doc);
     } else if (!doc) {
       res.sendStatus(404);
     } else {

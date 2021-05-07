@@ -1,20 +1,42 @@
-<div class="row text-light">
+<div class="row text-light mb-3">
   <div class="col col-md-4">
-    <div class="list-group">
-      <button class="list-group-item list-group-item-action" *ngFor="let watchlist of watchlists"
-        (click)="onSelectWatchlist(watchlist)" [class.active]="watchlist === selectedWatchlist">{{ watchlist.name
-        }}</button>
+    <div class="row mb-3">
+      <div class="col text-end">
+        <button class="btn btn-secondary" (click)="toggleCreateWatchlist()">Create Watchlist</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="list-group">
+          <button class="list-group-item list-group-item-action" *ngFor="let watchlist of watchlists"
+            (click)="onSelectWatchlist(watchlist)" [class.active]="watchlist === selectedWatchlist">{{ watchlist.name
+            }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3" *ngIf="watchlistForm">
+    <div class="card bg-dark">
+      <div class="card-header">
+        <h4>Create New Watchlist</h4>
+      </div>
+      <div class="card-body">
+        <app-watchlist-form></app-watchlist-form>
+      </div>
     </div>
   </div>
   <div class="col">
     <div class="card bg-dark" *ngIf="selectedWatchlist">
-
-        <div class="card-header"><h4>{{ selectedWatchlist.name }}</h4></div>
-
-        <div class="card-body">
-          <app-movie *ngFor="let movie of selectedWatchlist.movies" [movie]="movie"></app-movie>
+      <div class="card-header">
+        <div class="row">
+          <div class="col"><h4>{{ selectedWatchlist.name }}</h4></div>
+          <div class="col text-end"><button class="btn btn-danger" (click)="onDeleteWatchlist()">Delete</button></div>
         </div>
-
+      </div>
+      <div class="card-body">
+        <p *ngIf="selectedWatchlist.movies.length < 1">Add some movies!</p>
+        <app-movie *ngFor="let movie of selectedWatchlist.movies" [movie]="movie"></app-movie>
+      </div>
     </div>
   </div>
 </div>
