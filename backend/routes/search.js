@@ -6,12 +6,31 @@ const watchlistModel = require('../models/watchlist');
 
 
 // Return SPECIFIC movie from TMDB
-router.get('/:movieId', async function (req, res, next) {
+router.get('/id/:movieId', async function (req, res, next) {
   const movieId = req.params.movieId;
   let movie = {};
   try {
     movie = await tmdb.getMovie(movieId);
     res.json(movie);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(500);
+      throw error;
+    }
+  }
+});
+
+// Return MULTIPLE (query) movie from TMDB
+router.get('/', async function (req, res, next) {
+  const { title } = req.query;
+  let movies = [];
+  try {
+    movies = await tmdb.get('search/movie', {
+      query: title
+    });
+    res.json(movies.results);
   } catch (error) {
     if (error instanceof NotFoundError) {
       res.sendStatus(404);
