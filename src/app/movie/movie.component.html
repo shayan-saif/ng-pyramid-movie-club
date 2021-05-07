@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-actions style="position:absolute;top:0;right:1rem">
+    <button mat-icon-button>
+      <mat-icon>bookmark</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>archive</mat-icon>
+    </button>
+    <!-- <button mat-icon-button>
+      <mat-icon>add</mat-icon>
+    </button> -->
+  </mat-card-actions>
+  <div class="row">
+    <div class="col-3">
+      <div class="d-flex">
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="container">
+        <mat-card-title>{{ movie.title }}</mat-card-title>
+        <div class="mat-subheading-1">{{ movie.releaseDate | date }}</div>
+        <div class="mat-body-1">{{ movie.overview }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="mat-caption" style="position: absolute;bottom:0.8rem;right:1rem;">
+    Added by {{ movie.club.addedBy }} / {{ movie.club.dateAdded | date }}
+  </div>
+  
+</mat-card>
