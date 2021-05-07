@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { MovieComponent } from './watchlist/movie/movie.component';
 import { WatchlistFormComponent } from './watchlist/watchlist-form/watchlist-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { WatchlistFormComponent } from './watchlist/watchlist-form/watchlist-for
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
