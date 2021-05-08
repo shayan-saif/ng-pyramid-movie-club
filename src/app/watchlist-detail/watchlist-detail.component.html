@@ -1,12 +1,15 @@
 <mat-card>
-  <mat-tab-group mat-align-tabs="start">
+  <mat-tab-group mat-align-tabs="start" dynamicHeight>
     <mat-tab label="To Watch">
-      <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie"></app-movie>
-  
-  
+      <div style="margin:1rem 1rem;">
+        <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie"></app-movie>
+        <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie"></app-movie>
+      </div>
     </mat-tab>
     <mat-tab label="Watched">
-      <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
+      <div style="margin:1rem 1rem;">
+        <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </mat-card>

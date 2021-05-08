@@ -213,7 +213,7 @@ export class WatchlistDetailComponent implements OnInit {
       },
       {
         "club": {
-          "bookmarked": false,
+          "bookmarked": true,
           "dateAdded": "2021-05-07T01:09:50.798Z",
           "addedBy": "Anonymous",
           "viewing": false,
@@ -330,13 +330,16 @@ export class WatchlistDetailComponent implements OnInit {
   }
 
   toWatchMovies: IMovie[];
+  bookmarkedMovies: IMovie[];
   watchedMovies: IMovie[];
 
 
   constructor() { }
 
   ngOnInit(): void {
-    this.toWatchMovies = this.watchlist.movies.filter(movie => !movie.club.watched);
+    this.toWatchMovies = this.watchlist.movies.filter(movie => !movie.club.watched && !movie.club.bookmarked);
+    this.bookmarkedMovies = this.watchlist.movies.filter(movie => !movie.club.watched && movie.club.bookmarked);
+    console.log(this.bookmarkedMovies);
     this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
   }
 

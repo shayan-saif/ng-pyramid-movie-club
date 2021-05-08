@@ -1,10 +1,10 @@
 <mat-card>
   <mat-card-actions style="position:absolute;top:0;right:1rem">
     <div *ngIf="!search">
-      <button mat-icon-button>
-        <mat-icon>bookmark</mat-icon>
+      <button mat-icon-button *ngIf="!watched" (click)="toggleBookmark()">
+        <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button *ngIf="!watched">
         <mat-icon>archive</mat-icon>
       </button>
       <button mat-icon-button>
@@ -18,7 +18,7 @@
     </div>
   </mat-card-actions>
   <div class="row">
-    <div class="col-3">
+    <div class="col-auto">
       <div class="d-flex">
         <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
       </div>
@@ -28,7 +28,8 @@
         <mat-card-title><a href="https://www.themoviedb.org/movie/{{ movie.id }}" target="_blank">{{ movie.title }}</a>
         </mat-card-title>
         <div class="mat-body-1">{{ movie.releaseDate | date }}</div>
-        <div class="genres my-2"><span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name }}</span></div>
+        <div class="genres my-2"><span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name }}</span>
+        </div>
         <div class="mat-body-1">{{ movie.overview }}</div>
       </div>
     </div>
