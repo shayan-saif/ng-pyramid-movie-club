@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IWatchlist } from './models/watchlist.model';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ import { Subject } from 'rxjs';
 export class WatchlistService {
   private watchlists: IWatchlist[] = [];
   private watchlistSubject = new Subject<IWatchlist[]>();
-  private selectedWatchlist: IWatchlist;
-  private selectedWatchlistListener = new Subject<IWatchlist>();
+
+  private selectedWatchlist = new BehaviorSubject<IWatchlist>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -25,13 +25,18 @@ export class WatchlistService {
     return this.watchlistSubject.asObservable();
   }
 
-  getSelectedWatchlistListener() {
-    return this.selectedWatchlistListener.asObservable();
+  setSelectedWatchlist(selectedWatchlist: IWatchlist): void {
+    this.getSelectedWatchlist().subscribe(() => {
+      this.selectedWatchlist.next(selectedWatchlist);
+    })
+  }
+
+  getSelectedWatchlist() {
+    return this.selectedWatchlist.asObservable();
   }
 
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {
     this.http.post<IWatchlist>('http://localhost:3000/api/watchlist', watchlist).subscribe((res) => {
-      console.log(res);
       this.watchlists.push(res);
       this.watchlistSubject.next([...this.watchlists]);
     });
@@ -40,9 +45,7 @@ export class WatchlistService {
   deleteWatchlist(watchlist: IWatchlist) {
     const watchlistId = watchlist._id;
     this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}`).subscribe((res) => {
-      console.log(res);
       this.watchlists = this.watchlists.filter(element => {
-        console.log(element._id !== res._id);
         return element._id !== res._id;
       });
       this.watchlistSubject.next([...this.watchlists]);

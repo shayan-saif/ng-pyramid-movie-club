@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.component';
+import { WatchlistService } from './watchlist.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.co
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [WatchlistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
