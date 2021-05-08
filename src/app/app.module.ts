@@ -25,7 +25,7 @@ import { WatchlistService } from './watchlist.service';
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [WatchlistService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

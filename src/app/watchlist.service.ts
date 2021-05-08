@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IWatchlist } from './models/watchlist.model';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class WatchlistService {
   private watchlists: IWatchlist[] = [];
   private watchlistSubject = new Subject<IWatchlist[]>();
-
-  private selectedWatchlist = new BehaviorSubject<IWatchlist>(null);
+  selectedWatchlist = new Subject<IWatchlist>();
 
   constructor(private http: HttpClient) { }
 
@@ -25,15 +24,7 @@ export class WatchlistService {
     return this.watchlistSubject.asObservable();
   }
 
-  setSelectedWatchlist(selectedWatchlist: IWatchlist): void {
-    this.getSelectedWatchlist().subscribe(() => {
-      this.selectedWatchlist.next(selectedWatchlist);
-    })
-  }
-
-  getSelectedWatchlist() {
-    return this.selectedWatchlist.asObservable();
-  }
+  
 
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {
     this.http.post<IWatchlist>('http://localhost:3000/api/watchlist', watchlist).subscribe((res) => {

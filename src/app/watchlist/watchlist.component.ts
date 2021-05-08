@@ -26,7 +26,7 @@ export class WatchlistComponent implements OnInit {
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
     this.selectedWatchlist = watchlistSelected;
-    this.watchlistService.setSelectedWatchlist(watchlistSelected);
+    this.watchlistService.selectedWatchlist.next(watchlistSelected);
   }
 
 }
