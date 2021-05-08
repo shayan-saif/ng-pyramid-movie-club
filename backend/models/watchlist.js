@@ -18,7 +18,7 @@ const watchlistSchema =
   "movies": {
     "type": [movieSchema],
   },
-  "private": {
+  "hidden": {
     "type": "Boolean",
     "default": "false",
   },

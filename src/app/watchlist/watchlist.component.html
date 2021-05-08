@@ -1,0 +1,11 @@
+<mat-selection-list #watchlistsRef [multiple]="false">
+  <mat-card>
+    <mat-list-option *ngFor="let watchlist of watchlists" [value]="watchlist._id">
+      {{watchlist.name}}
+    </mat-list-option>
+  </mat-card>
+</mat-selection-list>
+<!-- 
+<p>
+  Option selected: {{watchlistsRef.selectedOptions.selected[0]?.value}}
+</p> -->

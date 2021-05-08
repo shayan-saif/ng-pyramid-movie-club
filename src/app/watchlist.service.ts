@@ -9,6 +9,8 @@ import { Observable, Subject } from 'rxjs';
 export class WatchlistService {
   private watchlists: IWatchlist[] = [];
   private watchlistSubject = new Subject<IWatchlist[]>();
+  private selectedWatchlist: IWatchlist;
+  private selectedWatchlistListener = new Subject<IWatchlist>();
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +23,10 @@ export class WatchlistService {
 
   getWatchlistListener() {
     return this.watchlistSubject.asObservable();
+  }
+
+  getSelectedWatchlistListener() {
+    return this.selectedWatchlistListener.asObservable();
   }
 
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {

@@ -7,11 +7,15 @@ import { MaterialModule } from './material/material.module';
 
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
+import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieComponent,
+    WatchlistComponent,
+    WatchlistDetailComponent,
   ],
   imports: [
     BrowserModule,

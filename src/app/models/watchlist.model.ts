@@ -1,7 +1,7 @@
 import { IMovie } from './movie.model';
 
 export interface IWatchlist {
-  private: boolean
+  hidden: boolean
   sharedWith: any[]
   _id: string
   by: string
