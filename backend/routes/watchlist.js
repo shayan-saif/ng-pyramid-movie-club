@@ -6,7 +6,11 @@ var router = express.Router();
 // Return ALL watchlists
 router.get('/', async function (req, res, next) {
   let watchlists = await watchlistModel.find();
-
+  // let watchlistBasicInfo = [];
+  
+  // watchlists.forEach(watchlist => {
+  //   watchlistBasicInfo.push(watchlist.name)
+  // });
   res.json(watchlists);
 });
 
@@ -64,7 +68,6 @@ router.put('/:watchlistId', async function (req, res, next) {
 // (un)Bookmark SPECIFIC movie in SPECIFIC watchlist
 router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
   const { watchlistId, movieId } = req.params;
-  const bookmarked = req.body.bookmarked;
 
   let watchlist = await watchlistModel.findById(watchlistId);
   let movies = watchlist.movies;
