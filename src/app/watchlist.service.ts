@@ -37,6 +37,7 @@ export class WatchlistService {
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {
     this.http.post<IWatchlist>('http://localhost:3000/api/watchlist', watchlist).subscribe((watchlistCreated) => {
       this.watchlists.next([...this.watchlists.value, watchlistCreated]);
+      this.selectedWatchlist.next(watchlistCreated);
     });
   }
 
