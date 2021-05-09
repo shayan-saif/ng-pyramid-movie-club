@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { IMovie } from '../models/movie.model';
 import { IWatchlist } from '../models/watchlist.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
+import { TmdbService } from '../tmdb.service';
 import { WatchlistService } from '../watchlist.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class MovieComponent implements OnInit {
   @Output() bookmark = new EventEmitter<number>();
 
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private tmdb: TmdbService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (this.movie.club) {
@@ -36,7 +37,7 @@ export class MovieComponent implements OnInit {
   }
 
   onAddMovie(): void {
-    console.log("Adding");
+    this.tmdb.selectedMovie.next(this.movie);
     this.dialog.open(AddMovieComponent);
   }
 

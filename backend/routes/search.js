@@ -56,7 +56,7 @@ router.post('/', async function (req, res, next) {
     } else {
       watchlist.movies.push(movie);
       watchlist.save();
-      res.sendStatus(200);
+      res.json(watchlist);
     }
   } catch (error) {
     if (error instanceof NotFoundError) {

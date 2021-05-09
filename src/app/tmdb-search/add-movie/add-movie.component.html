@@ -5,7 +5,7 @@
     <mat-label>Watchlist</mat-label>
     <mat-select [(value)]="watchlist">
       <mat-option *ngFor="let watchlist of watchlists" [value]="watchlist">
-        {{ watchlist }}
+        {{ watchlist.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>

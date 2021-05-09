@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IWatchlist } from 'src/app/models/watchlist.model';
+import { TmdbService } from 'src/app/tmdb.service';
 import { WatchlistService } from 'src/app/watchlist.service';
 
 @Component({
@@ -7,21 +9,20 @@ import { WatchlistService } from 'src/app/watchlist.service';
   styleUrls: ['./add-movie.component.scss']
 })
 export class AddMovieComponent implements OnInit {
-  watchlists: string[] = [];
-  watchlist: string = null;
+  watchlists: IWatchlist[] = [];
+  watchlist: IWatchlist = null;
 
-  constructor(private watchlistService: WatchlistService) { }
+  constructor(private watchlistService: WatchlistService, private tmdb: TmdbService) { }
 
   ngOnInit(): void {
     this.watchlistService.watchlists.subscribe((watchlists) => {
-      watchlists.forEach((watchlist) => {
-        this.watchlists.push(watchlist.name);
-      });
+      this.watchlists = watchlists;
     });
   }
 
   addToWatchlist() {
-    console.log(this.watchlist);
+    this.watchlistService.selectedWatchlist.next(this.watchlist);
+    this.tmdb.addMovieToWatchlist();
   }
 
 }
