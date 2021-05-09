@@ -85,7 +85,8 @@ router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
     watchlist.movies[movieIndex] = movie;
     watchlist.save();
 
-    res.json(watchlist.movies[movieIndex]);
+    // res.json(watchlist.movies[movieIndex]);
+    res.json(watchlist);
   }
 
 });

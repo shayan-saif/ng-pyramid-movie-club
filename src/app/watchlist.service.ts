@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IWatchlist } from './models/watchlist.model';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { IMovie } from './models/movie.model';
+import { BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +20,11 @@ export class WatchlistService {
     });
   }
 
-  // getWatchlistListener() {
-  //   return this.watchlists.asObservable();
-  // }
-
   toggleBookmark(movieId: number) {
     let watchlistId = this.selectedWatchlist.value._id;
 
-    this.http.post<IMovie>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/bookmark`, {}).subscribe((movie) => {
-        let movieId = movie.id;
-        let movieIndex = this.selectedWatchlist.value.movies.findIndex((movie) => {
-          return movie.id === movieId;
-        });
-        this.selectedWatchlist.value.movies[movieIndex] = movie;
+    this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/bookmark`, {}).subscribe((watchlistResponse) => {
+        this.selectedWatchlist.next(watchlistResponse);
       });
   }
 
