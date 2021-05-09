@@ -14,7 +14,7 @@ export class MovieComponent implements OnInit {
   // @Input() watchlistId: string;
   watched: boolean;
   bookmarkStatus: boolean;
-  // @Output() bookmark = new EventEmitter<number>();
+  @Output() bookmark = new EventEmitter<number>();
 
 
   constructor() { }
@@ -24,9 +24,10 @@ export class MovieComponent implements OnInit {
     this.watched = this.movie.club.watched;
   }
 
-  // onToggleBookmark(): void {
-  //   this.bookmarkStatus = !this.bookmarkStatus;
-  //   this.bookmark.emit(this.movie.id);
-  // }
+  onToggleBookmark(): void {
+    this.bookmarkStatus = !this.bookmarkStatus;
+    console.log(this.bookmarkStatus);
+    this.bookmark.emit(this.movie.id);
+  }
 
 }

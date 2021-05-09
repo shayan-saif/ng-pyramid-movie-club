@@ -25,15 +25,13 @@ export class WatchlistService {
     return this.watchlistSubject.asObservable();
   }
 
-  // toggleBookmark(movieId: number) {
-  //   // this.selectedWatchlist.subscribe((watchlist) => {
-  //   //   console.log(`http://localhost:3000/api/watchlist/${watchlist._id}/${movieId}`);
-  //   //   this.http.post(`http://localhost:3000/api/watchlist/${watchlist._id}/${movieId}`, {}).subscribe((res) => {
-  //   //     console.log(res);
-  //   //   });
-  //   // });
-  //   console.log(this.selectedWatchlist);
-  // }
+  toggleBookmark(movieId: number) {
+    this.selectedWatchlist.subscribe((watchlist) => {
+      this.http.post(`http://localhost:3000/api/watchlist/${watchlist._id}/${movieId}/bookmark`, {}).subscribe((res) => {
+        console.log(res);
+      });
+    });
+  }
 
 
 

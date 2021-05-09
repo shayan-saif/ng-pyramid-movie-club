@@ -77,13 +77,12 @@ router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
     res.sendStatus(404);
   } else {
     let movie = movies[movieIndex];
-
-    movie.club.bookmarked = bookmarked || movie.club.bookmarked;
+    movie.club.bookmarked = !movie.club.bookmarked;
 
     watchlist.movies[movieIndex] = movie;
     watchlist.save();
 
-    res.sendStatus(200);
+    res.json(watchlist.movies[movieIndex]);
   }
 
 });
