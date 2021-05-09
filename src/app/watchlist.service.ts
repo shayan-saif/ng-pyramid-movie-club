@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IWatchlist } from './models/watchlist.model';
-import { BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,13 @@ export class WatchlistService {
     let watchlistId = this.selectedWatchlist.value._id;
 
     this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/bookmark`, {}).subscribe((watchlistResponse) => {
-        this.selectedWatchlist.next(watchlistResponse);
-      });
+      // this.watchlists.next([...this.watchlists.value, watchlistResponse]);
+      let watchlistIndex = this.watchlists.value.findIndex(watchlist => watchlist._id === watchlistResponse._id);
+      let updatedWatchlist = this.watchlists.value;
+      updatedWatchlist[watchlistIndex] = watchlistResponse;
+      this.watchlists.next(updatedWatchlist);
+      this.selectedWatchlist.next(watchlistResponse);
+    });
   }
 
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {

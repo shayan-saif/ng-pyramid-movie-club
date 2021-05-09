@@ -34,10 +34,13 @@ export class WatchlistComponent implements OnInit {
   }
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
+    // this.watchlistService.getWatchlists();
     if(this.router.url !== '/' ) {
       this.router.navigate(['/']);
     }
+    // this.watchlistService.getWatchlists();
     this.watchlistService.selectedWatchlist.next(watchlistSelected);
+    
   }
 
   openCreateWatchlist() {

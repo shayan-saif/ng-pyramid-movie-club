@@ -31,6 +31,8 @@ export class WatchlistDetailComponent implements OnInit {
         this.bookmarkedMovies = this.watchlist.movies.filter(movie => !movie.club.watched && movie.club.bookmarked);
         this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
       }
+
+      console.log(this.bookmarkedMovies);
     });
   }
 
