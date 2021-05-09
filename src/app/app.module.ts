@@ -10,14 +10,21 @@ import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.component';
-import { WatchlistService } from './watchlist.service';
+import { CreateWatchlistComponent, CreateWatchlistPopupComponent } from './create-watchlist/create-watchlist.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieComponent,
     WatchlistComponent,
-    WatchlistDetailComponent
+    WatchlistDetailComponent,
+    CreateWatchlistComponent,
+    CreateWatchlistPopupComponent
+  ],
+  entryComponents: [
+    CreateWatchlistComponent,
+    CreateWatchlistPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +32,8 @@ import { WatchlistService } from './watchlist.service';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    OrderModule
+    OrderModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
