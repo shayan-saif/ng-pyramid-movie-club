@@ -1,7 +1,7 @@
 import { IClub } from './club.model';
 
 export interface IMovie {
-  club: IClub
+  club?: IClub
   genres: IGenre[]
   productionCompanies: IProductionCompany[]
   productionCountries: ProductionCountry[]

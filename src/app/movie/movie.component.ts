@@ -9,9 +9,8 @@ import { WatchlistService } from '../watchlist.service';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
-  search: boolean = false;
+  searchType: boolean = false;
   @Input() movie: IMovie;
-  // @Input() watchlistId: string;
   watched: boolean;
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
@@ -20,8 +19,12 @@ export class MovieComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.bookmarkStatus = this.movie.club.bookmarked;
-    this.watched = this.movie.club.watched;
+    if (this.movie.club) {
+      this.bookmarkStatus = this.movie.club.bookmarked;
+      this.watched = this.movie.club.watched;
+    } else {
+      this.searchType = true;
+    }
   }
 
   onToggleBookmark(): void {
