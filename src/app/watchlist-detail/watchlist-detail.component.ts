@@ -23,9 +23,11 @@ export class WatchlistDetailComponent implements OnInit {
   ngOnInit(): void {
     this.watchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((watchlist) => {
       this.watchlist = watchlist;
-      this.toWatchMovies = this.watchlist.movies.filter(movie => !movie.club.watched && !movie.club.bookmarked);
-      this.bookmarkedMovies = this.watchlist.movies.filter(movie => !movie.club.watched && movie.club.bookmarked);
-      this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
+      console.log(this.watchlist);
+
+      // this.toWatchMovies = this.watchlist.movies.filter(movie => !movie.club.watched && !movie.club.bookmarked);
+      // this.bookmarkedMovies = this.watchlist.movies.filter(movie => !movie.club.watched && movie.club.bookmarked);
+      // this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
     });
   }
 

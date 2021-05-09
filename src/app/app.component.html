@@ -10,7 +10,7 @@
         <app-watchlist></app-watchlist>
       </div>
       <div class="col-7">
-        <app-watchlist-detail></app-watchlist-detail>
+        <app-watchlist-detail *ngIf="selectedWatchlist"></app-watchlist-detail>
       </div>
     </div>
   </div>

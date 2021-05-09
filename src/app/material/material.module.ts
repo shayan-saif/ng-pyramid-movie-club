@@ -7,6 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const material = [
   MatButtonModule,
@@ -16,7 +17,8 @@ const material = [
   MatChipsModule,
   MatDividerModule,
   MatListModule,
-  MatTabsModule
+  MatTabsModule,
+  MatDialogModule
 ];
 
 

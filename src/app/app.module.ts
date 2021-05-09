@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
 
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
@@ -16,14 +17,15 @@ import { WatchlistService } from './watchlist.service';
     AppComponent,
     MovieComponent,
     WatchlistComponent,
-    WatchlistDetailComponent,
+    WatchlistDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IWatchlist } from '../models/watchlist.model';
 import { WatchlistService } from '../watchlist.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-watchlist',
@@ -14,7 +16,7 @@ export class WatchlistComponent implements OnInit {
   watchlistSubscription = new Subscription;
   watchlistSelectSubscription = new Subscription;
 
-  constructor(private watchlistService: WatchlistService) { }
+  constructor(private watchlistService: WatchlistService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.watchlistService.getWatchlists();
@@ -28,5 +30,6 @@ export class WatchlistComponent implements OnInit {
     this.selectedWatchlist = watchlistSelected;
     this.watchlistService.selectedWatchlist.next(watchlistSelected);
   }
+
 
 }

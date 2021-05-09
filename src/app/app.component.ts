@@ -9,21 +9,16 @@ import { WatchlistService } from './watchlist.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // watchlists: IWatchlist[] = [];
-  // selectedWatchlist: IWatchlist;
+  selectedWatchlist: IWatchlist;
 
-  // selectedWatchlistSubscription: Subscription;
-  // watchlistSubscription: Subscription;
+  selectedWatchlistSubscription: Subscription;
 
   constructor(private watchlistService: WatchlistService) { }
 
   ngOnInit(): void {
-    // this.watchlistService.getWatchlists();
-    // this.watchlistSubscription = this.watchlistService.getWatchlistListener().subscribe(watchlists => {
-    //   this.watchlists = watchlists;
-    // });
-    // this.selectedWatchlistSubscription = this.watchlistService.getSelectedWatchlist().subscribe((res => {
-    //   console.log(res);
-    // }));
+    this.watchlistService.getWatchlists();
+    this.selectedWatchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
+      this.selectedWatchlist = selectedWatchlist;
+    });
   }
 }
