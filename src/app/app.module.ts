@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.component';
-import { CreateWatchlistComponent, CreateWatchlistPopupComponent } from './create-watchlist/create-watchlist.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CreateWatchlistComponent } from './create-watchlist/create-watchlist.component';
+import { WatchlistDeleteConfirmComponent } from './watchlist-detail/watchlist-delete-confirm/watchlist-delete-confirm.component';
+import { TmdbSearchComponent } from './tmdb-search/tmdb-search.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     WatchlistComponent,
     WatchlistDetailComponent,
     CreateWatchlistComponent,
-    CreateWatchlistPopupComponent
+    WatchlistDeleteConfirmComponent,
+    TmdbSearchComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,
-    CreateWatchlistPopupComponent
+    WatchlistDeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

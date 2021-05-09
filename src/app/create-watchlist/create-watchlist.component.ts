@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { WatchlistService } from '../watchlist.service';
 
 @Component({
@@ -13,13 +13,12 @@ export class CreateWatchlistComponent implements OnInit {
     name: new FormControl(null, Validators.required)
   })
 
-  constructor(private watchlistService: WatchlistService, public dialog: MatDialog) { }
+  constructor(private watchlistService: WatchlistService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   onCreateWatchlist() {
-    console.log(this.createWatchlistForm);
     let watchlistName = this.createWatchlistForm.value.name;
 
     let inputWatchlist = { 
@@ -30,21 +29,9 @@ export class CreateWatchlistComponent implements OnInit {
     
     this.watchlistService.createWatchlist(inputWatchlist);
 
-    this.dialog.open(CreateWatchlistPopupComponent);
+    this.snackBar.open('Watchlist created', 'Dismiss', {
+      duration: 3000
+    });
   }
-
-}
-
-@Component({
-  selector: 'app-create-watchlist-popup',
-  template:
-    `
-  <h2 mat-dialog-title>Watchlist Created</h2>
-  <mat-dialog-content>You have successfully created a new watchlist!</mat-dialog-content>
-  <mat-dialog-actions><button mat-button mat-dialog-close>Close</button></mat-dialog-actions>
-  `,
-  styleUrls: []
-})
-export class CreateWatchlistPopupComponent {
 
 }
