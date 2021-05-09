@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Select Watchlist</h2>
+<mat-dialog-content>
+  <h4>Basic mat-select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Watchlist</mat-label>
+    <mat-select [(value)]="watchlist">
+      <mat-option *ngFor="let watchlist of watchlists" [value]="watchlist">
+        {{ watchlist }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close (click)="addToWatchlist()">Add To Watchlist</button>
+</mat-dialog-actions>

@@ -14,6 +14,7 @@ import { WatchlistDetailComponent } from './watchlist-detail/watchlist-detail.co
 import { CreateWatchlistComponent } from './create-watchlist/create-watchlist.component';
 import { WatchlistDeleteConfirmComponent } from './watchlist-detail/watchlist-delete-confirm/watchlist-delete-confirm.component';
 import { TmdbSearchComponent } from './tmdb-search/tmdb-search.component';
+import { AddMovieComponent } from './tmdb-search/add-movie/add-movie.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TmdbSearchComponent } from './tmdb-search/tmdb-search.component';
     WatchlistDetailComponent,
     CreateWatchlistComponent,
     WatchlistDeleteConfirmComponent,
-    TmdbSearchComponent
+    TmdbSearchComponent,
+    AddMovieComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

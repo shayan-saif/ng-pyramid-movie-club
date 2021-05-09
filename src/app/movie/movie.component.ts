@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { IMovie } from '../models/movie.model';
 import { IWatchlist } from '../models/watchlist.model';
+import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { WatchlistService } from '../watchlist.service';
 
 @Component({
@@ -16,7 +18,7 @@ export class MovieComponent implements OnInit {
   @Output() bookmark = new EventEmitter<number>();
 
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (this.movie.club) {
@@ -31,6 +33,11 @@ export class MovieComponent implements OnInit {
     this.bookmarkStatus = !this.bookmarkStatus;
     console.log(this.bookmarkStatus);
     this.bookmark.emit(this.movie.id);
+  }
+
+  onAddMovie(): void {
+    console.log("Adding");
+    this.dialog.open(AddMovieComponent);
   }
 
 }
