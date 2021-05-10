@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IMovie } from '../models/movie.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { TmdbService } from '../tmdb.service';
@@ -18,7 +19,7 @@ export class MovieComponent implements OnInit {
   @Output() bookmark = new EventEmitter<number>();
 
 
-  constructor(private tmdb: TmdbService, public dialog: MatDialog) { }
+  constructor(private tmdb: TmdbService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     if (this.movie.club) {
@@ -32,6 +33,9 @@ export class MovieComponent implements OnInit {
   onToggleBookmark(): void {
     this.bookmarkStatus = !this.bookmarkStatus;
     this.bookmark.emit(this.movie.id);
+    this.snackBar.open(`Movie ${this.bookmarkStatus? '' : 'un'}bookmarked!`, 'Dismiss', {
+      duration: 3000
+    });
   }
 
   onAddMovie(): void {

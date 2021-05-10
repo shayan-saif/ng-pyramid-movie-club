@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TmdbService } from 'src/app/tmdb.service';
 
 
@@ -12,7 +13,8 @@ export class ConfirmDeleteMovieComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { movieId: number },
-    private tmdb: TmdbService
+    private tmdb: TmdbService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +22,9 @@ export class ConfirmDeleteMovieComponent implements OnInit {
 
   deletionConfirmed(): void {
     this.tmdb.deleteMovieFromWatchlist(this.data.movieId);
+    this.snackBar.open('Movie deleted!', 'Dismiss', {
+      duration: 3000
+    });
   }
 
 }
