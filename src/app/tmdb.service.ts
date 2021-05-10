@@ -35,8 +35,12 @@ export class TmdbService {
     this.http.post<IWatchlist>(`http://localhost:3000/api/search`, payload).subscribe((updatedWatchlist) => {
       //   let updatedWatchlist = this.watchlistService.selectedWatchlist.value;
       //   updatedWatchlist.movies.push(newMovie);
-      this.watchlistService.selectedWatchlist.next(updatedWatchlist);
-      console.log(this.watchlistService.selectedWatchlist);
+      let updatedWatchlists = this.watchlistService.watchlists.value;
+      const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
+      updatedWatchlists[watchlistIndex] = updatedWatchlist;
+      this.watchlistService.watchlists.next(updatedWatchlists);
+      // this.watchlistService.selectedWatchlist.next(updatedWatchlist);
+      // console.log(this.watchlistService.selectedWatchlist);
     });
   }
 }

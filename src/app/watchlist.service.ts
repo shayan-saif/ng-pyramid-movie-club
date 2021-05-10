@@ -48,6 +48,7 @@ export class WatchlistService {
     this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}`).subscribe((deletedWatchlist) => {
       currentWatchlists = currentWatchlists.filter(watchlist => deletedWatchlist._id !== watchlist._id);
       this.watchlists.next(currentWatchlists);
+      this.selectedWatchlist.next(null);
     });
   }
 }
