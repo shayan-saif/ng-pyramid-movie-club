@@ -5,9 +5,8 @@
       <button mat-button (click)="openDeleteDialog()">Delete Watchlist</button>
     </div>
     <mat-tab-group mat-align-tabs="start" dynamicHeight>
-      <mat-tab label="Bookmarked">
+      <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
         <div style="margin:1rem 1rem;">
-          <!-- <app-movie *ngFor="let movie of sortedCollection" [movie]="movie"></app-movie> -->
           <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
           </app-movie>
         </div>
@@ -16,7 +15,6 @@
         <div style="margin:1rem 1rem;">
           <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
           </app-movie>
-          <!-- <app-movie *ngFor="let movie of watchlist.movies" [movie]="movie"></app-movie> -->
         </div>
       </mat-tab>
       <mat-tab label="Watched">
