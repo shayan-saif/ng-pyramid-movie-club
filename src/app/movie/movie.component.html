@@ -4,7 +4,7 @@
       <button mat-icon-button *ngIf="!watched" (click)="onToggleBookmark()">
         <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!watched">
+      <button mat-icon-button *ngIf="!watched" (click)="onArchiveMovie()">
         <mat-icon>archive</mat-icon>
       </button>
       <button mat-icon-button>

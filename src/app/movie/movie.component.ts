@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { IMovie } from '../models/movie.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { TmdbService } from '../tmdb.service';
+import { ArchiveMovieComponent } from './archive-movie/archive-movie.component';
 import { ConfirmDeleteMovieComponent } from './confirm-delete-movie/confirm-delete-movie.component';
 
 @Component({
@@ -30,6 +31,11 @@ export class MovieComponent implements OnInit {
     }
   }
 
+  onAddMovie(): void {
+    this.tmdb.selectedMovie.next(this.movie);
+    this.dialog.open(AddMovieComponent);
+  }
+
   onToggleBookmark(): void {
     this.bookmarkStatus = !this.bookmarkStatus;
     this.bookmark.emit(this.movie.id);
@@ -38,10 +44,10 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  onAddMovie(): void {
-    this.tmdb.selectedMovie.next(this.movie);
-    this.dialog.open(AddMovieComponent);
+  onArchiveMovie(): void {
+    this.dialog.open(ArchiveMovieComponent);
   }
+
 
   onDeleteMovie(): void {
     // this.tmdb.deleteMovieFromWatchlist(this.movie.id);
