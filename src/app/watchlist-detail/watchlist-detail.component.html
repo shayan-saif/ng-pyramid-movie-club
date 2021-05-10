@@ -17,7 +17,7 @@
           </app-movie>
         </div>
       </mat-tab>
-      <mat-tab label="Watched">
+      <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
         <div style="margin:1rem 1rem;">
           <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
         </div>
