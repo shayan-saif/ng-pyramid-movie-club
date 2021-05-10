@@ -18,6 +18,7 @@ import { AddMovieComponent } from './tmdb-search/add-movie/add-movie.component';
 import { ConfirmDeleteMovieComponent } from './movie/confirm-delete-movie/confirm-delete-movie.component';
 import { ArchiveMovieComponent } from './movie/archive-movie/archive-movie.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RegisterComponent } from './register/register.component';
     AddMovieComponent,
     ConfirmDeleteMovieComponent,
     ArchiveMovieComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

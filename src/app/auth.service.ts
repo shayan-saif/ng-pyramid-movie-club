@@ -8,7 +8,7 @@ import { ILogin, IRegister, IUser } from './models/auth.model';
   providedIn: 'root'
 })
 export class AuthService {
-  signedIn = new BehaviorSubject<boolean>(null);
+  isLoggedIn = new BehaviorSubject<boolean>(null);
   user = new BehaviorSubject<IUser>(null);
 
   constructor(private http: HttpClient) { }
@@ -30,9 +30,10 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    this.http.post<IUser>('http://localhost:3000/api/auth/register', user).subscribe((userInfo) => {
-      this.signedIn.next(true);
+    this.http.post<IUser>('http://localhost:3000/api/auth/login', user).subscribe((userInfo) => {
+      this.isLoggedIn.next(true);
       this.user.next(userInfo);
+      console.log(this.isLoggedIn.value);
       console.log(this.user.value);
     });
   }

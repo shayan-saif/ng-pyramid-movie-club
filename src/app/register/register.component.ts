@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  loginForm = new FormGroup({
+  registerForm = new FormGroup({
     username: new FormControl(null),
     password: new FormControl(null),
     secret: new FormControl(null)
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSignup(): void {
-    this.auth.registerUser(this.loginForm.value)
+    this.auth.registerUser(this.registerForm.value)
   }
 
 }
