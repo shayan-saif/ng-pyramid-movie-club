@@ -8,7 +8,7 @@
         <mat-icon>archive</mat-icon>
       </button>
       <button mat-icon-button>
-        <mat-icon color="warn">delete</mat-icon>
+        <mat-icon color="warn" (click)="onDeleteMovie()">delete</mat-icon>
       </button>
     </div>
     <div *ngIf="searchType">

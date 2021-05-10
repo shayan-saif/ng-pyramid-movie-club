@@ -1,10 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IMovie } from '../models/movie.model';
-import { IWatchlist } from '../models/watchlist.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { TmdbService } from '../tmdb.service';
-import { WatchlistService } from '../watchlist.service';
+import { ConfirmDeleteMovieComponent } from './confirm-delete-movie/confirm-delete-movie.component';
 
 @Component({
   selector: 'app-movie',
@@ -38,6 +37,13 @@ export class MovieComponent implements OnInit {
   onAddMovie(): void {
     this.tmdb.selectedMovie.next(this.movie);
     this.dialog.open(AddMovieComponent);
+  }
+
+  onDeleteMovie(): void {
+    // this.tmdb.deleteMovieFromWatchlist(this.movie.id);
+    this.dialog.open(ConfirmDeleteMovieComponent, {
+      data: { movieId: this.movie.id },
+    });
   }
 
 }

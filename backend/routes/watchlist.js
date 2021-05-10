@@ -174,7 +174,7 @@ router.delete('/:watchlistId/:movieId', async function (req, res, next) {
       watchlist.movies = filteredMovies;
       watchlist.save();
 
-      res.sendStatus(200);
+      res.json(watchlist);
     }
   }
 });

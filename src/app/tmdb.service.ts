@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IMovie } from './models/movie.model';
@@ -13,7 +14,7 @@ export class TmdbService {
   movies = new BehaviorSubject<IMovie[]>(null);
   selectedMovie = new BehaviorSubject<IMovie>(null);
 
-  constructor(private http: HttpClient, private watchlistService: WatchlistService) { }
+  constructor(private http: HttpClient, private watchlistService: WatchlistService, public snackBar: MatSnackBar) { }
 
   titleSearch(title: string) {
     const options = { params: new HttpParams().set('title', title) };
@@ -24,7 +25,6 @@ export class TmdbService {
   }
 
   addMovieToWatchlist() {
-    console.log(this.selectedMovie);
     let movieId = this.selectedMovie.value.id;
     let watchlistId = this.watchlistService.selectedWatchlist.value._id;
 
@@ -34,30 +34,38 @@ export class TmdbService {
     }
 
     this.http.post<IWatchlist>(`http://localhost:3000/api/search`, payload)
-    .pipe(catchError(this.handleError))
-    
-    .subscribe((updatedWatchlist) => {
-      console.log(updatedWatchlist);
-      let updatedWatchlists = this.watchlistService.watchlists.value;
-      const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
-      updatedWatchlists[watchlistIndex] = updatedWatchlist;
-      this.watchlistService.watchlists.next(updatedWatchlists);
-    });
+      .pipe(catchError(this.handleError))
+
+      .subscribe((updatedWatchlist) => {
+        let updatedWatchlists = this.watchlistService.watchlists.value;
+        const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
+        updatedWatchlists[watchlistIndex] = updatedWatchlist;
+        this.watchlistService.watchlists.next(updatedWatchlists);
+      });
   }
 
-  private handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
-    } else {
+    } else if (error.error.text === 'duplicate') {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      console.log(error.error.text);
     }
     // Return an observable with a user-facing error message.
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+  deleteMovieFromWatchlist(movieId: number) {
+    let watchlistId = this.watchlistService.selectedWatchlist.value._id;
+    this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
+      let updatedWatchlists = this.watchlistService.watchlists.value;
+      const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
+      updatedWatchlists[watchlistIndex] = updatedWatchlist;
+      this.watchlistService.watchlists.next(updatedWatchlists);
+      this.watchlistService.selectedWatchlist.next(updatedWatchlist);
+    });
   }
 }
