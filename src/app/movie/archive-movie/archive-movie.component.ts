@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TmdbService } from 'src/app/tmdb.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -10,11 +12,22 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 export class ArchiveMovieComponent {
   archiveForm = new FormGroup({
     movieTitle: new FormControl(null, Validators.required),
-    participants: new FormArray([]),
+    participants: new FormArray([
+      new FormGroup({
+        name: new FormControl(null),
+        rating: new FormControl(null)
+      }, Validators.required)
+    ]),
     dateWatched: new FormControl(null)
   });
 
-  constructor() { }
+  constructor(
+    private tmdb: TmdbService,
+    @Inject(MAT_DIALOG_DATA) private movie: {
+      movieId: number,
+      movieTitle: string
+    }
+    ) { }
 
   onAddParticipant() {
     const control = new FormGroup({
@@ -32,7 +45,7 @@ export class ArchiveMovieComponent {
   onSubmit() {
     // const recipe: RecipeModel = this.recipeForm.value;
     // this.addSub = this.recipeService.addRecipe(recipe).subscribe();
-    console.log(this.archiveForm);
+    this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
   }
 
 

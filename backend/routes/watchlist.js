@@ -137,15 +137,15 @@ router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
   } else {
     let movie = movies[movieIndex];
 
-    movie.club.watched = watched || movie.club.watched;
-    movie.club.participants = participants || movie.club.participants;
-    movie.club.dateWatched = dateWatched || movie.club.dateWatched;
-    movie.club.ourRating = ourRating || movie.club.ourRating;
+    movie.club.watched = watched;
+    movie.club.participants = participants;
+    movie.club.dateWatched = dateWatched;
+    movie.club.ourRating = ourRating;
 
     watchlist.movies[movieIndex] = movie;
     watchlist.save();
 
-    res.sendStatus(200);
+    res.json(watchlist);
   }
 
 });

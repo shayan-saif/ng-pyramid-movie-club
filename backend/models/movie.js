@@ -117,8 +117,7 @@ const movieSchema =
       "type": "Date",
     },
     "participants": {
-      "type": "Array",
-      default: []
+      "type": "Array"
     },
     "ourRating": {
       "type": "Number"

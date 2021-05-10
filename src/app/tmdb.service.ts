@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -58,8 +59,69 @@ export class TmdbService {
       'Something bad happened; please try again later.');
   }
 
-  deleteMovieFromWatchlist(movieId: number) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  archiveMovie(movieId: number, archiveForm: FormGroup) {
     let watchlistId = this.watchlistService.selectedWatchlist.value._id;
+
+    const payload = {
+      watched: true,
+      participants: archiveForm.value.participants,
+      dateWatched: archiveForm.value.dateWatched,
+      ourRating: 4
+    }
+
+    this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
+      console.log(updatedWatchlist);
+    
+      let updatedWatchlists = this.watchlistService.watchlists.value;
+      const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
+      updatedWatchlists[watchlistIndex] = updatedWatchlist;
+      this.watchlistService.watchlists.next(updatedWatchlists);
+      this.watchlistService.selectedWatchlist.next(updatedWatchlist);
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  deleteMovieFromWatchlist(movieId: number) {
+
+    const watchlistId = this.watchlistService.selectedWatchlist.value._id;
+
     this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);

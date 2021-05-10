@@ -39,13 +39,15 @@ export class MovieComponent implements OnInit {
   onToggleBookmark(): void {
     this.bookmarkStatus = !this.bookmarkStatus;
     this.bookmark.emit(this.movie.id);
-    this.snackBar.open(`Movie ${this.bookmarkStatus? '' : 'un'}bookmarked!`, 'Dismiss', {
+    this.snackBar.open(`Movie ${this.bookmarkStatus ? '' : 'un'}bookmarked!`, 'Dismiss', {
       duration: 3000
     });
   }
 
   onArchiveMovie(): void {
-    this.dialog.open(ArchiveMovieComponent);
+    this.dialog.open(ArchiveMovieComponent, {
+      data: { movieId: this.movie.id, movieTitle: this.movie.title },
+    });
   }
 
 

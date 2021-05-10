@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const material = [
@@ -27,7 +29,9 @@ const material = [
   MatInputModule,
   MatSnackBarModule,
   MatSelectModule,
-  MatSliderModule
+  MatSliderModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 
