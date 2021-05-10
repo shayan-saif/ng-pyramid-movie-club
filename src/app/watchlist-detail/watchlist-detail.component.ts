@@ -32,7 +32,6 @@ export class WatchlistDetailComponent implements OnInit {
         this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
       }
 
-      console.log(this.bookmarkedMovies);
     });
   }
 

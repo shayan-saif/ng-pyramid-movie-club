@@ -25,7 +25,6 @@ export class TmdbSearchComponent implements OnInit {
 
   onTitleSearch() {
     this.tmdb.titleSearch(this.movieQueryForm.value.title);
-    console.log(this.movies);
   }
 
 }

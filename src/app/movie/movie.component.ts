@@ -32,7 +32,6 @@ export class MovieComponent implements OnInit {
 
   onToggleBookmark(): void {
     this.bookmarkStatus = !this.bookmarkStatus;
-    console.log(this.bookmarkStatus);
     this.bookmark.emit(this.movie.id);
   }
 
