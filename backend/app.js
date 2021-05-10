@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
-// var cors = require('cors')
+const session = require("express-session");
+const passport = require("passport");
 var path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, "../.env") });
 var cookieParser = require('cookie-parser');
@@ -9,6 +10,7 @@ var db = require('./connect');
 
 var watchlistRouter = require('./routes/watchlist');
 var searchRouter = require('./routes/search');
+var authRouter = require('./routes/auth');
 
 var app = express();
 
@@ -20,6 +22,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static("public"));
+app.use(
+    session({
+        secret: process.env.SESSION_KEY,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'Angular')));
 
 var cors = require('cors');
@@ -28,6 +40,7 @@ var cors = require('cors');
 app.use(cors({origin: 'http://localhost:4200'}));
 app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/auth', authRouter);
 app.use(function(req, res, next) {
   res.sendFile(path.join(__dirname, "Angular", "index.html"));
 })

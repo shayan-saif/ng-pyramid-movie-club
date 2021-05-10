@@ -1,0 +1,19 @@
+<mat-card>
+  <form [formGroup]="loginForm" (ngSubmit)="onSignup()">
+    <h1 mat-card-title>Register</h1>
+    <mat-divider></mat-divider>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Secret Key</mat-label>
+      <input type="password" matInput formControlName="secret">
+    </mat-form-field>
+    <button type="submit" mat-button>Signup</button>
+  </form>
+</mat-card>
