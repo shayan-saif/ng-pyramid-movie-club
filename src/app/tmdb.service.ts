@@ -58,24 +58,7 @@ export class TmdbService {
     return throwError(
       'Something bad happened; please try again later.');
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-
   archiveMovie(movieId: number, archiveForm: FormGroup) {
     let watchlistId = this.watchlistService.selectedWatchlist.value._id;
 
@@ -87,8 +70,6 @@ export class TmdbService {
     }
 
     this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
-      console.log(updatedWatchlist);
-    
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
       updatedWatchlists[watchlistIndex] = updatedWatchlist;
@@ -96,26 +77,6 @@ export class TmdbService {
       this.watchlistService.selectedWatchlist.next(updatedWatchlist);
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   deleteMovieFromWatchlist(movieId: number) {

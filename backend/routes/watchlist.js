@@ -124,7 +124,7 @@ router.post('/:watchlistId/:movieId/viewing', async function(req, res, next) {
 router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
   const { watchlistId, movieId } = req.params;
   const { watched, participants, dateWatched, ourRating } = req.body;
-
+  console.log(req.body);
   let watchlist = await watchlistModel.findById(watchlistId);
   let movies = watchlist.movies;
 

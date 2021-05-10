@@ -116,9 +116,11 @@ const movieSchema =
     "dateWatched": {
       "type": "Date",
     },
-    "participants": {
-      "type": "Array"
-    },
+    "participants":
+      [{
+        'name': { type: String },
+        'rating': { type: Number }
+      }],
     "ourRating": {
       "type": "Number"
     }
