@@ -13,6 +13,8 @@ var searchRouter = require('./routes/search');
 var authRouter = require('./routes/auth');
 
 var app = express();
+app.listen(process.env.PORT || 5000);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
