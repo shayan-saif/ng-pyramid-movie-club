@@ -37,4 +37,11 @@ export class AuthService {
       console.log(this.user.value);
     });
   }
+
+  logout(): void {
+    this.http.get('http://localhost:3000/api/auth/register').subscribe(() => {
+      this.isLoggedIn.next(null);
+      this.user.next(null);
+    })
+  }
 }

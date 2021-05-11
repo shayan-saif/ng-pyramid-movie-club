@@ -1,11 +1,11 @@
 export interface IUser {
   _id: string
   username: string
-  permission: Permission
+  permission: IPermission
   joinDate: string
 }
 
-export interface Permission {
+export interface IPermission {
   create: boolean
   add: boolean
   bookmark: boolean

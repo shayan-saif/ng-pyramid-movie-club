@@ -1,9 +1,10 @@
 <mat-card>
+  <div class="d-flex justify-content-end mb-4">
+    <button mat-stroked-button (click)="openCreateWatchlist()" [disabled]="!canCreate">Create Watchlist</button>
+  </div>
 <mat-selection-list #watchlistsRef [multiple]="false">
   
-    <div class="d-flex justify-content-end mb-4">
-      <button mat-stroked-button (click)="openCreateWatchlist()">Create Watchlist</button>
-    </div>
+    
     <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)">
       {{ watchlist.name }}
     </mat-list-option>

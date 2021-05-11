@@ -5,6 +5,8 @@ import { WatchlistService } from '../watchlist.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateWatchlistComponent } from '../create-watchlist/create-watchlist.component';
 import { Router } from '@angular/router';
+import { IUser } from '../models/auth.model';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -17,9 +19,12 @@ export class WatchlistComponent implements OnInit {
   selectedWatchlist: IWatchlist;
   watchlistSubscription = new Subscription;
   watchlistSelectSubscription = new Subscription;
+  user: IUser = null;
+  canCreate: boolean = null;
 
   constructor(
-    private watchlistService: WatchlistService, 
+    private watchlistService: WatchlistService,
+    private auth: AuthService, 
     public dialog: MatDialog,
     private router: Router) { }
 
@@ -30,7 +35,13 @@ export class WatchlistComponent implements OnInit {
     });
     this.watchlistSelectSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
       this.selectedWatchlist = selectedWatchlist;
-    })
+    });
+    this.auth.user.subscribe((user) => {
+      this.user = user;
+      if(user && user.permission.create) {
+        this.canCreate = true;
+      }
+    });
   }
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
