@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { IUser } from '../models/auth.model';
 import { IMovie } from '../models/movie.model';
 import { IWatchlist } from '../models/watchlist.model';
 import { WatchlistService } from '../watchlist.service';
@@ -14,13 +16,17 @@ import { WatchlistDeleteConfirmComponent } from './watchlist-delete-confirm/watc
 export class WatchlistDetailComponent implements OnInit {
   watchlist: IWatchlist;
   watchlistSubscription: Subscription;
+  user: IUser;
 
   toWatchMovies: IMovie[];
   bookmarkedMovies: IMovie[];
   watchedMovies: IMovie[];
 
 
-  constructor(private watchlistService: WatchlistService, public dialog: MatDialog) { }
+  constructor(
+    private watchlistService: WatchlistService, 
+    private auth: AuthService, 
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.watchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((watchlist) => {
@@ -33,6 +39,8 @@ export class WatchlistDetailComponent implements OnInit {
       }
 
     });
+
+    this.auth.user.subscribe((user) => this.user = user);
   }
 
   toggleBookmark(movieId: number): void {

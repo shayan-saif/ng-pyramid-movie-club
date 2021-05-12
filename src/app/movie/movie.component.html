@@ -1,18 +1,18 @@
 <mat-card class="my-3">
   <mat-card-actions style="position:absolute;top:0;right:1rem">
     <div *ngIf="!searchType">
-      <button mat-icon-button *ngIf="!watched" (click)="onToggleBookmark()">
+      <button mat-icon-button *ngIf="!watched" (click)="onToggleBookmark()" [disabled]="!user || !user.permission.bookmark">
         <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!watched" (click)="onArchiveMovie()">
+      <button mat-icon-button *ngIf="!watched" (click)="onArchiveMovie()" [disabled]="!user || !user.permission.archive">
         <mat-icon>archive</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon color="warn" (click)="onDeleteMovie()">delete</mat-icon>
+      <button mat-icon-button (click)="onDeleteMovie()" [disabled]="!user || !user.permission.delete">
+        <mat-icon color="warn">delete</mat-icon>
       </button>
     </div>
     <div *ngIf="searchType">
-      <button mat-icon-button (click)="onAddMovie()">
+      <button mat-icon-button (click)="onAddMovie()" [disabled]="!user || !user.permission.add">
         <mat-icon>add</mat-icon>
       </button>
     </div>

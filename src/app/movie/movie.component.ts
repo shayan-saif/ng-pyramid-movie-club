@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service';
+import { IUser } from '../models/auth.model';
 import { IMovie } from '../models/movie.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { TmdbService } from '../tmdb.service';
@@ -18,11 +20,16 @@ export class MovieComponent implements OnInit {
   watched: boolean;
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
+  user: IUser;
 
 
-  constructor(private tmdb: TmdbService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private tmdb: TmdbService,
+    private auth: AuthService, 
+    private dialog: MatDialog, 
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.auth.user.subscribe((user) => this.user = user);
     if (this.movie.club) {
       this.bookmarkStatus = this.movie.club.bookmarked;
       this.watched = this.movie.club.watched;
