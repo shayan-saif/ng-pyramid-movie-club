@@ -34,7 +34,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'Angular')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 var cors = require('cors');
 
@@ -44,7 +44,7 @@ app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/auth', authRouter);
 app.use(function(req, res, next) {
-  res.sendFile(path.join(__dirname, "Angular", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 })
 
 // catch 404 and forward to error handler
