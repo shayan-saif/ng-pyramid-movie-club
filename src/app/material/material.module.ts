@@ -15,6 +15,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 const material = [
@@ -33,7 +34,8 @@ const material = [
   MatSliderModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatToolbarModule
 ];
 
 

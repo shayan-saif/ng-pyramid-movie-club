@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   isDark = true;
   selectedWatchlist: IWatchlist;
   selectedWatchlistSubscription: Subscription;
-  user: IUser = null;
+  user: IUser;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -27,10 +27,6 @@ export class AppComponent implements OnInit {
       this.selectedWatchlist = selectedWatchlist;
     });
     this.auth.user.subscribe((user) => this.user = user);
-  }
-
-  onLogout(): void {
-    this.auth.logout();
   }
 
   @HostBinding('class')

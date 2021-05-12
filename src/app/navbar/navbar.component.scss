@@ -1,0 +1,19 @@
+.nav-container {
+  display: flex;
+  height: 120px;
+  background: #000;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+
+img {
+  height: 60px;
+}
+
+.nav-link {
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}

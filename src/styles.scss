@@ -246,12 +246,38 @@ $altTheme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
   }
 }
 
-
 body {
   margin:0;
   padding:0;
-  background-color: rgb(255, 255, 255);
+  background: -moz-linear-gradient(
+        157deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 13, 97, 1) 4%,
+        rgba(120, 42, 42, 1) 72%,
+        rgba(139, 81, 0, 1) 100%
+    );
+    background: -webkit-linear-gradient(
+        157deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 13, 97, 1) 4%,
+        rgba(120, 42, 42, 1) 72%,
+        rgba(139, 81, 0, 1) 100%
+    );
+    background: linear-gradient(
+        157deg,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 13, 97, 1) 4%,
+        rgba(120, 42, 42, 1) 72%,
+        rgba(139, 81, 0, 1) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#8b5100", GradientType=1);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+a {
+  color: white;
+  text-decoration: none;
+}
 

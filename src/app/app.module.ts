@@ -19,6 +19,7 @@ import { ConfirmDeleteMovieComponent } from './movie/confirm-delete-movie/confir
 import { ArchiveMovieComponent } from './movie/archive-movie/archive-movie.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginComponent } from './login/login.component';
     ConfirmDeleteMovieComponent,
     ArchiveMovieComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,
