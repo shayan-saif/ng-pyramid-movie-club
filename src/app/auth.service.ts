@@ -19,7 +19,7 @@ export class AuthService {
       password: registerInfo.password,
       secret: registerInfo.secret
     }
-    this.http.post<IUser>('http://localhost:3000/api/auth/register', user).subscribe((userInfo) => {
+    this.http.post<IUser>('https://ng-pmc.herokuapp.com/api/auth/register', user).subscribe((userInfo) => {
       console.log(userInfo);
     });
   }
@@ -30,7 +30,7 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    this.http.post<IUser>('http://localhost:3000/api/auth/login', user).subscribe((userInfo) => {
+    this.http.post<IUser>('https://ng-pmc.herokuapp.com/api/auth/login', user).subscribe((userInfo) => {
       this.isLoggedIn.next(true);
       this.user.next(userInfo);
       console.log(this.isLoggedIn.value);
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.get('http://localhost:3000/api/auth/register').subscribe(() => {
+    this.http.get('https://ng-pmc.herokuapp.com/api/auth/register').subscribe(() => {
       this.isLoggedIn.next(null);
       this.user.next(null);
     })
