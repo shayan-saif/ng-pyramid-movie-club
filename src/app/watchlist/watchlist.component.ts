@@ -40,6 +40,8 @@ export class WatchlistComponent implements OnInit {
       this.user = user;
       if(user && user.permission.create) {
         this.canCreate = true;
+      } else {
+        this.canCreate = false;
       }
     });
   }

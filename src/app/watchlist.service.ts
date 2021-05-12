@@ -15,7 +15,7 @@ export class WatchlistService {
   constructor(private http: HttpClient) { }
 
   getWatchlists() {
-    this.http.get<IWatchlist[]>('https://ng-pmc.herokuapp.com/api/watchlist').subscribe(watchlists => {
+    this.http.get<IWatchlist[]>('http://localhost:3000/api/watchlist').subscribe(watchlists => {
       this.watchlists.next(watchlists);
       // this.selectedWatchlist.next(watchlists[0]);
     });
@@ -24,7 +24,7 @@ export class WatchlistService {
   toggleBookmark(movieId: number) {
     let watchlistId = this.selectedWatchlist.value._id;
 
-    this.http.post<IWatchlist>(`https://ng-pmc.herokuapp.com/api/watchlist/${watchlistId}/${movieId}/bookmark`, {}).subscribe((watchlistResponse) => {
+    this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/bookmark`, {}).subscribe((watchlistResponse) => {
       // this.watchlists.next([...this.watchlists.value, watchlistResponse]);
       let watchlistIndex = this.watchlists.value.findIndex(watchlist => watchlist._id === watchlistResponse._id);
       let updatedWatchlist = this.watchlists.value;
@@ -35,7 +35,7 @@ export class WatchlistService {
   }
 
   createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {
-    this.http.post<IWatchlist>('https://ng-pmc.herokuapp.com/api/watchlist', watchlist).subscribe((watchlistCreated) => {
+    this.http.post<IWatchlist>('http://localhost:3000/api/watchlist', watchlist).subscribe((watchlistCreated) => {
       this.watchlists.next([...this.watchlists.value, watchlistCreated]);
       this.selectedWatchlist.next(watchlistCreated);
     });
@@ -45,7 +45,7 @@ export class WatchlistService {
     let currentWatchlists = this.watchlists.value;
     const watchlistId = this.selectedWatchlist.value._id;
 
-    this.http.delete<IWatchlist>(`https://ng-pmc.herokuapp.com/api/watchlist/${watchlistId}`).subscribe((deletedWatchlist) => {
+    this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}`).subscribe((deletedWatchlist) => {
       currentWatchlists = currentWatchlists.filter(watchlist => deletedWatchlist._id !== watchlist._id);
       this.watchlists.next(currentWatchlists);
       this.selectedWatchlist.next(null);

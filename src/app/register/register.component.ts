@@ -13,10 +13,19 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(null),
     secret: new FormControl(null)
   })
+  error: { status: number, message: string };
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.registerError.subscribe(err => {
+      if (err) {
+        this.error = {
+          status: err.status,
+          message: err.error
+        }
+      }
+    });
   }
 
   onSignup(): void {

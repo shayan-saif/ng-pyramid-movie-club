@@ -8,39 +8,41 @@ passport.serializeUser(userModel.serializeUser());
 passport.deserializeUser(userModel.deserializeUser());
 
 /* GET home page. */
-router.get("/login", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.redirect("/");
-  } else {
-    var message = req.flash();
-    res.render("auth/login", {
-      title: "Login",
-      user: "",
-      message: message,
-    });
-  }
-});
+// router.get("/login", (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.redirect("/");
+//   } else {
+//     var message = req.flash();
+//     res.render("auth/login", {
+//       title: "Login",
+//       user: "",
+//       message: message,
+//     });
+//   }
+// });
+
+// router.get("/register", async (req, res) => {
+//   if (req.isAuthenticated()) {
+//     res.redirect("/");
+//   } else {
+//     var message = {
+//       type: req.flash("type"),
+//       text: req.flash("text"),
+//     };
+//     res.render("auth/register", {
+//       title: "Register",
+//       user: "",
+//       message,
+//     });
+//   }
+// });
 
 router.get("/logout", (req, res) => {
   req.logout();
-  res.send("Logged out");
+  res.json("Logged out");
 });
 
-router.get("/register", async (req, res) => {
-  if (req.isAuthenticated()) {
-    res.redirect("/");
-  } else {
-    var message = {
-      type: req.flash("type"),
-      text: req.flash("text"),
-    };
-    res.render("auth/register", {
-      title: "Register",
-      user: "",
-      message,
-    });
-  }
-});
+
 
 router.post("/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
@@ -48,7 +50,7 @@ router.post("/login", function (req, res, next) {
       return console.log(err);
     }
     if (!user) {
-      res.send("Incorrect login");
+      res.status(404).send("Invalid credentials");
     } else {
       req.logIn(user, function (err) {
         if (err) {
@@ -71,7 +73,7 @@ router.post("/login", function (req, res, next) {
 router.post("/register", async (req, res) => {
   const key = req.body.secret;
   if (key != process.env.REGISTER_KEY) {
-    res.sendStatus(404);
+    res.status(404).send("Invalid key");
   } else {
     let date = new Date();
     await userModel.register(

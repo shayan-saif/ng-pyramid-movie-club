@@ -15,5 +15,6 @@
       <input type="password" matInput formControlName="secret">
     </mat-form-field>
     <button type="submit" mat-button>Signup</button>
+    <div *ngIf="error">{{ error.message }}</div>
   </form>
 </mat-card>

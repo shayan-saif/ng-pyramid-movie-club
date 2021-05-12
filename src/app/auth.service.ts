@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ILogin, IRegister, IUser } from './models/auth.model';
 
 
@@ -8,8 +9,9 @@ import { ILogin, IRegister, IUser } from './models/auth.model';
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn = new BehaviorSubject<boolean>(null);
   user = new BehaviorSubject<IUser>(null);
+  loginError = new BehaviorSubject(null);
+  registerError = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +21,15 @@ export class AuthService {
       password: registerInfo.password,
       secret: registerInfo.secret
     }
-    this.http.post<IUser>('https://ng-pmc.herokuapp.com/api/auth/register', user).subscribe((userInfo) => {
-      console.log(userInfo);
-    });
+    this.http.post<IUser>('http://localhost:3000/api/auth/register', user)
+      .pipe(catchError(this.handleRegisterError))
+      .subscribe((userInfo) => {
+        console.log(userInfo);
+      }, (err) => this.registerError.next(err));
+  }
+
+  handleRegisterError(error) {
+    return throwError(error || "Server error");
   }
 
   loginUser(loginInfo: ILogin): void {
@@ -30,18 +38,20 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    this.http.post<IUser>('https://ng-pmc.herokuapp.com/api/auth/login', user).subscribe((userInfo) => {
-      this.isLoggedIn.next(true);
-      this.user.next(userInfo);
-      console.log(this.isLoggedIn.value);
-      console.log(this.user.value);
-    });
+    this.http.post<IUser>('http://localhost:3000/api/auth/login', user)
+      .pipe(catchError(this.handleLoginError))
+      .subscribe((userInfo) => {
+        this.user.next(userInfo);
+      }, (err) => this.loginError.next(err));
   }
 
-  logout(): void {
-    this.http.get('https://ng-pmc.herokuapp.com/api/auth/register').subscribe(() => {
-      this.isLoggedIn.next(null);
+  handleLoginError(error) {
+    return throwError(error || "Server error");
+  }
+
+  logout() {
+    this.http.get('http://localhost:3000/api/auth/logout').subscribe(() => {
       this.user.next(null);
-    })
+    });
   }
 }

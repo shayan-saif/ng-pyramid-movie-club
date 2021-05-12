@@ -20,7 +20,7 @@ export class TmdbService {
   titleSearch(title: string) {
     const options = { params: new HttpParams().set('title', title) };
 
-    this.http.get<IMovie[]>('https://ng-pmc.herokuapp.com/api/search', options).subscribe((results) => {
+    this.http.get<IMovie[]>('http://localhost:3000/api/search', options).subscribe((results) => {
       this.movies.next(results);
     });
   }
@@ -34,7 +34,7 @@ export class TmdbService {
       watchlistId: watchlistId
     }
 
-    this.http.post<IWatchlist>(`https://ng-pmc.herokuapp.com/api/search`, payload)
+    this.http.post<IWatchlist>(`http://localhost:3000/api/search`, payload)
       .pipe(catchError(this.handleError))
 
       .subscribe((updatedWatchlist) => {
@@ -69,7 +69,7 @@ export class TmdbService {
       ourRating: 4
     }
 
-    this.http.post<IWatchlist>(`https://ng-pmc.herokuapp.com/api/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
+    this.http.post<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
       updatedWatchlists[watchlistIndex] = updatedWatchlist;
@@ -83,7 +83,7 @@ export class TmdbService {
 
     const watchlistId = this.watchlistService.selectedWatchlist.value._id;
 
-    this.http.delete<IWatchlist>(`https://ng-pmc.herokuapp.com/api/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
+    this.http.delete<IWatchlist>(`http://localhost:3000/api/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
       updatedWatchlists[watchlistIndex] = updatedWatchlist;

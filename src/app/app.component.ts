@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
+import { IUser } from './models/auth.model';
 import { IWatchlist } from './models/watchlist.model';
 import { WatchlistService } from './watchlist.service';
 
@@ -11,8 +12,8 @@ import { WatchlistService } from './watchlist.service';
 })
 export class AppComponent implements OnInit {
   selectedWatchlist: IWatchlist;
-
   selectedWatchlistSubscription: Subscription;
+  user: IUser = null;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
     this.selectedWatchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
       this.selectedWatchlist = selectedWatchlist;
     });
+    this.auth.user.subscribe((user) => this.user = user);
   }
 
   onLogout(): void {
