@@ -15,39 +15,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(registerInfo: IRegister): void {
+  registerUser(registerInfo: IRegister) {
     let user = {
       username: registerInfo.username,
       password: registerInfo.password,
       secret: registerInfo.secret
     }
-    this.http.post<IUser>('http://localhost:3000/api/auth/register', user)
-      .pipe(catchError(this.handleRegisterError))
-      .subscribe((userInfo) => {
-        console.log(userInfo);
-      }, (err) => this.registerError.next(err));
+    
+    return this.http.post<IUser>('http://localhost:3000/api/auth/register', user);
   }
 
-  handleRegisterError(error) {
-    return throwError(error || "Server error");
-  }
-
-  loginUser(loginInfo: ILogin): void {
+  loginUser(loginInfo: ILogin) {
     let user = {
       username: loginInfo.username,
       password: loginInfo.password,
     }
 
-    this.http.post<IUser>('http://localhost:3000/api/auth/login', user)
-      .pipe(catchError(this.handleLoginError))
-      .subscribe((userInfo) => {
-        this.user.next(userInfo);
-      }, (err) => this.loginError.next(err));
+    return this.http.post<IUser>('http://localhost:3000/api/auth/login', user);
   }
 
-  handleLoginError(error) {
-    return throwError(error || "Server error");
-  }
+  
 
   logout() {
     this.http.get('http://localhost:3000/api/auth/logout').subscribe(() => {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -14,7 +17,7 @@ export class LoginComponent implements OnInit {
   })
   error: { status: number, message: string };
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.auth.loginError.subscribe(err => {
@@ -27,8 +30,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLogin(): void {
-    this.auth.loginUser(this.loginForm.value);
+  onLogin() {
+    this.auth.loginUser(this.loginForm.value)
+      .pipe(catchError(this.handleError))
+      .subscribe((userInfo) => {
+        this.auth.user.next(userInfo);
+        this.router.navigate(['']);
+      }, (err) => {
+        this.error = {
+          status: err.status,
+          message: err.error
+        }
+      });
+    }
+
+  handleError(error) {
+    return throwError(error || "Server error");
   }
 
 }
