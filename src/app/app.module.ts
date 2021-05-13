@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShortenPipe } from './shorten.pipe';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ShortenPipe } from './shorten.pipe';
     RegisterComponent,
     LoginComponent,
     NavbarComponent,
-    ShortenPipe
+    ShortenPipe,
+    FooterComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

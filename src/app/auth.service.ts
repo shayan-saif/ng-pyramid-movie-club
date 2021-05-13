@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { ILogin, IRegister, IUser } from './models/auth.model';
 
 
@@ -22,7 +21,7 @@ export class AuthService {
       secret: registerInfo.secret
     }
     
-    return this.http.post<IUser>('http://localhost:3000/api/auth/register', user);
+    return this.http.post<IUser>('http://pyramidmovieclub-env.eba-2f3jnpr3.us-east-1.elasticbeanstalk.com/api/auth/register', user);
   }
 
   loginUser(loginInfo: ILogin) {
@@ -31,13 +30,13 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    return this.http.post<IUser>('http://localhost:3000/api/auth/login', user);
+    return this.http.post<IUser>('http://pyramidmovieclub-env.eba-2f3jnpr3.us-east-1.elasticbeanstalk.com/api/auth/login', user);
   }
 
   
 
   logout() {
-    this.http.get('http://localhost:3000/api/auth/logout').subscribe(() => {
+    this.http.get('http://pyramidmovieclub-env.eba-2f3jnpr3.us-east-1.elasticbeanstalk.com/api/auth/logout').subscribe(() => {
       this.user.next(null);
     });
   }

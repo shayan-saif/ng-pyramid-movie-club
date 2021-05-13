@@ -1,8 +1,11 @@
-<div *ngIf="watchlist">
-  <mat-card>
+<div *ngIf="watchlist" class="watchlist-detail-container">
+  <mat-card class="watchlist-detail">
     <div class="d-flex justify-content-between px-2">
       <h1 mat-card-title>{{ watchlist.name }}</h1>
-      <button mat-button mat-stroked-button color="warn" (click)="openDeleteDialog()" *ngIf="watchlist.name != 'Global'" [disabled]="!user || !user.permission.delete"><mat-icon style="margin-right: 1rem;">delete</mat-icon> Watchlist</button>
+      <button mat-icon-button color="warn" (click)="openDeleteDialog()" *ngIf="watchlist.name != 'Global'"
+        [disabled]="!user || !user.permission.delete">
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
     <mat-tab-group mat-align-tabs="start" dynamicHeight>
       <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">

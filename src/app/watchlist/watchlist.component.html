@@ -1,10 +1,8 @@
-<mat-card style="padding:0">
-  <div class="d-flex justify-content-end p-3">
-    <!-- <button mat-stroked-button color="accent" (click)="openCreateWatchlist()" [disabled]="!canCreate">
-      <mat-icon>add</mat-icon> Watchlist
-    </button> -->
-    <button mat-stroked-button color="accent" (click)="openCreateWatchlist()">
-      <mat-icon>add</mat-icon> Watchlist
+<mat-card class="watchlists">
+  <div class="d-flex justify-content-between px-3 pt-3">
+    <h1>Watchlists</h1>
+    <button mat-icon-button color="accent" (click)="openCreateWatchlist()" [disabled]="!canCreate">
+      <mat-icon>add</mat-icon>
     </button>
   </div>
   <mat-divider></mat-divider>
