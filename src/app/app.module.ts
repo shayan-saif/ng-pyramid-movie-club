@@ -20,6 +20,7 @@ import { ArchiveMovieComponent } from './movie/archive-movie/archive-movie.compo
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ShortenPipe } from './shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ArchiveMovieComponent,
     RegisterComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    ShortenPipe
   ],
   entryComponents: [
     CreateWatchlistComponent,

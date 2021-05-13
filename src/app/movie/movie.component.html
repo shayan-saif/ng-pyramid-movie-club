@@ -1,40 +1,46 @@
-<mat-card class="my-3">
+<mat-card class="my-3 movie-card">
   <mat-card-actions style="position:absolute;top:0;right:1rem">
     <div *ngIf="!searchType">
-      <button mat-icon-button *ngIf="!watched" (click)="onToggleBookmark()" [disabled]="!user || !user.permission.bookmark">
+      <button mat-icon-button color="primary" *ngIf="!watched"
+        (click)="onToggleBookmark()" [disabled]="!user || !user.permission.bookmark">
         <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!watched" (click)="onArchiveMovie()" [disabled]="!user || !user.permission.archive">
+      <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
+        [disabled]="!user || !user.permission.archive">
         <mat-icon>archive</mat-icon>
       </button>
-      <button mat-icon-button (click)="onDeleteMovie()" [disabled]="!user || !user.permission.delete">
-        <mat-icon color="warn">delete</mat-icon>
+      <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!user || !user.permission.delete">
+        <mat-icon>delete</mat-icon>
       </button>
     </div>
     <div *ngIf="searchType">
-      <button mat-icon-button (click)="onAddMovie()" [disabled]="!user || !user.permission.add">
+      <button mat-icon-button color="accent" (click)="onAddMovie()" [disabled]="!user || !user.permission.add">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </mat-card-actions>
   <div class="row">
     <div class="col-auto">
-      <div class="d-flex">
+      <div class="d-flex" class="poster-container">
         <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
+        <mat-icon class="trailer-icon">movie</mat-icon>
       </div>
     </div>
     <div class="col-8">
       <div class="container">
-        <mat-card-title><a href="https://www.themoviedb.org/movie/{{ movie.id }}" target="_blank">{{ movie.title }}</a>
-        </mat-card-title>
+        <span class="mat-title"><a href="https://www.themoviedb.org/movie/{{ movie.id }}" class="movie-title"
+            target="_blank">{{ movie.title
+            | shorten : 26}}</a>
+        </span>
         <div class="mat-body-1">{{ movie.releaseDate | date }}</div>
-        <div class="genres my-2"><span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name }}</span>
+        <div class="genres mt-2 mb-3"><span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name
+            }}</span>
         </div>
-        <div class="mat-body-1">{{ movie.overview }}</div>
+        <div class="mat-body-1">{{ movie.overview | shorten : 250 }}</div>
       </div>
     </div>
   </div>
-  <div class="mat-caption" style="position: absolute;bottom:0.8rem;right:1rem;" *ngIf="!searchType">
+  <div class="mat-caption addedby" *ngIf="!searchType">
     Added by {{ movie.club.addedBy }} / {{ movie.club.dateAdded | date }}
   </div>
 </mat-card>

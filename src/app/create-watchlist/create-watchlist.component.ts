@@ -30,7 +30,10 @@ export class CreateWatchlistComponent implements OnInit {
     this.watchlistService.createWatchlist(inputWatchlist);
 
     this.snackBar.open('Watchlist created', 'Dismiss', {
-      duration: 3000
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top",
+      panelClass: ['mat-primary']
     });
   }
 

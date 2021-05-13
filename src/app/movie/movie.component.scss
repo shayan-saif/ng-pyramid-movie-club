@@ -1,12 +1,57 @@
-img.poster {
-  width: 140px;
+.poster-container {
+  cursor: pointer;
 }
 
-.genres {}
+img.poster {
+  transition: 0.4s;
+  width     : 140px;
+  opacity   : 100%;
+}
+
+.poster-container:hover>img.poster {
+  transition: 0.4s;
+  width     : 140px;
+  opacity   : 40%;
+  filter    : blur(4px);
+}
+
+.trailer-icon {
+  transition: 0.4s;
+  opacity   : 0%;
+  font-size : 3rem;
+  position  : absolute;
+  top       : 40%;
+  left      : 11%;
+}
+
+.poster-container:hover>.trailer-icon {
+  transition: 0.4s;
+  opacity   : 100%;
+}
 
 .badge {
-  padding         : 2px;
+  padding         : 2px 8px;
   border-radius   : 5px;
-  background-color: gray;
-  color           : white;
+  color           : rgba(255, 255, 255, 0.616);
+  background-color: rgba(255, 255, 255, 0.062);
+}
+
+.movie-card {
+  min-width: 35rem;
+  max-width: 35rem;
+}
+
+.addedby {
+  position: absolute;
+  bottom  : 0.8rem;
+  right   : 1rem;
+  opacity: 40%;
+}
+
+a.movie-title {
+  color: rgb(255, 145, 0);
+}
+
+a.movie-title:hover {
+  text-decoration: underline;
 }
