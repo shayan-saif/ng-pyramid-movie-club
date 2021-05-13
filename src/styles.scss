@@ -272,7 +272,7 @@ body {
     );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000", endColorstr="#8b5100", GradientType=1);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-attachment: fixed;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

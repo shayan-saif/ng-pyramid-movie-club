@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   selectedWatchlist: IWatchlist;
   selectedWatchlistSubscription: Subscription;
   user: IUser;
+  showDrawer: boolean = false;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -32,5 +33,9 @@ export class AppComponent implements OnInit {
   @HostBinding('class')
   get themeMode() {
     return this.isDark ? 'theme-dark' : 'theme-light';
+  }
+
+  toggleDrawer() {
+    this.showDrawer = !this.showDrawer;
   }
 }

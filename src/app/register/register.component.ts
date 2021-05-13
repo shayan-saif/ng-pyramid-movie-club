@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -12,11 +12,13 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({
-    username: new FormControl(null),
-    password: new FormControl(null),
-    secret: new FormControl(null)
+    username: new FormControl(null, [Validators.required, Validators.maxLength(16)]),
+    password: new FormControl(null, [Validators.required, Validators.maxLength(32)]),
+    secret: new FormControl(null, [Validators.required, Validators.maxLength(64)])
   })
   error: { status: number, message: string };
+  hidePassword: boolean;
+  hideKey: boolean;
 
   constructor(private auth: AuthService, private router: Router) { }
 

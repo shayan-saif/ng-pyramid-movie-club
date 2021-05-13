@@ -2,15 +2,28 @@
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <h1 mat-card-title>Login</h1>
     <mat-divider></mat-divider>
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input type="password" matInput formControlName="password">
-    </mat-form-field>
-    <button type="submit" mat-button>Login</button>
-    <div *ngIf="error">{{ error.message }}</div>
+    <mat-card-content class="pt-3">
+      <mat-error *ngIf="error" class="mb-3">{{ error.message }}</mat-error>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput formControlName="username">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" [type]="hidePassword ? 'text' : 'password'">
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Sign in</button>
+    </mat-card-content>
   </form>
 </mat-card>
