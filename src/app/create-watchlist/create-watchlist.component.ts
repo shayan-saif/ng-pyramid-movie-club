@@ -10,7 +10,7 @@ import { WatchlistService } from '../watchlist.service';
 })
 export class CreateWatchlistComponent implements OnInit {
   createWatchlistForm = new FormGroup({
-    name: new FormControl(null, Validators.required)
+    name: new FormControl(null, [Validators.required, Validators.maxLength(16)])
   })
 
   constructor(private watchlistService: WatchlistService, private snackBar: MatSnackBar) { }

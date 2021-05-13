@@ -1,13 +1,16 @@
-<mat-card>
-  <div class="d-flex justify-content-end mb-4">
-    <button mat-stroked-button (click)="openCreateWatchlist()" [disabled]="!canCreate">Create Watchlist</button>
+<mat-card style="padding:0">
+  <div class="d-flex justify-content-end p-3">
+    <!-- <button mat-stroked-button color="accent" (click)="openCreateWatchlist()" [disabled]="!canCreate">
+      <mat-icon>add</mat-icon> Watchlist
+    </button> -->
+    <button mat-stroked-button color="accent" (click)="openCreateWatchlist()">
+      <mat-icon>add</mat-icon> Watchlist
+    </button>
   </div>
-<mat-selection-list #watchlistsRef [multiple]="false">
-  
-    
+  <mat-divider></mat-divider>
+  <mat-selection-list #watchlistsRef [multiple]="false">
     <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)">
       {{ watchlist.name }}
     </mat-list-option>
-  
-</mat-selection-list>
+  </mat-selection-list>
 </mat-card>
