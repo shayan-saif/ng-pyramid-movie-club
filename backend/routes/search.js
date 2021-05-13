@@ -41,6 +41,21 @@ router.get('/', async function (req, res, next) {
   }
 });
 
+router.get('/discover', async function (req, res, next) {
+  let movies = [];
+  try {
+    movies = await tmdb.get('discover/movie');
+    res.json(movies.results);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(500);
+      throw error;
+    }
+  }
+})
+
 // Add SPECIFIC movie to SPECIFIC watchlist OR Global
 router.post('/', async function (req, res, next) {
   const { movieId, addedBy } = req.body;

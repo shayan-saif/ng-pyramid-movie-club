@@ -1,10 +1,9 @@
 .watchlist-detail-container {
-  min-width: 40rem;
-  max-width: 40rem;
+  min-width: 41rem;
 }
 
 .watchlist-detail {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 70vh;
   overflow-y: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -17,5 +16,5 @@
 }
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-  background: #FF0000;
+  // background: #FF0000;
 }

@@ -25,6 +25,10 @@ export class TmdbService {
     });
   }
 
+  getDiscover() {
+    return this.http.get<IMovie[]>('http://pyramidmovieclub-env.eba-2f3jnpr3.us-east-1.elasticbeanstalk.com/api/search/discover');
+  }
+
   addMovieToWatchlist() {
     let movieId = this.selectedMovie.value.id;
     let watchlistId = this.watchlistService.selectedWatchlist.value._id;

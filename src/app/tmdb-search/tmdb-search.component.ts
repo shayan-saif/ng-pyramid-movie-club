@@ -19,7 +19,14 @@ export class TmdbSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.tmdb.movies.subscribe((movies) => {
-      this.movies = movies;
+      if (!movies) {
+        this.tmdb.getDiscover().subscribe((movies) => {
+        this.tmdb.movies.next(movies);
+        this.movies = movies;
+        });
+      } else {
+        this.movies = movies;
+      }
     });
   }
 
