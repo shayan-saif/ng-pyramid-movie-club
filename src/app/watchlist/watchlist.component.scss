@@ -1,3 +1,15 @@
-.watchlists {
+mat-card {
   padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-end;
+  margin: 0.6rem;
+  padding-top: 0.6rem;
+}
+
+span.mat-title {
+  margin: 0;
 }

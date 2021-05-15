@@ -1,7 +1,7 @@
-<mat-card class="watchlists">
-  <div class="d-flex justify-content-between px-3 pt-3">
-    <h1>Watchlists</h1>
-    <button mat-icon-button color="accent" (click)="openCreateWatchlist()" [disabled]="!canCreate">
+<mat-card class="container">
+  <div class="header">
+    <span class="mat-title">Watchlists</span>
+    <button mat-mini-fab color="primary" (click)="openCreateWatchlist()" [disabled]="!canCreate">
       <mat-icon>add</mat-icon>
     </button>
   </div>
