@@ -1,32 +1,30 @@
 <div *ngIf="watchlist" class="container">
-  <mat-card class="watchlist-detail">
-    <div class="d-flex justify-content-between px-2">
-      <h1 mat-card-title>{{ watchlist.name }}</h1>
-      <button mat-icon-button color="warn" (click)="openDeleteDialog()" *ngIf="watchlist.name != 'Global'"
+  <mat-card>
+    <div class="d-flex justify-content-between header">
+      <span class="mat-title">{{ watchlist.name }}</span>
+      <button mat-mini-fab color="warn" (click)="openDeleteDialog()" [disabled]="watchlist.name === 'Global'"
         [disabled]="!user || !user.permission.delete">
         <mat-icon>clear</mat-icon>
       </button>
     </div>
-    <mat-card-content>
-      <mat-tab-group mat-align-tabs="start" dynamicHeight>
-        <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
-          <div style="margin:1rem 1rem;">
-            <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
-            </app-movie>
-          </div>
-        </mat-tab>
-        <mat-tab label="To Watch">
-          <div style="margin:1rem 1rem;">
-            <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
-            </app-movie>
-          </div>
-        </mat-tab>
-        <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
-          <div style="margin:1rem 1rem;">
-            <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
+    <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight>
+      <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
+        <div style="margin:1rem 1rem;">
+          <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
+          </app-movie>
+        </div>
+      </mat-tab>
+      <mat-tab label="To Watch">
+        <div style="margin:1rem 1rem;">
+          <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
+          </app-movie>
+        </div>
+      </mat-tab>
+      <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
+        <div style="margin:1rem 1rem;">
+          <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
 </div>
