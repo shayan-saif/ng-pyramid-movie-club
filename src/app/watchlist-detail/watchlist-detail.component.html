@@ -1,32 +1,5 @@
-<!-- <mat-expansion-panel class="mb-3">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ watchlist.name }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="row">
-      <div class="col">
-        <p>This watchlist was created by <span class="insert">{{ watchlist.by }}</span> on <span class="insert">{{
-            watchlist.dateCreated | date }}</span>. It contains <span class="insert">{{ watchlist.movies.length > 0 ?
-            watchlist.movies.length : 'no' }}</span> {{ watchlist.movies.length === 1 ? 'movie' : 'movies' }}.
-        </p>
-      </div>
-      <div class="col-2">
-        <div class="d-flex justify-content-end">
-          <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
-            [disabled]="watchlist.name === 'Global' || !user || !user.permission.delete">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-  </mat-expansion-panel> -->
 <div *ngIf="watchlist" class="container">
-  <div class="content pb-3">
-    <!-- <mat-form-field class="search" appearance="fill">
-      <mat-label>Search</mat-label>
-      <input type="text" matInput>
-    </mat-form-field> -->
+  <div class="content">
     <div class="header">
       <span class="mat-title">{{ watchlist.name }}</span>
       <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
