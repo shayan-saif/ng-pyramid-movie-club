@@ -1,14 +1,16 @@
-<mat-card class="container">
-  <div class="d-flex justify-content-between header">
-    <span class="mat-title">Watchlists</span>
-    <button mat-mini-fab color="primary" (click)="openCreateWatchlist()" [disabled]="!canCreate">
-      <mat-icon>add</mat-icon>
-    </button>
+<div class="container">
+  <div class="content pb-3">
+    <div class="header align-items-end">
+      <span class="mat-title">Watchlists</span>
+      <button mat-mini-fab color="primary" (click)="openCreateWatchlist()" [disabled]="!canCreate">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-selection-list #watchlistsRef [multiple]="false">
+      <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)">
+        {{ watchlist.name }}
+      </mat-list-option>
+    </mat-selection-list>
   </div>
-  <mat-divider></mat-divider>
-  <mat-selection-list #watchlistsRef [multiple]="false">
-    <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)">
-      {{ watchlist.name }}
-    </mat-list-option>
-  </mat-selection-list>
-</mat-card>
+</div>

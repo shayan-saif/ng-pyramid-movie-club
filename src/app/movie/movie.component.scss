@@ -1,3 +1,12 @@
+// mat-card {
+//   padding: 0;
+// }
+
+.movie-card {
+  max-width: 40rem;
+  margin: 1rem 0;
+}
+
 .poster-container {
   cursor: pointer;
 }
@@ -34,11 +43,6 @@ img.poster {
   border-radius   : 5px;
   color           : rgba(255, 255, 255, 0.616);
   background-color: rgba(255, 255, 255, 0.062);
-}
-
-.movie-card {
-  min-width: 35rem;
-  max-width: 35rem;
 }
 
 .addedby {

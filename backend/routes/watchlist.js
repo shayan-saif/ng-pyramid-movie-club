@@ -29,7 +29,8 @@ router.get('/:watchlistId', function (req, res, next) {
 
 // Create NEW watchlist
 router.post('/', function (req, res, next) {
-  const { name, by, private, sharedWith } = req.body;
+  const { name, private, sharedWith } = req.body;
+  const by = req.user.username;
   const dateCreated = new Date();
 
   const watchlist = {

@@ -10,15 +10,16 @@ mat-card {
   padding:0;
 }
 
-.header {
-  align-items:center;
-  margin: 0.6rem;
-  margin-left: 1rem;
-  padding-top: 0.6rem;
+.insert {
+  color:rgb(224,145,1);
 }
 
-span.mat-title {
-  margin: 0;
+.search {
+  width: 100%;
+}
+
+input {
+  font-size: 1.4rem;
 }
 
 // ::-webkit-scrollbar {
