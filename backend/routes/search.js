@@ -58,7 +58,8 @@ router.get('/discover', async function (req, res, next) {
 
 // Add SPECIFIC movie to SPECIFIC watchlist OR Global
 router.post('/', async function (req, res, next) {
-  const { movieId, addedBy } = req.body;
+  const movieId = req.body.movieId;
+  const addedBy = req.user.username;
   const watchlistId = req.body.watchlistId || '6092f5e8cb847e4a0cd5e8c4';
   const watchlist = await watchlistModel.findById(watchlistId);
 
@@ -69,6 +70,7 @@ router.post('/', async function (req, res, next) {
     if (duplicate) {
       res.send("duplicate");
     } else {
+      movie = {...movie, club: { addedBy: addedBy}};
       watchlist.movies.push(movie);
       watchlist.save();
       res.json(watchlist);

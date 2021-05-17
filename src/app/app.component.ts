@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 import { IUser } from './models/auth.model';
 import { IWatchlist } from './models/watchlist.model';
+import { UserService } from './user.service';
 import { WatchlistService } from './watchlist.service';
 
 @Component({
@@ -19,15 +20,20 @@ export class AppComponent implements OnInit {
 
   constructor(
     private watchlistService: WatchlistService,
-    private auth: AuthService
-    ) { }
+    private auth: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     this.watchlistService.getWatchlists();
     this.selectedWatchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
       this.selectedWatchlist = selectedWatchlist;
     });
-    this.auth.user.subscribe((user) => this.user = user);
+    this.auth.user.subscribe((user) => {
+      this.user = user
+    });
+    this.userService.verifyStatus();
+
   }
 
   @HostBinding('class')

@@ -11,6 +11,7 @@ var db = require('./connect');
 var watchlistRouter = require('./routes/watchlist');
 var searchRouter = require('./routes/search');
 var authRouter = require('./routes/auth');
+var userRouter = require('./routes/user');
 
 var app = express();
 app.listen(process.env.PORT || 8080);
@@ -39,10 +40,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 var cors = require('cors');
 
 // use it before all route definitions
-app.use(cors({origin: 'http://pyramidmovie-dev.us-east-1.elasticbeanstalk.com'}));
+app.use(cors({origin: ['http://pyramidmovie-dev.us-east-1.elasticbeanstalk.com', 'http://localhost:4200']}));
 app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 app.use('', function(req, res, next) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 })

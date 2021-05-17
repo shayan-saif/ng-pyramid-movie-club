@@ -23,7 +23,7 @@ export class AuthService {
       password: registerInfo.password,
       secret: registerInfo.secret
     }
-    
+
     return this.http.post<IUser>(BACKEND_URL + '/register', user);
   }
 
@@ -36,7 +36,7 @@ export class AuthService {
     return this.http.post<IUser>(BACKEND_URL + '/login', user);
   }
 
-  
+
 
   logout() {
     this.http.get(BACKEND_URL + '/logout').subscribe(() => {
