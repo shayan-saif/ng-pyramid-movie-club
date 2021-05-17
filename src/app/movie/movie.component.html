@@ -1,4 +1,4 @@
-<div class="content p-3 mb-3">
+<div class="content p-3 mb-3" [class.bookmark]="bookmarkStatus">
   <div class="row">
     <div class="col-2 hide-img">
       <div class="d-flex">
@@ -30,11 +30,11 @@
           target="_blank">{{ movie.title
           | shorten : 26}}</a>
       </span>
+      <div class="mat-body-1">{{ movie.releaseDate | date }}</div>
       <div class="genres mt-2 mb-3">
         <span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name
           }}</span>
       </div>
-      <div class="mat-body-1">{{ movie.releaseDate | date }}</div>
       <div class="mat-body-1">{{ movie.overview | shorten : 600}}</div>
       <div class="mat-caption added" *ngIf="!searchType">{{ movie.club.addedBy }} / {{
         movie.club.dateAdded | date }}</div>

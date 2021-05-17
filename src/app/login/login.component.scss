@@ -1,3 +1,17 @@
+.content {
+  max-width: 20rem;
+}
+
+form {
+  padding: 0 1rem 1rem 1rem;
+}
+
 mat-form-field {
   width: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  .content {
+    max-width: none;
+  }
 }

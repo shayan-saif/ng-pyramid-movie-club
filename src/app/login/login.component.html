@@ -1,8 +1,7 @@
-<mat-card>
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <h1 mat-card-title>Login</h1>
-    <mat-divider></mat-divider>
-    <mat-card-content class="pt-3">
+<div class="container">
+  <div class="content">
+    <div class="header"><span class="mat-title">Login</span></div>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <mat-error *ngIf="error" class="mb-3">{{ error.message }}</mat-error>
       <div class="row">
         <div class="col">
@@ -23,7 +22,8 @@
           </mat-form-field>
         </div>
       </div>
-      <button class="full-width" type="submit" mat-raised-button color="accent" [disabled]="loginForm.invalid">Sign in</button>
-    </mat-card-content>
-  </form>
-</mat-card>
+      <button class="full-width" type="submit" mat-raised-button color="accent" [disabled]="loginForm.invalid">Sign
+        in</button>
+    </form>
+  </div>
+</div>

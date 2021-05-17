@@ -1,4 +1,57 @@
-<mat-card>
+<div class="container">
+  <div class="content">
+    <div class="header"><span class="mat-title">Register</span></div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSignup()">
+      <mat-error *ngIf="error" class="mb-3">{{ error.message }}</mat-error>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput formControlName="username">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" [type]="hidePassword ? 'text' : 'password'">
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Secret Key</mat-label>
+            <input type="password" matInput formControlName="secret" [type]="hideKey ? 'text' : 'password'">
+            <button type="button" mat-icon-button matSuffix (click)="hideKey = !hideKey">
+              <mat-icon>{{ hideKey ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+      <button class="full-width" type="submit" mat-raised-button color="accent"
+        [disabled]="registerForm.invalid">Signup</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card>
   <form [formGroup]="registerForm" (ngSubmit)="onSignup()">
     <h1 mat-card-title>Register</h1>
     <mat-divider></mat-divider>
@@ -37,4 +90,4 @@
       <button class="full-width" type="submit" mat-raised-button color="accent" [disabled]="registerForm.invalid">Signup</button>
     </mat-card-content>
   </form>
-</mat-card>
+</mat-card> -->

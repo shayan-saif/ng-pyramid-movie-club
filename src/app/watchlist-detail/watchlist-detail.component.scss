@@ -1,32 +1,10 @@
-// .watchlist-detail {
-//   background-color: rgba(0, 0, 0, 0.4);
-//   height: 70vh;
-//   overflow-y: scroll;
-//   -ms-overflow-style: none;  /* IE and Edge */
-//   scrollbar-width: none;  /* Firefox */
-// }
+.movie-list {
+  margin:1rem 1rem;
+  max-height: 60vh;
+  overflow-y: scroll;
+}
 
-// mat-card {
-//   padding:0;
-// }
-
-// .insert {
-//   color:rgb(224,145,1);
-// }
-
-// .search {
-//   width: 100%;
-// }
-
-// input {
-//   font-size: 1.4rem;
-// }
-
-// ::-webkit-scrollbar {
-//   width: 0;  /* Remove scrollbar space */
-//   background: transparent;  /* Optional: just make scrollbar invisible */
-// }
-// /* Optional: show position indicator in red */
-// ::-webkit-scrollbar-thumb {
-//   // background: #FF0000;
-// }
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}

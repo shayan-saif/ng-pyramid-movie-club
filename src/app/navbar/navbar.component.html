@@ -1,18 +1,10 @@
-<div class="nav-container">
-  <div class="row align-items-center">
-    <div class="col-auto"><img src="assets/images/logo.png" alt="logo"></div>
-    <div class="col-3"><span class="mat-title">Pyramid Movie Club</span></div>
-  </div>
-  <div class="justify-self-center">
+<mat-toolbar>
+  <span>Pyramid Movie Club</span>
+  <span class="spacer"></span>
+  <div>
     <a class="nav-link" mat-button [routerLink]="['search']">Search</a>
     <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['login']">Login</a>
     <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['register']">Register</a>
     <button *ngIf="user" mat-button (click)="onLogout()">Logout</button>
   </div>
-</div>
-<!-- <mat-toolbar color="primary">
-  <button mat-icon-button (click)="onToggleDrawer()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Pyramid Movie Club</span>
-</mat-toolbar> -->
+</mat-toolbar>

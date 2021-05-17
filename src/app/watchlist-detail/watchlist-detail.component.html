@@ -1,4 +1,4 @@
-<div *ngIf="watchlist" class="ps-3">
+<div *ngIf="watchlist" class="container">
   <div class="content">
     <div class="header">
       <span class="mat-title">{{ watchlist.name }}</span>
@@ -9,19 +9,19 @@
     </div>
     <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight>
       <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
-        <div style="margin:1rem 1rem;">
+        <div class="movie-list">
           <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
           </app-movie>
         </div>
       </mat-tab>
       <mat-tab label="To Watch">
-        <div style="margin:1rem 1rem;">
+        <div class="movie-list">
           <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
           </app-movie>
         </div>
       </mat-tab>
       <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
-        <div style="margin:1rem 1rem;">
+        <div class="movie-list">
           <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
         </div>
       </mat-tab>
