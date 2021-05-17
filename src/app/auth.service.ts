@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ILogin, IRegister, IUser } from './models/auth.model';
+import { environment } from '../environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/auth';
 
 
 @Injectable({
@@ -21,7 +24,7 @@ export class AuthService {
       secret: registerInfo.secret
     }
     
-    return this.http.post<IUser>('http://localhost:8080/api/auth/register', user);
+    return this.http.post<IUser>(BACKEND_URL + '/register', user);
   }
 
   loginUser(loginInfo: ILogin) {
@@ -30,13 +33,13 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    return this.http.post<IUser>('http://localhost:8080/api/auth/login', user);
+    return this.http.post<IUser>(BACKEND_URL + '/login', user);
   }
 
   
 
   logout() {
-    this.http.get('http://localhost:8080/api/auth/logout').subscribe(() => {
+    this.http.get('BACKEND_URL/logout').subscribe(() => {
       this.user.next(null);
     });
   }

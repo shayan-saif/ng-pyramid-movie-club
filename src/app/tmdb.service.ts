@@ -7,6 +7,9 @@ import { catchError } from 'rxjs/operators';
 import { IMovie } from './models/movie.model';
 import { IWatchlist } from './models/watchlist.model';
 import { WatchlistService } from './watchlist.service';
+import { environment } from '../environments/environment';
+
+const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +23,13 @@ export class TmdbService {
   titleSearch(title: string) {
     const options = { params: new HttpParams().set('title', title) };
 
-    this.http.get<IMovie[]>('http://localhost:8080/api/search', options).subscribe((results) => {
+    this.http.get<IMovie[]>(BACKEND_URL + '/search', options).subscribe((results) => {
       this.movies.next(results);
     });
   }
 
   getDiscover() {
-    return this.http.get<IMovie[]>('http://localhost:8080/api/search/discover');
+    return this.http.get<IMovie[]>(BACKEND_URL + '/search/discover');
   }
 
   addMovieToWatchlist() {
@@ -38,7 +41,7 @@ export class TmdbService {
       watchlistId: watchlistId
     }
 
-    this.http.post<IWatchlist>(`http://localhost:8080/api/search`, payload)
+    this.http.post<IWatchlist>(`${BACKEND_URL}/search`, payload)
       .pipe(catchError(this.handleError))
 
       .subscribe((updatedWatchlist) => {
@@ -73,7 +76,7 @@ export class TmdbService {
       ourRating: 4
     }
 
-    this.http.post<IWatchlist>(`http://localhost:8080/api/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
+    this.http.post<IWatchlist>(`${BACKEND_URL}/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
       updatedWatchlists[watchlistIndex] = updatedWatchlist;
@@ -87,7 +90,7 @@ export class TmdbService {
 
     const watchlistId = this.watchlistService.selectedWatchlist.value._id;
 
-    this.http.delete<IWatchlist>(`http://localhost:8080/api/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
+    this.http.delete<IWatchlist>(`${BACKEND_URL}/watchlist/${watchlistId}/${movieId}`).subscribe((updatedWatchlist) => {
       let updatedWatchlists = this.watchlistService.watchlists.value;
       const watchlistIndex = updatedWatchlists.findIndex(watchlist => watchlist._id === updatedWatchlist._id);
       updatedWatchlists[watchlistIndex] = updatedWatchlist;

@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 var cors = require('cors');
 
 // use it before all route definitions
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors({origin: 'http://pyramidmovie-dev.us-east-1.elasticbeanstalk.com/'}));
 app.use('/api/watchlist', watchlistRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/auth', authRouter);
