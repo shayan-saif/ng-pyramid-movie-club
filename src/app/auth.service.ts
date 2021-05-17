@@ -39,7 +39,7 @@ export class AuthService {
   
 
   logout() {
-    this.http.get('BACKEND_URL/logout').subscribe(() => {
+    this.http.get(BACKEND_URL + '/logout').subscribe(() => {
       this.user.next(null);
     });
   }
