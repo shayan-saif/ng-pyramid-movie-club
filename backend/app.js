@@ -13,7 +13,7 @@ var searchRouter = require('./routes/search');
 var authRouter = require('./routes/auth');
 
 var app = express();
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 8080);
 
 
 // view engine setup

@@ -1,6 +1,24 @@
 branch-defaults:
+  main:
+    environment: pyramidmovie-dev
   movie-component-error:
     environment: null
     group_suffix: null
+environment-defaults:
+  pyramidmovie-dev:
+    branch: main
+    repository: pyramidmovie
 global:
+  application_name: pyramidmovie
+  branch: main
+  default_ec2_keyname: null
+  default_platform: Node.js 14 running on 64bit Amazon Linux 2
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
   profile: null
+  repository: pyramidmovie
+  sc: git
+  workspace_type: Application

@@ -21,7 +21,7 @@ export class AuthService {
       secret: registerInfo.secret
     }
     
-    return this.http.post<IUser>('http://localhost:3000/api/auth/register', user);
+    return this.http.post<IUser>('http://localhost:8080/api/auth/register', user);
   }
 
   loginUser(loginInfo: ILogin) {
@@ -30,13 +30,13 @@ export class AuthService {
       password: loginInfo.password,
     }
 
-    return this.http.post<IUser>('http://localhost:3000/api/auth/login', user);
+    return this.http.post<IUser>('http://localhost:8080/api/auth/login', user);
   }
 
   
 
   logout() {
-    this.http.get('http://localhost:3000/api/auth/logout').subscribe(() => {
+    this.http.get('http://localhost:8080/api/auth/logout').subscribe(() => {
       this.user.next(null);
     });
   }
