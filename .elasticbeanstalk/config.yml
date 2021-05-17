@@ -1,0 +1,6 @@
+branch-defaults:
+  movie-component-error:
+    environment: null
+    group_suffix: null
+global:
+  profile: null
