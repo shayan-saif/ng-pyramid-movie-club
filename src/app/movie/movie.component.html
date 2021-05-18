@@ -1,8 +1,11 @@
 <div class="content p-3 mb-3" [class.bookmark]="bookmarkStatus">
   <div class="row">
     <div class="col-2 hide-img">
-      <div class="d-flex">
+      <div class="d-flex" style="position: relative;">
         <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
+        <div class="rating">
+          {{ movie.voteAverage }}
+        </div>
       </div>
     </div>
     <div class="col-12 col-xxl-10 info">
