@@ -26,10 +26,11 @@
           </button>
         </div>
       </div>
-      <span class="mat-title"><a href="https://www.themoviedb.org/movie/{{ movie.id }}" class="movie-title"
-          target="_blank">{{ movie.title
-          | shorten : 26}}</a>
-      </span>
+      <div class="title-container">
+        <span class="mat-title"><a href="https://www.themoviedb.org/movie/{{ movie.id }}" class="movie-title"
+            target="_blank">{{ movie.title }}</a>
+        </span>
+      </div>
       <div class="mat-body-1">{{ movie.releaseDate | date }}</div>
       <div class="genres mt-2 mb-3">
         <span class="badge me-1" *ngFor="let genre of movie.genres">{{ genre.name
