@@ -1,10 +1,9 @@
 <div class="container">
-
   <div class="content">
     <div class="header">
       <span class="mat-title">The Movie Database</span>
       <form [formGroup]="movieQueryForm" (ngSubmit)="onTitleSearch()">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>Movie Name</mat-label>
           <input matInput placeholder="The Godfather" formControlName="title">
         </mat-form-field>
@@ -16,22 +15,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-<!-- <h1 mat-card-title>Search</h1>
-
-  <div class="d-block">
-    <form [formGroup]="movieQueryForm" (ngSubmit)="onTitleSearch()">
-      <mat-form-field class="example-full-width">
-        <mat-label>Movie Name</mat-label>
-        <input matInput placeholder="The Godfather" formControlName="title">
-      </mat-form-field>
-      <button type="submit" mat-button>Search</button>
-    </form>
-  </div>
-  <div *ngIf="movies">
-    <app-movie *ngFor="let movie of movies" [movie]="movie"></app-movie>
-  </div>
- -->

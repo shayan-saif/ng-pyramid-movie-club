@@ -21,15 +21,27 @@ export class MovieComponent implements OnInit {
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
   user: IUser;
+  admin: boolean = false;
+  canBookmark: boolean = false;
+  canArchive: boolean = false;
+  canDelete: boolean = false;
+  canAdd: boolean = false;
 
 
   constructor(private tmdb: TmdbService,
-    private auth: AuthService, 
-    private dialog: MatDialog, 
+    private auth: AuthService,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => this.user = user);
+    this.auth.user.subscribe((user) => {
+      this.user = user;
+      this.admin = user.permission.admin;
+      this.canBookmark = user.permission.bookmark;
+      this.canArchive = user.permission.archive;
+      this.canDelete = user.permission.delete;
+      this.canAdd = user.permission.add;
+    });
     if (this.movie.club) {
       this.bookmarkStatus = this.movie.club.bookmarked;
       this.watched = this.movie.club.watched;

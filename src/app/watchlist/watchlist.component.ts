@@ -20,11 +20,12 @@ export class WatchlistComponent implements OnInit {
   watchlistSubscription = new Subscription;
   watchlistSelectSubscription = new Subscription;
   user: IUser = null;
-  canCreate: boolean = null;
+  canCreate: boolean = false;
+  admin: boolean = false;
 
   constructor(
     private watchlistService: WatchlistService,
-    private auth: AuthService, 
+    private auth: AuthService,
     public dialog: MatDialog,
     private router: Router) { }
 
@@ -37,23 +38,20 @@ export class WatchlistComponent implements OnInit {
       this.selectedWatchlist = selectedWatchlist;
     });
     this.auth.user.subscribe((user) => {
-      this.user = user;
-      if(user && user.permission.create) {
-        this.canCreate = true;
-      } else {
-        this.canCreate = false;
+      if (user) {
+        this.user = user;
+        this.canCreate = user.permission.create;
+        this.admin = user.permission.admin;
       }
     });
   }
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
-    // this.watchlistService.getWatchlists();
-    if(this.router.url !== '/' ) {
+    if (this.router.url !== '/') {
       this.router.navigate(['/']);
     }
-    // this.watchlistService.getWatchlists();
     this.watchlistService.selectedWatchlist.next(watchlistSelected);
-    
+
   }
 
   openCreateWatchlist() {

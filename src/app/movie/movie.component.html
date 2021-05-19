@@ -12,19 +12,19 @@
       <div class="action-container">
         <div *ngIf="!searchType">
           <button mat-icon-button color="primary" *ngIf="!watched" (click)="onToggleBookmark()"
-            [disabled]="!user || !user.permission.bookmark">
+            [disabled]="!canBookmark && !admin">
             <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
           </button>
           <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
-            [disabled]="!user || !user.permission.archive">
+            [disabled]="!canArchive && !admin">
             <mat-icon>archive</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!user || !user.permission.delete">
+          <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!canDelete && !admin">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
         <div *ngIf="searchType">
-          <button mat-icon-button color="accent" (click)="onAddMovie()" [disabled]="!user || !user.permission.add">
+          <button mat-icon-button color="accent" (click)="onAddMovie()" [disabled]="!canAdd && !admin">
             <mat-icon>add</mat-icon>
           </button>
         </div>

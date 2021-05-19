@@ -3,7 +3,7 @@
     <div class="header">
       <span class="mat-title">{{ watchlist.name }}</span>
       <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
-        [disabled]="watchlist.name === 'Global' || !user || !user.permission.delete">
+        [disabled]="watchlist.name === 'Global' || (!canDelete && !admin)">
         <mat-icon>clear</mat-icon>
       </button>
     </div>

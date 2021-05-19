@@ -17,6 +17,8 @@ export class WatchlistDetailComponent implements OnInit {
   watchlist: IWatchlist;
   watchlistSubscription: Subscription;
   user: IUser;
+  canDelete: boolean = false;
+  admin: boolean = false;
 
   toWatchMovies: IMovie[];
   bookmarkedMovies: IMovie[];
@@ -40,7 +42,13 @@ export class WatchlistDetailComponent implements OnInit {
 
     });
 
-    this.auth.user.subscribe((user) => this.user = user);
+    this.auth.user.subscribe((user) => {
+      if(user) {
+        this.user = user;
+        this.canDelete = user.permission.delete;
+        this.admin = user.permission.admin;
+      }
+    });
   }
 
   toggleBookmark(movieId: number): void {
