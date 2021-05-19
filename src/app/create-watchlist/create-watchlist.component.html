@@ -1,12 +1,12 @@
 <form [formGroup]="createWatchlistForm" (ngSubmit)="onCreateWatchlist()">
   <h2 mat-dialog-title class="mb-4">Create New Watchlist</h2>
-  <mat-dialog-content>
+  <div class="mb-3">
     <mat-form-field appearance="outline">
       <mat-label>Watchlist Name</mat-label>
       <input matInput placeholder="Horror" formControlName="name">
     </mat-form-field>
     <mat-checkbox class="d-block" formControlName="hidden">This is a private watchlist.</mat-checkbox>
-  </mat-dialog-content>
+  </div>
   <mat-dialog-actions>
     <button type="submit" class="full-width" mat-raised-button color="accent" [disabled]="createWatchlistForm.invalid"
       mat-dialog-close>Create</button>

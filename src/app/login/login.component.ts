@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
       .subscribe((userInfo) => {
         this.auth.user.next(userInfo);
         this.snackBar.open('Successfully logged in', 'Dismiss', {
-          duration: 3000
+          duration: 3000,
+          horizontalPosition: "center",
+          verticalPosition: "top"
         });
         this.router.navigate(['']);
       }, (err) => {
@@ -49,6 +51,10 @@ export class LoginComponent implements OnInit {
           status: err.status,
           message: err.error
         }
+        this.snackBar.open(this.error.message, 'Dismiss', {
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        });
       });
     }
 

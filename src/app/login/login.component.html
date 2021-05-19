@@ -2,7 +2,6 @@
   <div class="content">
     <div class="header"><span class="mat-title">Login</span></div>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <mat-error *ngIf="error" class="mb-3">{{ error.message }}</mat-error>
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline">

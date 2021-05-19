@@ -15,11 +15,13 @@ export class WatchlistDeleteConfirmComponent implements OnInit {
   }
 
   deletionConfirmed() {
-    
+
     this.watchlistService.deleteWatchlist();
 
     this.snackBar.open('Watchlist deleted', 'Dismiss', {
-      duration: 3000
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
     });
   }
 

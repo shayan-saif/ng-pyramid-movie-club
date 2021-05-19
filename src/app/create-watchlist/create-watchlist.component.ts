@@ -34,8 +34,7 @@ export class CreateWatchlistComponent implements OnInit {
     this.snackBar.open('Watchlist created', 'Dismiss', {
       duration: 3000,
       horizontalPosition: "center",
-      verticalPosition: "top",
-      panelClass: ['mat-primary']
+      verticalPosition: "top"
     });
   }
 

@@ -47,7 +47,9 @@ export class MovieComponent implements OnInit {
     this.bookmarkStatus = !this.bookmarkStatus;
     this.bookmark.emit(this.movie.id);
     this.snackBar.open(`Movie ${this.bookmarkStatus ? '' : 'un'}bookmarked!`, 'Dismiss', {
-      duration: 3000
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
     });
   }
 

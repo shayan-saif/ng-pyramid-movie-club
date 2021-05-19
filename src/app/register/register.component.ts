@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -20,7 +21,10 @@ export class RegisterComponent implements OnInit {
   hidePassword: boolean;
   hideKey: boolean;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService, 
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.auth.registerError.subscribe(err => {
@@ -40,11 +44,20 @@ export class RegisterComponent implements OnInit {
       .pipe(catchError(this.handleError))
       .subscribe(() => {
         this.router.navigate(['login']);
+        this.snackBar.open('You may now sign in!', 'Dismiss', {
+          duration: 3000,
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        });
       }, (err) => {
         this.error = {
           status: err.status,
           message: err.error
         }
+        this.snackBar.open(this.error.message, 'Dismiss', {
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        });
       });
   }
 
