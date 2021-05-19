@@ -5,6 +5,7 @@
       <mat-label>Watchlist Name</mat-label>
       <input matInput placeholder="Horror" formControlName="name">
     </mat-form-field>
+    <mat-checkbox class="d-block" formControlName="hidden">This is a private watchlist.</mat-checkbox>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button type="submit" class="full-width" mat-raised-button color="accent" [disabled]="createWatchlistForm.invalid"

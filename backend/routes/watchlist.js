@@ -30,7 +30,10 @@ router.get('/:watchlistId', function (req, res, next) {
 // Create NEW watchlist
 router.post('/', function (req, res, next) {
   const { name, private, sharedWith } = req.body;
-  const by = req.user.username;
+  var by = "Anonymous";
+  if(req.user) {
+    by = req.user.username
+  }
   const dateCreated = new Date();
 
   const watchlist = {
@@ -41,13 +44,11 @@ router.post('/', function (req, res, next) {
     sharedWith: sharedWith
   }
 
-  console.log(sharedWith);
-
   watchlistModel.create(watchlist, (err, doc) => {
     if (!err) {
-      res.json(doc);
+      res.status(201).json(doc);
     } else {
-      res.sendStatus(500);
+      res.json(err);
     }
   })
 });

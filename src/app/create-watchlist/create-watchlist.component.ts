@@ -10,7 +10,8 @@ import { WatchlistService } from '../watchlist.service';
 })
 export class CreateWatchlistComponent implements OnInit {
   createWatchlistForm = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.maxLength(16)])
+    name: new FormControl(null, [Validators.required, Validators.maxLength(16)]),
+    hidden: new FormControl(false)
   })
 
   constructor(private watchlistService: WatchlistService, private snackBar: MatSnackBar) { }
@@ -19,14 +20,15 @@ export class CreateWatchlistComponent implements OnInit {
   }
 
   onCreateWatchlist() {
-    let watchlistName = this.createWatchlistForm.value.name;
+    const watchlistName = this.createWatchlistForm.value.name;
+    const hidden = this.createWatchlistForm.value.hidden;
 
-    let inputWatchlist = { 
+    const inputWatchlist = {
       name: watchlistName,
       by: 'Anonymous',
-      'private': false
+      'private': hidden
     }
-    
+
     this.watchlistService.createWatchlist(inputWatchlist);
 
     this.snackBar.open('Watchlist created', 'Dismiss', {
