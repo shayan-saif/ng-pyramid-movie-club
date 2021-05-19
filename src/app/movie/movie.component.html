@@ -3,7 +3,7 @@
     <div class="col-2 hide-img">
       <div class="d-flex" style="position: relative;">
         <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
-        <div class="rating">
+        <div class="rating" [appRating]="movie.voteAverage">
           {{ movie.voteAverage }}
         </div>
       </div>

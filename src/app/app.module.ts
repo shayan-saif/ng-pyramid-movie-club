@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShortenPipe } from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component';
+import { RatingDirective } from './rating.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     NavbarComponent,
     ShortenPipe,
-    FooterComponent
+    FooterComponent,
+    RatingDirective
   ],
   entryComponents: [
     CreateWatchlistComponent,
