@@ -1,24 +1,44 @@
-<form [formGroup]="archiveForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="dateWatched">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-
-  <div formArrayName="participants">
-    <div *ngFor="let control of getParticipantControls(); let i = index;" [formGroupName]="i">
-      <mat-form-field>
-        <mat-label>Participant {{ i + 1 }}</mat-label>
-        <input type="text" matInput formControlName="name">
+<div class="dialog">
+  <form [formGroup]="archiveForm" (ngSubmit)="onSubmit()">
+    <h2 mat-dialog-title class="mb-4">How was the movie?</h2>
+    <div class="controls mb-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Date watched</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateWatched">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-label>Rating</mat-label>
-      <mat-slider thumbLabel tickInterval="0.1" step="0.1" min="0" max="10" formControlName="rating"></mat-slider>
+      <div formArrayName="participants" class="participants">
+        <div *ngFor="let control of getParticipantControls(); let i = index;" [formGroupName]="i" class="mb-3">
+          <fieldset class="participant">
+            <legend>
+              <h4>Participant {{ i + 1 }}</h4>
+            </legend>
+            <mat-form-field appearance="outline" class="participant-name">
+              <mat-label>Name</mat-label>
+              <input type="text" matInput formControlName="name">
+              <button type="button" mat-icon-button matSuffix (click)="onDeleteParticipant(i)" [disabled]="i == 0">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="rating">
+              <div style="display:flex;justify-content: space-between;">
+                <mat-label>Rating</mat-label>
+                <mat-label>{{ archiveForm.get(['participants', i, 'rating']).value }}</mat-label>
+              </div>
+              <mat-slider thumbLabel tickInterval="10" step="0.1" min="0" max="10" formControlName="rating">
+              </mat-slider>
+            </div>
+          </fieldset>
+        </div>
+        <div class="add-container">
+          <button type="button" mat-mini-fab color="primary" (click)="onAddParticipant()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
-    <button type="button" (click)="onAddParticipant()">Add</button>
-  </div>
-
-  <button type="submit">Submit</button>
-
-</form>
+    <button type="submit" class="full-width" mat-raised-button color="accent"
+      [disabled]="archiveForm.invalid">Submit</button>
+  </form>
+</div>

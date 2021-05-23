@@ -10,15 +10,16 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./archive-movie.component.scss']
 })
 export class ArchiveMovieComponent {
+  currentDate: Date = new Date();
   archiveForm = new FormGroup({
-    movieTitle: new FormControl(null, Validators.required),
+    // movieTitle: new FormControl(null, Validators.required),
+    dateWatched: new FormControl(this.currentDate, Validators.required),
     participants: new FormArray([
       new FormGroup({
-        name: new FormControl(null),
-        rating: new FormControl(null)
-      }, Validators.required)
-    ]),
-    dateWatched: new FormControl(null)
+        name: new FormControl(null, Validators.required),
+        rating: new FormControl(0)
+      })
+    ])
   });
 
   constructor(
@@ -27,7 +28,7 @@ export class ArchiveMovieComponent {
       movieId: number,
       movieTitle: string
     }
-    ) { }
+  ) { }
 
   onAddParticipant() {
     const control = new FormGroup({
@@ -37,14 +38,18 @@ export class ArchiveMovieComponent {
     (<FormArray>this.archiveForm.get('participants')).push(control)
   }
 
+  onDeleteParticipant(id: number) {
+    if ((<FormArray>this.archiveForm.controls.participants).length > 1) {
+      (<FormArray>this.archiveForm.controls.participants).removeAt(id);
+    }
+  }
+
   getParticipantControls() {
     return ((<FormArray>this.archiveForm.get('participants')).controls)
   }
 
 
   onSubmit() {
-    // const recipe: RecipeModel = this.recipeForm.value;
-    // this.addSub = this.recipeService.addRecipe(recipe).subscribe();
     this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
   }
 

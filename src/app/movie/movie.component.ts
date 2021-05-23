@@ -17,7 +17,7 @@ import { ConfirmDeleteMovieComponent } from './confirm-delete-movie/confirm-dele
 export class MovieComponent implements OnInit {
   searchType: boolean = false;
   @Input() movie: IMovie;
-  watched: boolean;
+  watched: boolean = false;
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
   user: IUser;
@@ -35,12 +35,14 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.user.subscribe((user) => {
-      this.user = user;
-      this.admin = user.permission.admin;
-      this.canBookmark = user.permission.bookmark;
-      this.canArchive = user.permission.archive;
-      this.canDelete = user.permission.delete;
-      this.canAdd = user.permission.add;
+      if (user) {
+        this.user = user;
+        this.admin = user.permission.admin;
+        this.canBookmark = user.permission.bookmark;
+        this.canArchive = user.permission.archive;
+        this.canDelete = user.permission.delete;
+        this.canAdd = user.permission.add;
+      }
     });
     if (this.movie.club) {
       this.bookmarkStatus = this.movie.club.bookmarked;
@@ -68,6 +70,8 @@ export class MovieComponent implements OnInit {
   onArchiveMovie(): void {
     this.dialog.open(ArchiveMovieComponent, {
       data: { movieId: this.movie.id, movieTitle: this.movie.title },
+      maxHeight: '70vh',
+      position: {'top': '50px'}
     });
   }
 

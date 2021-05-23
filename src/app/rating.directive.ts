@@ -19,7 +19,6 @@ export class RatingDirective implements OnInit {
   ngOnInit(): void {
 
     if (this.appRating >= 9) {
-      console.log("great");
       this.el.nativeElement.style.backgroundColor = this.colors[0];
     } else if (this.appRating >= 7) {
       this.el.nativeElement.style.backgroundColor = this.colors[1];

@@ -1,0 +1,24 @@
+.controls {
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.participants {
+  background-color: rgb(44, 44, 44);
+  padding         : 0.5rem;
+  border-radius   : 0.5rem;
+}
+
+fieldset.participant {
+  margin-bottom: 1rem;
+  position     : relative;
+}
+
+.add-container {
+  display        : flex;
+  justify-content: flex-end;
+}
+
+mat-slider {
+  width: 100%;
+}
