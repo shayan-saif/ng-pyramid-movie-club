@@ -15,9 +15,8 @@
             [disabled]="!canBookmark && !admin">
             <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
           </button>
-          <!-- <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
-            [disabled]="!canArchive && !admin"> -->
-          <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()">
+          <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
+            [disabled]="!canArchive && !admin">
             <mat-icon>archive</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!canDelete && !admin">

@@ -12,7 +12,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ArchiveMovieComponent {
   currentDate: Date = new Date();
   archiveForm = new FormGroup({
-    // movieTitle: new FormControl(null, Validators.required),
     dateWatched: new FormControl(this.currentDate, Validators.required),
     participants: new FormArray([
       new FormGroup({
