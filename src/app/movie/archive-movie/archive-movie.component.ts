@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TmdbService } from 'src/app/tmdb.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,8 +9,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './archive-movie.component.html',
   styleUrls: ['./archive-movie.component.scss']
 })
-export class ArchiveMovieComponent {
+export class ArchiveMovieComponent implements OnInit {
   currentDate: Date = new Date();
+  currentUser: string;
   archiveForm = new FormGroup({
     dateWatched: new FormControl(this.currentDate, Validators.required),
     participants: new FormArray([
@@ -25,9 +26,14 @@ export class ArchiveMovieComponent {
     private tmdb: TmdbService,
     @Inject(MAT_DIALOG_DATA) private movie: {
       movieId: number,
-      movieTitle: string
+      movieTitle: string,
+      currentUser: string;
     }
   ) { }
+
+  ngOnInit() {
+    this.archiveForm.get(['participants', 0, 'name']).setValue(this.movie.currentUser);
+  }
 
   onAddParticipant() {
     const control = new FormGroup({

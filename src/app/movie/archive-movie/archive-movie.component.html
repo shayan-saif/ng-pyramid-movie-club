@@ -16,7 +16,7 @@
             </legend>
             <mat-form-field appearance="outline" class="participant-name">
               <mat-label>Name</mat-label>
-              <input type="text" matInput formControlName="name">
+              <input type="text" matInput formControlName="name" [readonly]="i == 0">
               <button type="button" mat-icon-button matSuffix (click)="onDeleteParticipant(i)" [disabled]="i == 0">
                 <mat-icon>clear</mat-icon>
               </button>

@@ -21,11 +21,6 @@ export class MovieComponent implements OnInit {
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
   user: IUser;
-  admin: boolean = false;
-  canBookmark: boolean = false;
-  canArchive: boolean = false;
-  canDelete: boolean = false;
-  canAdd: boolean = false;
 
 
   constructor(private tmdb: TmdbService,
@@ -37,11 +32,19 @@ export class MovieComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       if (user) {
         this.user = user;
-        this.admin = user.permission.admin;
-        this.canBookmark = user.permission.bookmark;
-        this.canArchive = user.permission.archive;
-        this.canDelete = user.permission.delete;
-        this.canAdd = user.permission.add;
+      } else {
+        this.user = {
+          ...this.user,
+          username: null,
+          permission: {
+            admin: false,
+            create: false,
+            add: false,
+            bookmark: false,
+            archive: false,
+            delete: false
+          }
+        };
       }
     });
     if (this.movie.club) {
@@ -69,7 +72,7 @@ export class MovieComponent implements OnInit {
 
   onArchiveMovie(): void {
     this.dialog.open(ArchiveMovieComponent, {
-      data: { movieId: this.movie.id, movieTitle: this.movie.title },
+      data: { movieId: this.movie.id, movieTitle: this.movie.title, currentUser: this.user.username },
       maxHeight: '70vh',
       position: {'top': '50px'}
     });

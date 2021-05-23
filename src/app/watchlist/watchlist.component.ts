@@ -20,8 +20,6 @@ export class WatchlistComponent implements OnInit {
   watchlistSubscription = new Subscription;
   watchlistSelectSubscription = new Subscription;
   user: IUser = null;
-  canCreate: boolean = false;
-  admin: boolean = false;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -40,8 +38,19 @@ export class WatchlistComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       if (user) {
         this.user = user;
-        this.canCreate = user.permission.create;
-        this.admin = user.permission.admin;
+      } else {
+        this.user = {
+          ...this.user,
+          username: null,
+          permission: {
+            admin: false,
+            create: false,
+            add: false,
+            bookmark: false,
+            archive: false,
+            delete: false
+          }
+        }
       }
     });
   }
