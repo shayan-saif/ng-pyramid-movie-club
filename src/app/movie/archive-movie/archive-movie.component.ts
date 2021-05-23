@@ -16,7 +16,7 @@ export class ArchiveMovieComponent implements OnInit {
     dateWatched: new FormControl(this.currentDate, Validators.required),
     participants: new FormArray([
       new FormGroup({
-        name: new FormControl(null, Validators.required),
+        name: new FormControl(null),
         rating: new FormControl(0)
       })
     ])
@@ -37,10 +37,10 @@ export class ArchiveMovieComponent implements OnInit {
 
   onAddParticipant() {
     const control = new FormGroup({
-      name: new FormControl(null),
-      rating: new FormControl(null)
-    }, Validators.required);
-    (<FormArray>this.archiveForm.get('participants')).push(control)
+      name: new FormControl(null, Validators.required),
+      rating: new FormControl(0, Validators.required)
+    });
+    (<FormArray>this.archiveForm.get('participants')).push(control);
   }
 
   onDeleteParticipant(id: number) {
@@ -55,7 +55,8 @@ export class ArchiveMovieComponent implements OnInit {
 
 
   onSubmit() {
-    this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
+    // this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
+    console.log(this.archiveForm);
   }
 
 
