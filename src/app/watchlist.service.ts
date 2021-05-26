@@ -20,6 +20,9 @@ export class WatchlistService {
   getWatchlists() {
     this.http.get<IWatchlist[]>(BACKEND_URL).subscribe(watchlists => {
       this.watchlists.next(watchlists);
+      if(watchlists) {
+        this.selectedWatchlist.next(watchlists[0]);
+      }
       // this.selectedWatchlist.next(watchlists[0]);
     });
   }

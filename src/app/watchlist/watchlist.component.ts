@@ -4,7 +4,7 @@ import { IWatchlist } from '../models/watchlist.model';
 import { WatchlistService } from '../watchlist.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateWatchlistComponent } from '../create-watchlist/create-watchlist.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../models/auth.model';
 import { AuthService } from '../auth.service';
 
@@ -25,6 +25,7 @@ export class WatchlistComponent implements OnInit {
     private watchlistService: WatchlistService,
     private auth: AuthService,
     public dialog: MatDialog,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -52,6 +53,9 @@ export class WatchlistComponent implements OnInit {
           }
         }
       }
+    });
+    this.route.url.subscribe((url) => {
+      console.log(url);
     });
   }
 
