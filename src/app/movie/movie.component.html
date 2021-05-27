@@ -19,12 +19,14 @@
             [disabled]="!user.permission.archive && !user.permission.admin">
             <mat-icon>archive</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!user.permission.delete && !user.permission.admin">
+          <button mat-icon-button color="warn" (click)="onDeleteMovie()"
+            [disabled]="!user.permission.delete && !user.permission.admin">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
         <div *ngIf="searchType">
-          <button mat-icon-button color="accent" (click)="onAddMovie()" [disabled]="!user.permission.add && !user.permission.admin">
+          <button mat-icon-button color="accent" (click)="onAddMovie()"
+            [disabled]="!user.permission.add && !user.permission.admin">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -43,8 +45,11 @@
       <div class="mat-caption added" *ngIf="!searchType && !watched">{{ movie.club.addedBy }} / {{
         movie.club.dateAdded | date }}
       </div>
-      <div class="mat-caption added" *ngIf="!searchType && watched">{{ movie.club.addedBy }} / {{
-        movie.club.dateWatched | date }}
+      <div class="mat-caption watched" *ngIf="!searchType && watched" (click)="openWatchedInfo()">
+        <div class="d-flex align-items-center">
+          <mat-icon class="icon-info">info</mat-icon>
+          {{ movie.club.dateWatched | date }}
+        </div>
       </div>
     </div>
   </div>

@@ -23,6 +23,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ShortenPipe } from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component';
 import { RatingDirective } from './rating.directive';
+import { WatchedInfoComponent } from './movie/watched-info/watched-info.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RatingDirective } from './rating.directive';
     NavbarComponent,
     ShortenPipe,
     FooterComponent,
-    RatingDirective
+    RatingDirective,
+    WatchedInfoComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

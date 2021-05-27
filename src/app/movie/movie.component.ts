@@ -8,6 +8,7 @@ import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component'
 import { TmdbService } from '../tmdb.service';
 import { ArchiveMovieComponent } from './archive-movie/archive-movie.component';
 import { ConfirmDeleteMovieComponent } from './confirm-delete-movie/confirm-delete-movie.component';
+import { WatchedInfoComponent } from './watched-info/watched-info.component';
 
 @Component({
   selector: 'app-movie',
@@ -74,7 +75,7 @@ export class MovieComponent implements OnInit {
     this.dialog.open(ArchiveMovieComponent, {
       data: { movieId: this.movie.id, movieTitle: this.movie.title, currentUser: this.user.username },
       maxHeight: '70vh',
-      position: {'top': '50px'}
+      position: { 'top': '50px' }
     });
   }
 
@@ -84,6 +85,13 @@ export class MovieComponent implements OnInit {
     this.dialog.open(ConfirmDeleteMovieComponent, {
       data: { movieId: this.movie.id },
     });
+  }
+
+  openWatchedInfo(): void {
+    this.dialog.open(WatchedInfoComponent, {
+      data: { movie: this.movie, currentUser: this.user.username }
+    });
+    // console.log("open dialog");
   }
 
 }

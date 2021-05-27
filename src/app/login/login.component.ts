@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
+import { WatchlistService } from '../watchlist.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   hidePassword: boolean;
 
   constructor(
+    private watchlistService: WatchlistService,
     private auth: AuthService, 
     private router: Router,
     private snackBar: MatSnackBar) { }
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
           horizontalPosition: "center",
           verticalPosition: "top"
         });
+        this.watchlistService.selectedWatchlist.next(this.watchlistService.watchlists.value[0]);
         this.router.navigate(['']);
       }, (err) => {
         this.error = {

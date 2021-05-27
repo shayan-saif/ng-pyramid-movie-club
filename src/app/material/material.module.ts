@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 
 
 const material = [
@@ -43,7 +44,8 @@ const material = [
   MatSidenavModule,
   MatExpansionModule,
   MatCheckboxModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTableModule
 ];
 
 

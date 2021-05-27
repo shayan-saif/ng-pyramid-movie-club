@@ -6,5 +6,7 @@ export interface IClub {
   attendants: string[][]
   watched: boolean
   participants: any[]
-  dateViewing?: string
+  dateViewing?: string,
+  dateWatched?: Date
+  ourRating?: number;
 }
