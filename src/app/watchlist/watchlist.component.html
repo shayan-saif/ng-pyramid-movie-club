@@ -8,7 +8,7 @@
     </div>
     <mat-divider></mat-divider>
     <mat-selection-list #watchlistsRef [multiple]="false">
-      <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)" [selected]="watchlist.name === 'Global'">
+      <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)" [selected]="selectedWatchlist && watchlist.name === selectedWatchlist.name">
         {{ watchlist.name }}
       </mat-list-option>
     </mat-selection-list>

@@ -4,7 +4,7 @@ import { IWatchlist } from '../models/watchlist.model';
 import { WatchlistService } from '../watchlist.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateWatchlistComponent } from '../create-watchlist/create-watchlist.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { IUser } from '../models/auth.model';
 import { AuthService } from '../auth.service';
 
@@ -20,13 +20,23 @@ export class WatchlistComponent implements OnInit {
   watchlistSubscription = new Subscription;
   watchlistSelectSubscription = new Subscription;
   user: IUser = null;
+  activated: boolean;
 
   constructor(
     private watchlistService: WatchlistService,
     private auth: AuthService,
     public dialog: MatDialog,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+      router.events.subscribe((val) => {
+        if(val instanceof NavigationEnd) {
+          if(val.url !== "/") {
+            this.watchlistService.selectedWatchlist.next(null);
+
+          } else {
+          }
+        }
+    });
+    }
 
   ngOnInit(): void {
     this.watchlistService.getWatchlists();
@@ -54,9 +64,8 @@ export class WatchlistComponent implements OnInit {
         }
       }
     });
-    this.route.url.subscribe((url) => {
-      console.log(url);
-    });
+    
+    
   }
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
