@@ -10,6 +10,11 @@ import { WatchlistService } from './watchlist.service';
 import { environment } from '../environments/environment';
 
 const BACKEND_URL = environment.apiUrl;
+interface IParticipant {
+  _id: string,
+  name: string,
+  rating: number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -68,12 +73,13 @@ export class TmdbService {
   
   archiveMovie(movieId: number, archiveForm: FormGroup) {
     let watchlistId = this.watchlistService.selectedWatchlist.value._id;
+    const avgRate: number = average(archiveForm.value.participants);
 
     const payload = {
       watched: true,
       participants: archiveForm.value.participants,
       dateWatched: archiveForm.value.dateWatched,
-      ourRating: 4
+      ourRating: avgRate
     }
 
     this.http.post<IWatchlist>(`${BACKEND_URL}/watchlist/${watchlistId}/${movieId}/archive`, payload).subscribe((updatedWatchlist) => {
@@ -98,4 +104,15 @@ export class TmdbService {
       this.watchlistService.selectedWatchlist.next(updatedWatchlist);
     });
   }
+}
+
+function average(values: IParticipant[]) {
+  let sum: number = 0;
+
+  values.forEach((value: IParticipant) => {
+    sum += value.rating;
+  })
+
+  const average = Math.round((sum / values.length) * 10) / 10
+  return average;
 }

@@ -27,7 +27,6 @@ export class WatchedInfoComponent implements OnInit {
     this.movie = this._data.movie;
     this.participants = this._data.movie.club.participants;
     this.ourRating = this._data.movie.club.ourRating;
-    console.log(this.movie);
   }
 
 }
