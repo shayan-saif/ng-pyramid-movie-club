@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth.service';
 import { IUser } from 'src/app/models/auth.model';
 import { UserService } from 'src/app/user.service';
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private auth: AuthService, 
-    private userService: UserService
+    private userService: UserService,
+    private snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
@@ -26,9 +28,13 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   onChangePassword(): void {
-    console.log(this.changeForm);
     const password = this.changeForm.value.password;
     this.userService.changePassword(this.currentUser._id, password);
+    this.snackBar.open('Password changed', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
+    });
   }
 
 }

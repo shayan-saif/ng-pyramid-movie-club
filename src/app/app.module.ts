@@ -25,6 +25,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RatingDirective } from './rating.directive';
 import { WatchedInfoComponent } from './movie/watched-info/watched-info.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
+import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
     FooterComponent,
     RatingDirective,
     WatchedInfoComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    DeleteAccountComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

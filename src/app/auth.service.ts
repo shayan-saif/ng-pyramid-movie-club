@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ILogin, IRegister, IUser } from './models/auth.model';
 import { environment } from '../environments/environment';
+import { WatchlistService } from './watchlist.service';
 
 const BACKEND_URL = environment.apiUrl + '/auth';
 
@@ -15,7 +16,10 @@ export class AuthService {
   loginError = new BehaviorSubject(null);
   registerError = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private watchlistService: WatchlistService
+    ) { }
 
   registerUser(registerInfo: IRegister) {
     let user = {
@@ -40,6 +44,7 @@ export class AuthService {
 
   logout() {
     this.http.get(BACKEND_URL + '/logout').subscribe(() => {
+      this.watchlistService.getWatchlists();
       this.user.next(null);
     });
   }

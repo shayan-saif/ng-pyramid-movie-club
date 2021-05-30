@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
       .pipe(catchError(this.handleError))
       .subscribe(() => {
         this.router.navigate(['login']);
-        this.snackBar.open('You may now sign in!', 'Dismiss', {
+        this.snackBar.open('You may now sign in', 'Dismiss', {
           duration: 3000,
           horizontalPosition: "center",
           verticalPosition: "top"

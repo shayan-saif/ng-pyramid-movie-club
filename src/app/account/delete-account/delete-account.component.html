@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>Confirm Deletion</h2>
+<mat-dialog-content>Are you sure you want to delete this movie from your watchlist? There is no way to recover it after it's been
+  deleted.</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close (click)="deletionConfirmed()">Delete</button>
+</mat-dialog-actions>

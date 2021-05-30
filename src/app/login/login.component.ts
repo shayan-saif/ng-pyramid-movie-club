@@ -42,11 +42,12 @@ export class LoginComponent implements OnInit {
       .pipe(catchError(this.handleError))
       .subscribe((userInfo) => {
         this.auth.user.next(userInfo);
-        this.snackBar.open('Successfully logged in', 'Dismiss', {
+        this.snackBar.open('Logged in', 'Dismiss', {
           duration: 3000,
           horizontalPosition: "center",
           verticalPosition: "top"
         });
+        this.watchlistService.getWatchlists();
         this.watchlistService.selectedWatchlist.next(this.watchlistService.watchlists.value[0]);
         this.router.navigate(['']);
       }, (err) => {

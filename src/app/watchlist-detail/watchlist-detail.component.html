@@ -7,7 +7,7 @@
         <mat-icon>clear</mat-icon>
       </button>
     </div>
-    <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight>
+    <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight [selectedIndex]="selectedTab">
       <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
         <div class="movie-list">
           <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
+import { DeleteAccountComponent } from '../account/delete-account/delete-account.component';
 import { AuthService } from '../auth.service';
 import { IUser } from '../models/auth.model';
 
@@ -18,7 +20,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
     ) { }
 
   ngOnInit(): void {
@@ -28,6 +31,11 @@ export class NavbarComponent implements OnInit {
 
   onLogout(): void {
     this.auth.logout();
+    this.snackBar.open('Logged out', 'Dismiss', {
+      duration: 3000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -46,6 +54,10 @@ export class NavbarComponent implements OnInit {
 
   openChangePassword(): void {
     this.dialog.open(ChangePasswordComponent);
+  }
+
+  openDeleteAccount(): void {
+    this.dialog.open(DeleteAccountComponent);
   }
 
 }

@@ -24,6 +24,7 @@ const watchlistSchema =
   },
   "sharedWith": {
     "type": [String],
+    default: ['*']
   },
 }
 

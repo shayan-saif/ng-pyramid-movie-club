@@ -6,7 +6,7 @@
     <button class="nav-link" mat-button [matMenuTriggerFor]="accountMenu">Account</button>
     <mat-menu #accountMenu="matMenu">
       <button mat-menu-item (click)="openChangePassword()">Change Password</button>
-      <button mat-menu-item>Delete Account</button>
+      <button mat-menu-item (click)="openDeleteAccount()">Delete Account</button>
     </mat-menu>
     <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['login']">Login</a>
     <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['register']">Register</a>

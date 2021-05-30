@@ -22,7 +22,7 @@ export class ConfirmDeleteMovieComponent implements OnInit {
 
   deletionConfirmed(): void {
     this.tmdb.deleteMovieFromWatchlist(this.data.movieId);
-    this.snackBar.open('Movie deleted!', 'Dismiss', {
+    this.snackBar.open('Movie deleted', 'Dismiss', {
       duration: 3000,
       horizontalPosition: "center",
       verticalPosition: "top"

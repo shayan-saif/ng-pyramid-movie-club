@@ -40,7 +40,7 @@ export class WatchlistService {
     });
   }
 
-  createWatchlist(watchlist: { name: string, by: string, 'private': boolean }) {
+  createWatchlist(watchlist: { name: string, by: string, hidden: boolean, sharedWith: string[] }) {
     this.http.post<IWatchlist>(BACKEND_URL, watchlist).subscribe((watchlistCreated) => {
       this.watchlists.next([...this.watchlists.value, watchlistCreated]);
       this.selectedWatchlist.next(watchlistCreated);

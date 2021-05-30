@@ -24,7 +24,7 @@ export class AddMovieComponent implements OnInit {
   addToWatchlist() {
     this.watchlistService.selectedWatchlist.next(this.watchlist);
     this.tmdb.addMovieToWatchlist();
-    this.snackBar.open('Movie added!', 'Dismiss', {
+    this.snackBar.open('Movie added', 'Dismiss', {
       duration: 3000,
       horizontalPosition: "center",
       verticalPosition: "top"

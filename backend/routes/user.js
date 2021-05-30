@@ -47,6 +47,21 @@ router.post('/id/:userId', function (req, res, next) {
   }
 });
 
+router.delete('/id/:userId', function (req, res, next) {
+  const userId = req.params.userId;
+  if (req.user) {
+    userModel.findByIdAndRemove(userId, (err, user) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.status(200).json(null);
+      }
+    });
+  } else {
+    res.status(403);
+  }
+});
+
 
 
 module.exports = router;

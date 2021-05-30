@@ -7,6 +7,16 @@
     </mat-form-field>
     <mat-checkbox class="d-block" formControlName="hidden">This is a private watchlist.</mat-checkbox>
   </div>
+  
+  <mat-form-field *ngIf="createWatchlistForm.value.hidden">
+    <mat-label>Share with</mat-label>
+    <mat-chip-list #sharedControl>
+      <mat-chip *ngFor="let name of names">{{ name }}</mat-chip>
+      <input placeholder="New fruit..." formControlName="currentName" [matChipInputFor]="sharedControl"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="onAddName()">
+    </mat-chip-list>
+  </mat-form-field>
+
   <mat-dialog-actions>
     <button type="submit" class="full-width" mat-raised-button color="accent" [disabled]="createWatchlistForm.invalid"
       mat-dialog-close>Create</button>

@@ -18,6 +18,7 @@ export class WatchlistDetailComponent implements OnInit {
   watchlistSubscription: Subscription;
   user: IUser;
 
+  selectedTab: number = 0;
   toWatchMovies: IMovie[];
   bookmarkedMovies: IMovie[];
   watchedMovies: IMovie[];

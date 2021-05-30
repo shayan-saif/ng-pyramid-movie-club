@@ -29,4 +29,10 @@ export class UserService {
       this.auth.user.next(null);
     });
   }
+
+  deleteAccount(userId: string) {
+    this.http.delete(BACKEND_URL + '/id/' + userId).subscribe(() => {
+      this.auth.user.next(null);
+    });
+  }
 }

@@ -6,11 +6,29 @@ var router = express.Router();
 // Return ALL watchlists
 router.get('/', async function (req, res, next) {
   let watchlists = await watchlistModel.find();
-  // let watchlistBasicInfo = [];
-  
-  // watchlists.forEach(watchlist => {
-  //   watchlistBasicInfo.push(watchlist.name)
-  // });
+  const user = req.user || '';
+  watchlists = watchlists.filter((watchlist) => {
+    if (watchlist.name === 'Global' || watchlist.by === user.username) {
+      return true;
+    } else if (watchlist.sharedWith.includes(user.username || '*')) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  // if (watchlist.by === user.username) {
+  //   return watchlist;
+  // } else if (watchlist.club.sharedWith.find(user.username)) {
+  //   return watchlist;
+  // } else if (watchlist.name === 'Global') {
+  //   return watchlist;
+  // }
+  let watchlistBasicInfo = [];
+
+  watchlists.forEach(watchlist => {
+    watchlistBasicInfo.push(watchlist.name)
+  });
   res.json(watchlists);
 });
 
@@ -29,10 +47,13 @@ router.get('/:watchlistId', function (req, res, next) {
 
 // Create NEW watchlist
 router.post('/', function (req, res, next) {
-  const { name, private, sharedWith } = req.body;
-  var by = "Anonymous";
-  if(req.user) {
-    by = req.user.username
+  const { name, hidden, sharedWith } = req.body;
+  let by = "Anonymous";
+  if (req.user) {
+    by = req.user.username;
+  }
+  if (sharedWith.length === 0 && !hidden) {
+    sharedWith.push('*');
   }
   const dateCreated = new Date();
 
@@ -40,7 +61,7 @@ router.post('/', function (req, res, next) {
     name: name,
     by: by,
     dateCreated: dateCreated,
-    private: private,
+    hidden: hidden,
     sharedWith: sharedWith
   }
 
@@ -68,7 +89,7 @@ router.put('/:watchlistId', async function (req, res, next) {
 });
 
 // (un)Bookmark SPECIFIC movie in SPECIFIC watchlist
-router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
+router.post('/:watchlistId/:movieId/bookmark', async function (req, res, next) {
   const { watchlistId, movieId } = req.params;
 
   let watchlist = await watchlistModel.findById(watchlistId);
@@ -78,7 +99,7 @@ router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
     return movie.id == movieId;
   });
 
-  if(movieIndex === -1) {
+  if (movieIndex === -1) {
     res.sendStatus(404);
   } else {
     let movie = movies[movieIndex];
@@ -94,9 +115,9 @@ router.post('/:watchlistId/:movieId/bookmark', async function(req, res, next) {
 });
 
 // Modify viewing for SPECIFIC movie in SPECIFIC watchlist
-router.post('/:watchlistId/:movieId/viewing', async function(req, res, next) {
+router.post('/:watchlistId/:movieId/viewing', async function (req, res, next) {
   const { watchlistId, movieId } = req.params;
-  const { viewing, dateViewing, attendants} = req.body;
+  const { viewing, dateViewing, attendants } = req.body;
 
   let watchlist = await watchlistModel.findById(watchlistId);
   let movies = watchlist.movies;
@@ -105,7 +126,7 @@ router.post('/:watchlistId/:movieId/viewing', async function(req, res, next) {
     return movie.id == movieId;
   });
 
-  if(movieIndex === -1) {
+  if (movieIndex === -1) {
     res.sendStatus(404);
   } else {
     let movie = movies[movieIndex];
@@ -123,7 +144,7 @@ router.post('/:watchlistId/:movieId/viewing', async function(req, res, next) {
 });
 
 // (un)Archive SPECIFIC movie in SPECIFIC watchlist
-router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
+router.post('/:watchlistId/:movieId/archive', async function (req, res, next) {
   const { watchlistId, movieId } = req.params;
   const { watched, participants, dateWatched, ourRating } = req.body;
   console.log(req.body);
@@ -134,7 +155,7 @@ router.post('/:watchlistId/:movieId/archive', async function(req, res, next) {
     return movie.id == movieId;
   });
 
-  if(movieIndex === -1) {
+  if (movieIndex === -1) {
     res.sendStatus(404);
   } else {
     let movie = movies[movieIndex];
