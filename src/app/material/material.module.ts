@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 const material = [
@@ -45,7 +46,8 @@ const material = [
   MatExpansionModule,
   MatCheckboxModule,
   MatTooltipModule,
-  MatTableModule
+  MatTableModule,
+  MatMenuModule
 ];
 
 

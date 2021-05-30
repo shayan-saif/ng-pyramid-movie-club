@@ -24,6 +24,7 @@ import { ShortenPipe } from './shorten.pipe';
 import { FooterComponent } from './footer/footer.component';
 import { RatingDirective } from './rating.directive';
 import { WatchedInfoComponent } from './movie/watched-info/watched-info.component';
+import { ChangePasswordComponent } from './account/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { WatchedInfoComponent } from './movie/watched-info/watched-info.componen
     ShortenPipe,
     FooterComponent,
     RatingDirective,
-    WatchedInfoComponent
+    WatchedInfoComponent,
+    ChangePasswordComponent
   ],
   entryComponents: [
     CreateWatchlistComponent,

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangePasswordComponent } from '../account/change-password/change-password.component';
 import { AuthService } from '../auth.service';
 import { IUser } from '../models/auth.model';
 
@@ -14,7 +16,10 @@ export class NavbarComponent implements OnInit {
   @Output() drawer = new EventEmitter();
   
 
-  constructor(private auth: AuthService) { }
+  constructor(
+    private auth: AuthService,
+    private dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.auth.user.subscribe((user) => this.user = user);
@@ -37,6 +42,10 @@ export class NavbarComponent implements OnInit {
 
   onToggleDrawer() {
     this.drawer.emit();
+  }
+
+  openChangePassword(): void {
+    this.dialog.open(ChangePasswordComponent);
   }
 
 }

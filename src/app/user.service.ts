@@ -18,4 +18,15 @@ export class UserService {
       this.auth.user.next(user);
     });
   }
+
+  changePassword(userId: string, password: String) {
+    const payload = {
+      password: password
+    }
+    console.log(userId + " " + password);
+    this.http.post(BACKEND_URL + '/id/' + userId, payload).subscribe((res) => {
+      console.log(res);
+      this.auth.user.next(null);
+    });
+  }
 }
