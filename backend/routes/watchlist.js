@@ -10,20 +10,15 @@ router.get('/', async function (req, res, next) {
   watchlists = watchlists.filter((watchlist) => {
     if (watchlist.name === 'Global' || watchlist.by === user.username) {
       return true;
-    } else if (watchlist.sharedWith.includes(user.username || '*')) {
+    } else if (watchlist.sharedWith.includes(user.username)) {
+      return true;
+    } if (watchlist.sharedWith.includes('*')) {
       return true;
     } else {
       return false;
     }
   });
 
-  // if (watchlist.by === user.username) {
-  //   return watchlist;
-  // } else if (watchlist.club.sharedWith.find(user.username)) {
-  //   return watchlist;
-  // } else if (watchlist.name === 'Global') {
-  //   return watchlist;
-  // }
   let watchlistBasicInfo = [];
 
   watchlists.forEach(watchlist => {
