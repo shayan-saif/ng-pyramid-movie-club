@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { IUser } from 'src/app/models/auth.model';
 import { UserService } from 'src/app/user.service';
@@ -11,6 +12,8 @@ import { UserService } from 'src/app/user.service';
 })
 export class DeleteAccountComponent implements OnInit {
   user: IUser;
+  confirmUser: string;
+  authSub: Subscription;
 
   constructor(
     private auth: AuthService,
@@ -19,7 +22,7 @@ export class DeleteAccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
+    this.authSub = this.auth.user.subscribe((user) => {
       this.user = user;
     })
   }
@@ -31,6 +34,10 @@ export class DeleteAccountComponent implements OnInit {
       horizontalPosition: "center",
       verticalPosition: "top"
     });
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
 }

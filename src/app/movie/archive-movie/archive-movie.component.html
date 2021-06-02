@@ -1,7 +1,7 @@
 <div class="dialog">
   <form [formGroup]="archiveForm" (ngSubmit)="onSubmit()">
     <h2 mat-dialog-title class="mb-4">How was the movie?</h2>
-    <div class="controls mb-4">
+    <div class="controls">
       <mat-form-field appearance="outline">
         <mat-label>Date watched</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="dateWatched">
@@ -38,7 +38,12 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="full-width" mat-raised-button color="accent"
+    <mat-dialog-actions align="end">
+      <button type="submit" mat-raised-button color="accent"
       [disabled]="archiveForm.invalid" mat-dialog-close>Submit</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+    <!-- <button type="submit" class="full-width" mat-raised-button color="accent"
+      [disabled]="archiveForm.invalid" mat-dialog-close>Submit</button> -->
   </form>
 </div>

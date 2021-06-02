@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { IUser } from 'src/app/models/auth.model';
 import { UserService } from 'src/app/user.service';
@@ -16,6 +17,7 @@ export class ChangePasswordComponent implements OnInit {
     password: new FormControl(null, [Validators.required, Validators.minLength(6)])
   });
   hidePassword: boolean;
+  authSub: Subscription;
 
   constructor(
     private auth: AuthService, 
@@ -24,7 +26,7 @@ export class ChangePasswordComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => this.currentUser = user);
+    this.authSub = this.auth.user.subscribe((user) => this.currentUser = user);
   }
 
   onChangePassword(): void {
@@ -35,6 +37,10 @@ export class ChangePasswordComponent implements OnInit {
       horizontalPosition: "center",
       verticalPosition: "top"
     });
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
 }

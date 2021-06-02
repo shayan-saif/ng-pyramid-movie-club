@@ -18,6 +18,7 @@ export class WatchlistComponent implements OnInit {
   watchlists: IWatchlist[] = [];
   selectedWatchlist: IWatchlist;
   watchlistSubscription = new Subscription;
+  authSub: Subscription;
   watchlistSelectSubscription = new Subscription;
   user: IUser = null;
   activated: boolean;
@@ -27,16 +28,16 @@ export class WatchlistComponent implements OnInit {
     private auth: AuthService,
     public dialog: MatDialog,
     private router: Router) {
-      router.events.subscribe((val) => {
-        if(val instanceof NavigationEnd) {
-          if(val.url !== "/") {
-            this.watchlistService.selectedWatchlist.next(null);
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        if (val.url !== "/") {
+          this.watchlistService.selectedWatchlist.next(null);
 
-          } else {
-          }
+        } else {
         }
+      }
     });
-    }
+  }
 
   ngOnInit(): void {
     this.watchlistService.getWatchlists();
@@ -46,7 +47,7 @@ export class WatchlistComponent implements OnInit {
     this.watchlistSelectSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
       this.selectedWatchlist = selectedWatchlist;
     });
-    this.auth.user.subscribe((user) => {
+    this.authSub = this.auth.user.subscribe((user) => {
       if (user) {
         this.user = user;
       } else {
@@ -64,8 +65,8 @@ export class WatchlistComponent implements OnInit {
         }
       }
     });
-    
-    
+
+
   }
 
   onSelectWatchlist(watchlistSelected: IWatchlist) {
@@ -77,6 +78,14 @@ export class WatchlistComponent implements OnInit {
   }
 
   openCreateWatchlist() {
-    this.dialog.open(CreateWatchlistComponent);
+    this.dialog.open(CreateWatchlistComponent, {
+      maxWidth: '30rem',
+      position: { 'top': '10rem' }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.watchlistSelectSubscription.unsubscribe();
+    this.authSub.unsubscribe();
   }
 }

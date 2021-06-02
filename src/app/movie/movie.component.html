@@ -19,8 +19,7 @@
             [disabled]="!user.permission.archive && !user.permission.admin">
             <mat-icon>archive</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="onDeleteMovie()"
-            [disabled]="!user.permission.delete && !user.permission.admin">
+          <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!user.permission.delete && !user.permission.admin">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

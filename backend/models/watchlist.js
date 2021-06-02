@@ -23,8 +23,7 @@ const watchlistSchema =
     "default": "false",
   },
   "sharedWith": {
-    "type": [String],
-    default: ['*']
+    "type": [String]
   },
 }
 

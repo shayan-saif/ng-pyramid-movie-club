@@ -1,4 +1,5 @@
 var express = require('express');
+const { watch } = require('../models/watchlist');
 const watchlistModel = require('../models/watchlist');
 var router = express.Router();
 
@@ -8,15 +9,30 @@ router.get('/', async function (req, res, next) {
   let watchlists = await watchlistModel.find();
   const user = req.user || '';
   watchlists = watchlists.filter((watchlist) => {
-    if (watchlist.name === 'Global' || watchlist.by === user.username) {
-      return true;
-    } else if (watchlist.sharedWith.includes(user.username)) {
-      return true;
-    } if (watchlist.sharedWith.includes('*')) {
-      return true;
+    let result = false;
+
+    if(!watchlist.hidden) {
+      result = true;
     } else {
-      return false;
+      if(watchlist.by === user.username || watchlist.sharedWith.includes(user.username)) {
+        result = true;
+      }
     }
+
+    return result;
+
+
+
+
+    // if (watchlist.name === 'Global' || watchlist.by === user.username) {
+    //   return true;
+    // } else if (watchlist.sharedWith.includes(user.username)) {
+    //   return true;
+    // } if (watchlist.sharedWith.includes('*')) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
   });
 
   let watchlistBasicInfo = [];
@@ -47,9 +63,9 @@ router.post('/', function (req, res, next) {
   if (req.user) {
     by = req.user.username;
   }
-  if (sharedWith.length === 0 && !hidden) {
-    sharedWith.push('*');
-  }
+  // if (sharedWith.length === 0 && !hidden) {
+  //   sharedWith.push('*');
+  // }
   const dateCreated = new Date();
 
   const watchlist = {

@@ -14,9 +14,11 @@ import { WatchlistService } from './watchlist.service';
 export class AppComponent implements OnInit {
   isDark = true;
   selectedWatchlist: IWatchlist;
-  selectedWatchlistSubscription: Subscription;
   user: IUser;
   showDrawer: boolean = false;
+
+  selectedWatchlistSub: Subscription;
+  authSub: Subscription;
 
   constructor(
     private watchlistService: WatchlistService,
@@ -26,10 +28,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.watchlistService.getWatchlists();
-    this.selectedWatchlistSubscription = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
+    this.selectedWatchlistSub = this.selectedWatchlistSub = this.watchlistService.selectedWatchlist.subscribe((selectedWatchlist) => {
       this.selectedWatchlist = selectedWatchlist;
     });
-    this.auth.user.subscribe((user) => {
+    this.authSub = this.auth.user.subscribe((user) => {
       this.user = user
     });
     this.userService.verifyStatus();
@@ -43,5 +45,10 @@ export class AppComponent implements OnInit {
 
   toggleDrawer() {
     this.showDrawer = !this.showDrawer;
+  }
+
+  ngOnDestroy(): void {
+    this.selectedWatchlistSub.unsubscribe();
+    this.authSub.unsubscribe();
   }
 }

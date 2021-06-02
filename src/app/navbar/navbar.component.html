@@ -3,8 +3,9 @@
   <span class="spacer"></span>
   <div>
     <a class="nav-link" mat-button [routerLink]="['search']">Search</a>
-    <button class="nav-link" mat-button [matMenuTriggerFor]="accountMenu">Account</button>
+    <button class="nav-link" mat-button [matMenuTriggerFor]="accountMenu" *ngIf="user">Account</button>
     <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item *ngIf="user" disabled>{{ user.username }}</button>
       <button mat-menu-item (click)="openChangePassword()">Change Password</button>
       <button mat-menu-item (click)="openDeleteAccount()">Delete Account</button>
     </mat-menu>

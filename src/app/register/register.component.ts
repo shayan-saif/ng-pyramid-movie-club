@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
@@ -20,14 +20,15 @@ export class RegisterComponent implements OnInit {
   error: { status: number, message: string };
   hidePassword: boolean;
   hideKey: boolean;
+  authSub: Subscription;
 
   constructor(
-    private auth: AuthService, 
+    private auth: AuthService,
     private router: Router,
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.auth.registerError.subscribe(err => {
+    this.authSub = this.auth.registerError.subscribe(err => {
       if (err) {
         this.error = {
           status: err.status,
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSignup() {
-    this.auth.registerUser(this.registerForm.value)
+    this.authSub = this.auth.registerUser(this.registerForm.value)
       .pipe(catchError(this.handleError))
       .subscribe(() => {
         this.router.navigate(['login']);
@@ -63,6 +64,10 @@ export class RegisterComponent implements OnInit {
 
   handleError(error) {
     return throwError(error || "Server error");
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
 }

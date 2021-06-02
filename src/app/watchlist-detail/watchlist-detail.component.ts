@@ -16,6 +16,7 @@ import { WatchlistDeleteConfirmComponent } from './watchlist-delete-confirm/watc
 export class WatchlistDetailComponent implements OnInit {
   watchlist: IWatchlist;
   watchlistSubscription: Subscription;
+  authSub: Subscription;
   user: IUser;
 
   selectedTab: number = 0;
@@ -25,8 +26,8 @@ export class WatchlistDetailComponent implements OnInit {
 
 
   constructor(
-    private watchlistService: WatchlistService, 
-    private auth: AuthService, 
+    private watchlistService: WatchlistService,
+    private auth: AuthService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -41,8 +42,8 @@ export class WatchlistDetailComponent implements OnInit {
 
     });
 
-    this.auth.user.subscribe((user) => {
-      if(user) {
+    this.authSub = this.auth.user.subscribe((user) => {
+      if (user) {
         this.user = user;
       } else {
         this.user = {
@@ -66,7 +67,15 @@ export class WatchlistDetailComponent implements OnInit {
   }
 
   openDeleteDialog() {
-    this.dialog.open(WatchlistDeleteConfirmComponent)
+    this.dialog.open(WatchlistDeleteConfirmComponent, {
+      maxWidth: '30rem',
+      position: {'top': '10rem'}
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.watchlistSubscription.unsubscribe();
+    this.authSub.unsubscribe();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { IMovie } from '../models/movie.model';
 import { TmdbService } from '../tmdb.service';
 
@@ -10,6 +11,7 @@ import { TmdbService } from '../tmdb.service';
 })
 export class TmdbSearchComponent implements OnInit {
   movies: IMovie[] = null;
+  tmdbSub: Subscription;
 
   movieQueryForm = new FormGroup({
     title: new FormControl(null)
@@ -18,9 +20,9 @@ export class TmdbSearchComponent implements OnInit {
   constructor(private tmdb: TmdbService) { }
 
   ngOnInit(): void {
-    this.tmdb.movies.subscribe((movies) => {
+    this.tmdbSub = this.tmdb.movies.subscribe((movies) => {
       if (!movies) {
-        this.tmdb.getDiscover().subscribe((movies) => {
+        this.tmdbSub = this.tmdb.getDiscover().subscribe((movies) => {
         this.tmdb.movies.next(movies);
         this.movies = movies;
         });
@@ -32,6 +34,10 @@ export class TmdbSearchComponent implements OnInit {
 
   onTitleSearch() {
     this.tmdb.titleSearch(this.movieQueryForm.value.title);
+  }
+
+  ngOnDestroy(): void {
+    this.tmdbSub.unsubscribe();
   }
 
 }

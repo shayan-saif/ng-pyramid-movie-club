@@ -6,6 +6,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { IUser } from '../models/auth.model';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { AuthService } from '../auth.service';
 })
 export class CreateWatchlistComponent implements OnInit {
   currentUser: IUser;
+  authSub: Subscription;
 
   createWatchlistForm = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.maxLength(16)]),
@@ -31,7 +33,7 @@ export class CreateWatchlistComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => this.currentUser = user);
+    this.authSub = this.auth.user.subscribe((user) => this.currentUser = user);
   }
 
   onAddName(): void {
@@ -40,6 +42,12 @@ export class CreateWatchlistComponent implements OnInit {
     if (value) {
       if (value == this.currentUser.username) {
         this.snackBar.open('You will have access, don\'t worry', 'Dismiss', {
+          duration: 3000,
+          horizontalPosition: "center",
+          verticalPosition: "top"
+        });
+      } else if (this.names.includes(value)) {
+        this.snackBar.open('That name has already been added', 'Dismiss', {
           duration: 3000,
           horizontalPosition: "center",
           verticalPosition: "top"
@@ -70,6 +78,10 @@ export class CreateWatchlistComponent implements OnInit {
       horizontalPosition: "center",
       verticalPosition: "top"
     });
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
 }

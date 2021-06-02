@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { IWatchlist } from 'src/app/models/watchlist.model';
 import { TmdbService } from 'src/app/tmdb.service';
 import { WatchlistService } from 'src/app/watchlist.service';
@@ -12,11 +13,12 @@ import { WatchlistService } from 'src/app/watchlist.service';
 export class AddMovieComponent implements OnInit {
   watchlists: IWatchlist[] = [];
   watchlist: IWatchlist = null;
+  watchlistSub: Subscription;
 
   constructor(private watchlistService: WatchlistService, private tmdb: TmdbService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.watchlistService.watchlists.subscribe((watchlists) => {
+    this.watchlistSub = this.watchlistService.watchlists.subscribe((watchlists) => {
       this.watchlists = watchlists;
     });
   }
@@ -29,6 +31,10 @@ export class AddMovieComponent implements OnInit {
       horizontalPosition: "center",
       verticalPosition: "top"
     });
+  }
+
+  ngOnDestroy(): void {
+    this.watchlistSub.unsubscribe();
   }
 
 }

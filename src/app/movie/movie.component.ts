@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { IUser } from '../models/auth.model';
 import { IMovie } from '../models/movie.model';
@@ -22,6 +23,7 @@ export class MovieComponent implements OnInit {
   bookmarkStatus: boolean;
   @Output() bookmark = new EventEmitter<number>();
   user: IUser;
+  authSub: Subscription;
 
 
   constructor(private tmdb: TmdbService,
@@ -30,7 +32,7 @@ export class MovieComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.auth.user.subscribe((user) => {
+    this.authSub = this.auth.user.subscribe((user) => {
       if (user) {
         this.user = user;
       } else {
@@ -75,7 +77,7 @@ export class MovieComponent implements OnInit {
     this.dialog.open(ArchiveMovieComponent, {
       data: { movieId: this.movie.id, movieTitle: this.movie.title, currentUser: this.user.username },
       maxHeight: '70vh',
-      position: { 'top': '50px' }
+      position: { 'top': '10rem' }
     });
   }
 
@@ -84,6 +86,8 @@ export class MovieComponent implements OnInit {
     // this.tmdb.deleteMovieFromWatchlist(this.movie.id);
     this.dialog.open(ConfirmDeleteMovieComponent, {
       data: { movieId: this.movie.id },
+      maxWidth: '30rem',
+      position: {'top': '10rem'}
     });
   }
 
@@ -92,6 +96,10 @@ export class MovieComponent implements OnInit {
       data: { movie: this.movie, currentUser: this.user.username }
     });
     // console.log("open dialog");
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
   }
 
 }
