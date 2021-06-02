@@ -2,11 +2,19 @@
   <form [formGroup]="archiveForm" (ngSubmit)="onSubmit()">
     <h2 mat-dialog-title class="mb-4">How was the movie?</h2>
     <div class="controls">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Date watched</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="dateWatched">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" *ngIf="search" class="d-block">
+        <mat-label>Watchlist</mat-label>
+        <mat-select [(value)]="watchlist">
+          <mat-option *ngFor="let watchlist of watchlists" [value]="watchlist">
+            {{ watchlist.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <div formArrayName="participants" class="participants">
         <div *ngFor="let control of getParticipantControls(); let i = index;" [formGroupName]="i" class="mb-3">
@@ -17,7 +25,7 @@
             <mat-form-field appearance="outline" class="participant-name">
               <mat-label>Name</mat-label>
               <input type="text" matInput formControlName="name" [readonly]="i == 0">
-              <button type="button" mat-icon-button matSuffix (click)="onDeleteParticipant(i)" [disabled]="i == 0">
+              <button type="button" mat-icon-button matSuffix (click)="onDeleteParticipant(i)" [disabled]="i == 0" [matTooltip]="'Click to remove ' + (archiveForm.value.participants[i].name == null ? 'this participant' : archiveForm.value.participants[i].name)" matTooltipPosition="above">
                 <mat-icon>clear</mat-icon>
               </button>
             </mat-form-field>
@@ -32,8 +40,8 @@
           </fieldset>
         </div>
         <div class="add-container">
-          <button type="button" mat-mini-fab color="primary" (click)="onAddParticipant()">
-            <mat-icon>add</mat-icon>
+          <button type="button" mat-mini-fab color="primary" (click)="onAddParticipant()" matTooltip="Click to add a participant" matTooltipPosition="above">
+            <mat-icon>person_add</mat-icon>
           </button>
         </div>
       </div>

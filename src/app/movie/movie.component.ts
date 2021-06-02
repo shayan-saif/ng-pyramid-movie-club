@@ -78,7 +78,7 @@ export class MovieComponent implements OnInit {
 
   onArchiveMovie(): void {
     this.dialog.open(ArchiveMovieComponent, {
-      data: { movieId: this.movie.id, movieTitle: this.movie.title, currentUser: this.user.username },
+      data: { movieId: this.movie.id, movieTitle: this.movie.title, currentUser: this.user.username, search: this.searchType },
       maxHeight: '70vh',
       position: { 'top': '10rem' }
     });

@@ -1,28 +1,26 @@
-<div class="container">
-  <div class="content mat-elevation-z7">
-    <div class="header"><span class="mat-title">Login</span></div>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input type="text" matInput formControlName="username">
-          </mat-form-field>
-        </div>
+<div class="content mat-elevation-z7">
+  <div class="header"><span class="mat-title">Login</span></div>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput formControlName="username">
+        </mat-form-field>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="password" matInput formControlName="password" [type]="hidePassword ? 'text' : 'password'">
-            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1">
-              <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" [type]="hidePassword ? 'text' : 'password'">
+          <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" tabindex="-1">
+            <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+        </mat-form-field>
       </div>
-      <button class="full-width" type="submit" mat-raised-button color="accent" [disabled]="loginForm.invalid">Sign
-        in</button>
-    </form>
-  </div>
+    </div>
+    <button class="full-width" type="submit" mat-raised-button color="accent" [disabled]="loginForm.invalid">Sign
+      in</button>
+  </form>
 </div>

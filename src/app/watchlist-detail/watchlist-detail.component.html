@@ -1,31 +1,29 @@
-<div *ngIf="watchlist" class="container">
-  <div class="content mat-elevation-z7">
-    <div class="header">
-      <span class="mat-title">{{ watchlist.name }}</span>
-      <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
-        [disabled]="watchlist.name === 'Global' || (!user.permission.delete && !user.permission.admin)"
-        matTooltip="Delete watchlist" matTooltipPosition="above">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </div>
-    <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight [selectedIndex]="selectedTab">
-      <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
-        <div class="movie-list">
-          <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
-          </app-movie>
-        </div>
-      </mat-tab>
-      <mat-tab label="To Watch">
-        <div class="movie-list">
-          <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
-          </app-movie>
-        </div>
-      </mat-tab>
-      <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
-        <div class="movie-list">
-          <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+<div class="content mat-elevation-z7">
+  <div class="header">
+    <span class="mat-title">{{ watchlist.name }}</span>
+    <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
+      [disabled]="watchlist.name === 'Global' || (!user.permission.delete && !user.permission.admin)"
+      matTooltip="Delete watchlist" matTooltipPosition="above">
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
+  <mat-tab-group mat-align-tabs="start" color="accent" dynamicHeight [selectedIndex]="selectedTab">
+    <mat-tab label="Bookmarked" *ngIf="bookmarkedMovies.length > 0">
+      <div class="movie-list">
+        <app-movie *ngFor="let movie of bookmarkedMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
+        </app-movie>
+      </div>
+    </mat-tab>
+    <mat-tab label="To Watch">
+      <div class="movie-list">
+        <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
+        </app-movie>
+      </div>
+    </mat-tab>
+    <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
+      <div class="movie-list">
+        <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

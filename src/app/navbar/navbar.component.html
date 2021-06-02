@@ -1,16 +1,17 @@
-<mat-toolbar>
-  <span>Pyramid Movie Club</span>
-  <span class="spacer"></span>
-  <div>
-    <a class="nav-link" mat-button [routerLink]="['search']">Search</a>
-    <button class="nav-link" mat-button [matMenuTriggerFor]="accountMenu" *ngIf="user">Account</button>
-    <mat-menu #accountMenu="matMenu">
-      <button mat-menu-item *ngIf="user" disabled>{{ user.username }}</button>
-      <button mat-menu-item (click)="openChangePassword()">Change Password</button>
-      <button mat-menu-item (click)="openDeleteAccount()">Delete Account</button>
-    </mat-menu>
-    <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['login']">Login</a>
-    <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['register']">Register</a>
-    <button *ngIf="user" mat-button (click)="onLogout()">Logout</button>
-  </div>
-</mat-toolbar>
+<!-- <mat-toolbar> -->
+<!-- <span>Pyramid Movie Club</span>
+  <span class="spacer"></span> -->
+<div class="d-flex justify-content-center py-2"
+  style="background-color: rgba(255, 145, 0, 0.25);color:white;width:100%;">
+  <a class="nav-link" mat-button [routerLink]="['search']"><mat-icon>search</mat-icon> Search</a>
+  <button class="nav-link" mat-button [matMenuTriggerFor]="accountMenu" *ngIf="user"><mat-icon>account_circle</mat-icon> Account</button>
+  <mat-menu #accountMenu="matMenu">
+    <button mat-menu-item *ngIf="user" disabled>{{ user.username }}</button>
+    <button mat-menu-item (click)="openChangePassword()">Change Password</button>
+    <button mat-menu-item (click)="openDeleteAccount()">Delete Account</button>
+  </mat-menu>
+  <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['login']"><mat-icon>account_circle</mat-icon> Login</a>
+  <a class="nav-link" *ngIf="!user" mat-button [routerLink]="['register']"><mat-icon>person_add</mat-icon> Register</a>
+  <button *ngIf="user" mat-button (click)="onLogout()"><mat-icon>lock</mat-icon> Logout</button>
+</div>
+<!-- </mat-toolbar> -->

@@ -33,6 +33,11 @@
             matTooltipPosition="above">
             <mat-icon>add</mat-icon>
           </button>
+          <button mat-icon-button color="primary" *ngIf="!watched" (click)="onArchiveMovie()"
+             matTooltip="Archive movie"
+            matTooltipPosition="above">
+            <mat-icon>archive</mat-icon>
+          </button>
         </div>
       </div>
       <div class="title-container">

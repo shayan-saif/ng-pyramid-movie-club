@@ -1,17 +1,15 @@
-<div class="container">
-  <div class="content mat-elevation-z7">
-    <div class="header">
-      <span class="mat-title">The Movie Database</span>
-      <form [formGroup]="movieQueryForm" (ngSubmit)="onTitleSearch()">
-        <mat-form-field>
-          <mat-label>Movie Name</mat-label>
-          <input matInput placeholder="The Godfather" formControlName="title">
-        </mat-form-field>
-        <button type="submit" mat-button>Search</button>
-      </form>
-    </div>
-    <div *ngIf="movies" class="movie-list">
-      <app-movie *ngFor="let movie of movies" [movie]="movie"></app-movie>
-    </div>
+<div class="content mat-elevation-z7">
+  <div class="header">
+    <span class="mat-title">The Movie Database</span>
+    <form [formGroup]="movieQueryForm" (ngSubmit)="onTitleSearch()">
+      <mat-form-field>
+        <mat-label>Movie Name</mat-label>
+        <input matInput placeholder="The Godfather" formControlName="title">
+      </mat-form-field>
+      <button type="submit" mat-button>Search</button>
+    </form>
+  </div>
+  <div *ngIf="movies" class="movie-list">
+    <app-movie *ngFor="let movie of movies" [movie]="movie"></app-movie>
   </div>
 </div>

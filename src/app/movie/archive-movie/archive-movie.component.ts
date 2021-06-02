@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TmdbService } from 'src/app/tmdb.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IWatchlist } from 'src/app/models/watchlist.model';
+import { WatchlistService } from 'src/app/watchlist.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,6 +24,10 @@ export class ArchiveMovieComponent implements OnInit {
       })
     ])
   });
+  search: boolean;
+  watchlist: IWatchlist;
+  watchlists: IWatchlist[];
+  watchlistSub: Subscription;
 
   constructor(
     private tmdb: TmdbService,
@@ -28,11 +35,18 @@ export class ArchiveMovieComponent implements OnInit {
       movieId: number,
       movieTitle: string,
       currentUser: string;
-    }
+      search: boolean
+    },
+    private watchlistService: WatchlistService
   ) { }
 
   ngOnInit() {
     this.archiveForm.get(['participants', 0, 'name']).setValue(this.movie.currentUser);
+    this.search = this.movie.search;
+    this.watchlistSub = this.watchlistService.watchlists.subscribe((watchlists) => {
+      this.watchlists = watchlists;
+      this.watchlist = watchlists[0];
+    });
   }
 
   onAddParticipant() {
@@ -55,7 +69,8 @@ export class ArchiveMovieComponent implements OnInit {
 
 
   onSubmit() {
-    this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
+    // this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
+    console.log(this.archiveForm);
   }
 
 
