@@ -1,9 +1,10 @@
 <div *ngIf="watchlist" class="container">
-  <div class="content">
+  <div class="content mat-elevation-z7">
     <div class="header">
       <span class="mat-title">{{ watchlist.name }}</span>
       <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
-        [disabled]="watchlist.name === 'Global' || (!user.permission.delete && !user.permission.admin)">
+        [disabled]="watchlist.name === 'Global' || (!user.permission.delete && !user.permission.admin)"
+        matTooltip="Delete watchlist" matTooltipPosition="above">
         <mat-icon>clear</mat-icon>
       </button>
     </div>

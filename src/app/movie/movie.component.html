@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-2 hide-img">
       <div class="d-flex" style="position: relative;">
-        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster">
-        <div class="rating" [appRating]="movie.voteAverage">
-          {{ movie.voteAverage }}
+        <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.posterPath" class="img-fluid rounded poster mat-elevation-z3">
+        <div class="rating" [appRating]="movie.voteAverage" matTooltip="TMDB Rating" matTooltipPosition="above">
+          {{ movie.voteAverage | number : '1.1-1'}}
         </div>
       </div>
     </div>
@@ -12,20 +12,25 @@
       <div class="action-container">
         <div *ngIf="!searchType">
           <button mat-icon-button color="primary" *ngIf="!watched" (click)="onToggleBookmark()"
-            [disabled]="!user.permission.bookmark && !user.permission.admin">
+            [disabled]="!user.permission.bookmark && !user.permission.admin" matTooltip="Bookmark movie"
+            matTooltipPosition="above">
             <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
           </button>
           <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
-            [disabled]="!user.permission.archive && !user.permission.admin">
+            [disabled]="!user.permission.archive && !user.permission.admin" matTooltip="Archive movie"
+            matTooltipPosition="above">
             <mat-icon>archive</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="onDeleteMovie()" [disabled]="!user.permission.delete && !user.permission.admin">
+          <button mat-icon-button color="warn" (click)="onDeleteMovie()"
+            [disabled]="!user.permission.delete && !user.permission.admin" matTooltip="Delete movie"
+            matTooltipPosition="above">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
         <div *ngIf="searchType">
           <button mat-icon-button color="accent" (click)="onAddMovie()"
-            [disabled]="!user.permission.add && !user.permission.admin">
+            [disabled]="!user.permission.add && !user.permission.admin" matTooltip="Add to Watchlist"
+            matTooltipPosition="above">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -41,11 +46,12 @@
           }}</span>
       </div>
       <div class="mat-body-1">{{ movie.overview | shorten : 600}}</div>
-      <div class="mat-caption added" *ngIf="!searchType && !watched">{{ movie.club.addedBy }} / {{
+      <div class="mat-caption added" *ngIf="!searchType && !watched" matTooltip="Added by" matTooltipPosition="above">{{
+        movie.club.addedBy }} / {{
         movie.club.dateAdded | date }}
       </div>
       <div class="mat-caption watched" *ngIf="!searchType && watched" (click)="openWatchedInfo()">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center" matTooltip="Click for more info" matTooltipPosition="above">
           <mat-icon class="icon-info">info</mat-icon>
           {{ movie.club.dateWatched | date }}
         </div>

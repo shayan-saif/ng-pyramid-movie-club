@@ -1,14 +1,17 @@
 <div class="container">
-  <div class="content pb-3">
+  <div class="content pb-3 mat-elevation-z7">
     <div class="header align-items-end">
       <span class="mat-title">Watchlists</span>
-      <button mat-mini-fab color="primary" (click)="openCreateWatchlist()" [disabled]="!user.permission.create && !user.permission.admin">
+      <button mat-mini-fab color="primary" (click)="openCreateWatchlist()"
+        [disabled]="!user.permission.create && !user.permission.admin"
+        matTooltip="Create watchlist" matTooltipPosition="above">
         <mat-icon>add</mat-icon>
       </button>
     </div>
     <mat-divider></mat-divider>
     <mat-selection-list #watchlistsRef [multiple]="false">
-      <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)" [selected]="selectedWatchlist && watchlist.name === selectedWatchlist.name">
+      <mat-list-option *ngFor="let watchlist of watchlists" (click)="onSelectWatchlist(watchlist)"
+        [selected]="selectedWatchlist && watchlist.name === selectedWatchlist.name">
         {{ watchlist.name }}
       </mat-list-option>
     </mat-selection-list>

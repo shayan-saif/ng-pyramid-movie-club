@@ -15,11 +15,15 @@ export class AddMovieComponent implements OnInit {
   watchlist: IWatchlist = null;
   watchlistSub: Subscription;
 
-  constructor(private watchlistService: WatchlistService, private tmdb: TmdbService, private snackBar: MatSnackBar) { }
+  constructor(
+    private watchlistService: WatchlistService, 
+    private tmdb: TmdbService, 
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.watchlistSub = this.watchlistService.watchlists.subscribe((watchlists) => {
       this.watchlists = watchlists;
+      this.watchlist = watchlists[0];
     });
   }
 

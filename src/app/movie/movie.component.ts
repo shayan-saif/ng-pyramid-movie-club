@@ -60,7 +60,10 @@ export class MovieComponent implements OnInit {
 
   onAddMovie(): void {
     this.tmdb.selectedMovie.next(this.movie);
-    this.dialog.open(AddMovieComponent);
+    this.dialog.open(AddMovieComponent, {
+      maxHeight: '70vh',
+      position: { 'top': '10rem' }
+    });
   }
 
   onToggleBookmark(): void {
@@ -81,21 +84,21 @@ export class MovieComponent implements OnInit {
     });
   }
 
-
   onDeleteMovie(): void {
     // this.tmdb.deleteMovieFromWatchlist(this.movie.id);
     this.dialog.open(ConfirmDeleteMovieComponent, {
       data: { movieId: this.movie.id },
       maxWidth: '30rem',
-      position: {'top': '10rem'}
+      position: { 'top': '10rem' }
     });
   }
 
   openWatchedInfo(): void {
     this.dialog.open(WatchedInfoComponent, {
-      data: { movie: this.movie, currentUser: this.user.username }
+      data: { movie: this.movie, currentUser: this.user.username },
+      maxHeight: '70vh',
+      position: { 'top': '10rem' }
     });
-    // console.log("open dialog");
   }
 
   ngOnDestroy(): void {

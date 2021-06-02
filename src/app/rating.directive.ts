@@ -5,6 +5,7 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 })
 export class RatingDirective implements OnInit {
   @Input() appRating: number;
+  
   colors: string[] = [
     "#69B34C",
     "#ACB334",
