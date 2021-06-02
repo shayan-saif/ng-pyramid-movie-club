@@ -13,8 +13,8 @@
       <div class="action-container">
         <div *ngIf="!searchType">
           <button mat-icon-button color="primary" *ngIf="!watched" (click)="onToggleBookmark()"
-            [disabled]="!user.permission.bookmark && !user.permission.admin" matTooltip="Bookmark movie"
-            matTooltipPosition="above">
+            [disabled]="!user.permission.bookmark && !user.permission.admin"
+            [matTooltip]="bookmarkStatus? 'bookmark_remove' : 'bookmark_add'" matTooltipPosition="above">
             <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
           </button>
           <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
