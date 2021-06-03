@@ -12,21 +12,45 @@
     <div class="col-12 col-xxl-10 info">
       <div class="action-container">
         <div *ngIf="!searchType">
-          <button mat-icon-button color="primary" *ngIf="!watched" (click)="onToggleBookmark()"
-            [disabled]="!user.permission.bookmark && !user.permission.admin"
-            [matTooltip]="bookmarkStatus? 'Unbookmark movie' : 'Bookmark movie'" matTooltipPosition="above">
-            <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
-          </button>
-          <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
-            [disabled]="!user.permission.archive && !user.permission.admin" matTooltip="Archive movie"
-            matTooltipPosition="above">
-            <mat-icon>archive</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="onDeleteMovie()"
-            [disabled]="!user.permission.delete && !user.permission.admin" matTooltip="Delete movie"
-            matTooltipPosition="above">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div *ngIf="toolbar">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <div class="d-block">
+                <button mat-menu-item *ngIf="!watched" (click)="onToggleBookmark()"
+                [disabled]="!user.permission.bookmark && !user.permission.admin">
+                  {{ bookmarkStatus? 'Unbookmark' : 'Bookmark' }}
+                </button>
+                <button mat-menu-item *ngIf="!watched" (click)="onArchiveMovie()"
+                [disabled]="!user.permission.archive && !user.permission.admin">
+                  Archive
+                </button>
+                <button mat-menu-item (click)="onDeleteMovie()"
+                [disabled]="!user.permission.delete && !user.permission.admin">
+                  Delete
+                </button>
+              </div>
+            </mat-menu>
+          </div>
+
+          <div *ngIf="!toolbar">
+            <button mat-icon-button color="primary" *ngIf="!watched" (click)="onToggleBookmark()"
+              [disabled]="!user.permission.bookmark && !user.permission.admin"
+              [matTooltip]="bookmarkStatus? 'Unbookmark movie' : 'Bookmark movie'" matTooltipPosition="above">
+              <mat-icon>{{ bookmarkStatus? 'bookmark_remove' : 'bookmark_add' }}</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" *ngIf="!watched" (click)="onArchiveMovie()"
+              [disabled]="!user.permission.archive && !user.permission.admin" matTooltip="Archive movie"
+              matTooltipPosition="above">
+              <mat-icon>archive</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDeleteMovie()"
+              [disabled]="!user.permission.delete && !user.permission.admin" matTooltip="Delete movie"
+              matTooltipPosition="above">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
         <div *ngIf="searchType">
           <button mat-icon-button color="accent" (click)="onAddMovie()"

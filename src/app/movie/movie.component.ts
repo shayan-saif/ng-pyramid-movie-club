@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -24,6 +24,8 @@ export class MovieComponent implements OnInit {
   @Output() bookmark = new EventEmitter<number>();
   user: IUser;
   authSub: Subscription;
+  innerWidth: any;
+  toolbar: boolean;
 
 
   constructor(private tmdb: TmdbService,
@@ -55,6 +57,22 @@ export class MovieComponent implements OnInit {
       this.watched = this.movie.club.watched;
     } else {
       this.searchType = true;
+    }
+    this.innerWidth = window.innerWidth;
+    if(this.innerWidth < 992) {
+      this.toolbar = true;
+    } else {
+      this.toolbar = false;
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 992) {
+      this.toolbar = true;
+    } else {
+      this.toolbar = false;
     }
   }
 
