@@ -69,7 +69,7 @@ export class MovieComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth < 992) {
+    if (this.innerWidth < 760) {
       this.toolbar = true;
     } else {
       this.toolbar = false;
