@@ -69,7 +69,7 @@ export class ArchiveMovieComponent implements OnInit {
 
 
   onSubmit() {
-    // this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
+    this.tmdb.archiveMovie(this.movie.movieId, this.archiveForm);
     console.log(this.archiveForm);
   }
 
