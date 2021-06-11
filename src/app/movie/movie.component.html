@@ -13,7 +13,7 @@
       <div class="action-container">
         <div *ngIf="!searchType">
           <div *ngIf="toolbar">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="this.user.username === null">
               <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -27,7 +27,7 @@
                   Archive
                 </button>
                 <button mat-menu-item (click)="onDeleteMovie()"
-                [disabled]="!user.permission.delete && !user.permission.admin">
+                [disabled]="(!watchlistOwner && !user.permission.admin)">
                   Delete
                 </button>
               </div>

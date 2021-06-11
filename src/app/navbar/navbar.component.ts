@@ -1,11 +1,13 @@
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChangePasswordComponent } from '../account/change-password/change-password.component';
 import { DeleteAccountComponent } from '../account/delete-account/delete-account.component';
 import { AuthService } from '../auth.service';
 import { IUser } from '../models/auth.model';
+import { WatchlistService } from '../watchlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +25,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private watchlistService: WatchlistService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

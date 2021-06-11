@@ -5,8 +5,10 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { IUser } from '../models/auth.model';
 import { IMovie } from '../models/movie.model';
+import { IWatchlist } from '../models/watchlist.model';
 import { AddMovieComponent } from '../tmdb-search/add-movie/add-movie.component';
 import { TmdbService } from '../tmdb.service';
+import { WatchlistService } from '../watchlist.service';
 import { ArchiveMovieComponent } from './archive-movie/archive-movie.component';
 import { ConfirmDeleteMovieComponent } from './confirm-delete-movie/confirm-delete-movie.component';
 import { WatchedInfoComponent } from './watched-info/watched-info.component';
@@ -26,10 +28,13 @@ export class MovieComponent implements OnInit {
   authSub: Subscription;
   innerWidth: any;
   toolbar: boolean;
+  selectedWatchlist: IWatchlist;
+  watchlistOwner: boolean;
 
 
   constructor(private tmdb: TmdbService,
     private auth: AuthService,
+    private watchlistService: WatchlistService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
@@ -64,6 +69,15 @@ export class MovieComponent implements OnInit {
     } else {
       this.toolbar = false;
     }
+
+    this.watchlistService.selectedWatchlist.subscribe((watchlist) => {
+      this.selectedWatchlist = watchlist;
+      if(this.user.username === watchlist.by) {
+        this.watchlistOwner = true;
+      } else {
+        this.watchlistOwner = false;
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])

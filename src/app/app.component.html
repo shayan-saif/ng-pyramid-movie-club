@@ -16,7 +16,7 @@
   </div>
 </div> -->
 
-<div class="app-grid">
+<!-- <div class="app-grid">
   <div class="nav">
     <app-navbar></app-navbar>
   </div>
@@ -29,6 +29,31 @@
     </div>
   </div>
   <div class="footer">
+    <app-footer></app-footer>
+  </div>
+</div> -->
+
+<!-- <app-navbar></app-navbar>
+<app-watchlist></app-watchlist>
+<router-outlet></router-outlet> -->
+
+<div class="app-grid">
+  <div class="container-fluid navbar">
+    <app-navbar></app-navbar>
+  </div>
+
+  <div class="container main">
+    <div class="row g-3">
+      <div class="col-12 col-md-4 col-lg-3">
+        <app-watchlist></app-watchlist>
+      </div>
+      <div class="col-12 col-md-8 col-lg-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid footer">
     <app-footer></app-footer>
   </div>
 </div>

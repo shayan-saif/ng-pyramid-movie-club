@@ -27,6 +27,11 @@ export class WatchlistService {
     });
   }
 
+  setGlobal(): void {
+    const mainList = this.watchlists[0];
+    this.selectedWatchlist.next(mainList);
+  }
+
   toggleBookmark(movieId: number) {
     let watchlistId = this.selectedWatchlist.value._id;
 

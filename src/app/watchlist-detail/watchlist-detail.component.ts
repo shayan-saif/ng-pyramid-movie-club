@@ -18,6 +18,7 @@ export class WatchlistDetailComponent implements OnInit {
   watchlistSubscription: Subscription;
   authSub: Subscription;
   user: IUser;
+  owner?: boolean;
 
   selectedTab: number = 0;
   toWatchMovies: IMovie[];
@@ -38,6 +39,12 @@ export class WatchlistDetailComponent implements OnInit {
         this.toWatchMovies = this.watchlist.movies.filter(movie => !movie.club.watched && !movie.club.bookmarked);
         this.bookmarkedMovies = this.watchlist.movies.filter(movie => !movie.club.watched && movie.club.bookmarked);
         this.watchedMovies = this.watchlist.movies.filter(movie => movie.club.watched);
+      }
+
+      if (this.user && this.user.username === this.watchlist.by) {
+        this.owner = true;
+      } else {
+        this.owner = false;
       }
 
     });
