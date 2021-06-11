@@ -2,7 +2,7 @@
   <div class="header">
     <span class="mat-title">{{ watchlist.name }}</span>
     <button mat-mini-fab color="warn" (click)="openDeleteDialog()"
-      [disabled]="!owner && !user.permission.admin"
+      [disabled]="!(owner || user.permission.admin)"
       matTooltip="Delete watchlist" matTooltipPosition="above">
       <mat-icon>clear</mat-icon>
     </button>
