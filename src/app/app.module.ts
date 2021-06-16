@@ -26,6 +26,8 @@ import { RatingDirective } from './rating.directive';
 import { WatchedInfoComponent } from './movie/watched-info/watched-info.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { DeleteAccountComponent } from './account/delete-account/delete-account.component';
+import { ReversePipe } from './reverse.pipe';
+import { MovieSortPipe } from './movie-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { DeleteAccountComponent } from './account/delete-account/delete-account.
     RatingDirective,
     WatchedInfoComponent,
     ChangePasswordComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    ReversePipe,
+    MovieSortPipe
   ],
   entryComponents: [
     CreateWatchlistComponent,

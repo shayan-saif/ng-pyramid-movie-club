@@ -16,13 +16,13 @@
     </mat-tab>
     <mat-tab label="To Watch">
       <div class="movie-list">
-        <app-movie *ngFor="let movie of toWatchMovies" [movie]="movie" (bookmark)="toggleBookmark($event)">
+        <app-movie *ngFor="let movie of toWatchMovies | movieSort : 'byAdded'" [movie]="movie" (bookmark)="toggleBookmark($event)">
         </app-movie>
       </div>
     </mat-tab>
     <mat-tab label="Watched" *ngIf="watchedMovies.length > 0">
       <div class="movie-list">
-        <app-movie *ngFor="let movie of watchedMovies" [movie]="movie"></app-movie>
+        <app-movie *ngFor="let movie of watchedMovies | movieSort : 'byWatched'" [movie]="movie"></app-movie>
       </div>
     </mat-tab>
   </mat-tab-group>
