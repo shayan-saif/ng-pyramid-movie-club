@@ -80,11 +80,11 @@ router.post("/register", async (req, res) => {
       {
         username: req.body.username,
         permission: {
-          create: false,
-          add: false,
-          bookmark: false,
-          archive: false,
-          delete: false,
+          create: true,
+          add: true,
+          bookmark: true,
+          archive: true,
+          delete: true,
           admin: false
         },
         joinDate: date
